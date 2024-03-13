@@ -1,0 +1,201 @@
+@font-face {
+  font-family: "LeDain";
+  src: url("../fontFamily/GenJyuuGothicX-P-Medium.ttf");
+}
+
+@font-face {
+  font-family: "LeDain_light";
+  src: url("../fontFamily/GenJyuuGothicX-P-Light.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "LeDain";
+}
+
+header nav ul {
+  display: flex;
+}
+
+header nav ul li {
+  list-style-type: none;
+  font-size: 2rem;
+  margin: 1rem;
+}
+
+header div img {
+  width: 1900px;
+  display: flex;
+  justify-content: center;
+}
+
+header div.diversion {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+header div.diversion img {
+  width: 400px;
+  margin: 10px 20px;
+}
+
+header .search_pa {
+  display: flex;
+  justify-content: center;
+}
+
+header .search_ch {
+  background-color: #f2f2f2;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  padding: 15px;
+}
+
+main div.choose_left {
+  margin: 40px 0px;
+  background-color: #f2f2f2;
+  height: 400px;
+  padding: 40px 15px;
+  font-size: 20px;
+  border-radius: 20px;
+}
+
+main div.choose_left div.choose_left_1 {
+  text-align: center;
+}
+
+main div.choose_left div.choose_classification {
+  margin-top: 20px;
+}
+
+main div.choose_left_de div.choose_classification {
+  margin-top: 20px;
+}
+
+main div.choose_right div.col-4 {
+  margin: 15px 0px;
+}
+
+main div.card-title {
+  display: flex;
+  margin: 5% 10% 0;
+  font-size: 24px;
+}
+
+main div.card-body_la {
+  display: flex;
+  margin: 0 10%;
+  font-size: 20px;
+}
+
+main div.card-body_la p.card-text {
+  width: 100%;
+}
+
+main div.card-body_la p.price_1 {
+  margin-right: 5%;
+}
+
+/* 店家資訊 (左) */
+main div.choose_left_de {
+  margin: 40px 0px;
+  background-color: #f2f2f2;
+  height: 600px;
+  padding: 40px 15px;
+  font-size: 18px;
+  border-radius: 20px;
+  font-family: "LeDain_light";
+}
+
+main div.choose_left_de div.choose_left_1 {
+  text-align: center;
+}
+
+main div.choose_left_de div.choose_classification_1 {
+  background-color: aqua;
+  margin: 20% 0%;
+  padding: 0 10%;
+}
+
+main div.choose_left_de div.choose_classification_2 {
+  background-color: rgb(98, 0, 255);
+  margin: 20% 0%;
+  padding: 0 10%;
+}
+
+main div.choose_left_de div.choose_classification_3 {
+  background-color: rgb(255, 140, 0);
+  margin: 20% 0%;
+  padding: 0 10%;
+}
+
+/* 店家資訊 (右) */
+main div.choose_right div.image {
+  position: relative;
+}
+
+main div.choose_right div.image img.logo {
+  width: 65px;
+  height: 65px;
+  z-index: 3;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  border-radius: 50%;
+  border: 1px solid #aaaaaa;
+}
+
+main div.choose_right div.image img.card-img-top {
+  z-index: 1;
+}
+
+main div.choose_right div.information {
+  padding: 0% 2%;
+}
+
+main div.choose_right div.information p.score {
+  background-color: #f2f2f2;
+  padding: 1% 2%;
+  border-radius: 20px;
+  text-align: center;
+  margin: 0% auto;
+}
+
+main div.choose_right div.information p.score i {
+  color: #f3b021;
+}
+
+main div.choose_right div.information p.time {
+  background-color: #f2f2f2;
+  padding: 1% 2%;
+  border-radius: 20px;
+  text-align: center;
+  margin: 0% auto;
+}
+
+main div.choose_right div.information p.kilometre {
+  background-color: #f2f2f2;
+  padding: 1% 2%;
+  border-radius: 20px;
+  text-align: center;
+  margin: 0% auto;
+}
+
+main div.choose_right p.card-title {
+  font-size: 1.3rem;
+  margin-top: 5%;
+  padding-left: 2%;
+}
+
+main div.choose_right p.card-title a {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+}
