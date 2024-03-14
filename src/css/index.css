@@ -216,7 +216,6 @@ main div.card-body_la p.price_1 {
 main div.choose_left_de {
   margin: 40px 0px;
   background-color: #f2f2f2;
-  height: 600px;
   padding: 40px 15px;
   font-size: 18px;
   border-radius: 20px;
@@ -254,6 +253,11 @@ main div.choose_left_de div.choose_classification_3 {
   display: flex;
   align-content: center;
   align-items: center;
+}
+
+.addressall {
+  height: 135px;
+  overflow-y: scroll;
 }
 
 /* 店家與飲料共同 */

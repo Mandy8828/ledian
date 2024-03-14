@@ -163,30 +163,358 @@ class dian extends Component {
                   </div>
                   <div class="choose_classification_2">
                     <div className="classification_title">台中探索</div>
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="address"
-                        id="address_1"
-                      />
-                      <label class="form-check-label" for="address_1">
-                        {" "}
-                        中區{" "}
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="address"
-                        id="address_2"
-                        checked
-                      />
-                      <label class="form-check-label" for="address_2">
-                        {" "}
-                        東區{" "}
-                      </label>
+                    <div className="addressall">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_1"
+                          value="中區"
+                        />
+                        <label class="form-check-label" for="address_1">
+                          {" "}
+                          中區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_2"
+                          value="東區"
+                        />
+                        <label class="form-check-label" for="address_2">
+                          {" "}
+                          東區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_3"
+                          value="南區"
+                        />
+                        <label class="form-check-label" for="address_3">
+                          {" "}
+                          南區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_4"
+                          value="西區"
+                        />
+                        <label class="form-check-label" for="address_4">
+                          {" "}
+                          西區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_5"
+                          value="北區"
+                        />
+                        <label class="form-check-label" for="address_5">
+                          {" "}
+                          北區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_6"
+                          value="北屯區"
+                        />
+                        <label class="form-check-label" for="address_6">
+                          {" "}
+                          北屯區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_7"
+                          value="西屯區"
+                        />
+                        <label class="form-check-label" for="address_7">
+                          {" "}
+                          西屯區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_8"
+                          value="南屯區"
+                        />
+                        <label class="form-check-label" for="address_8">
+                          {" "}
+                          南屯區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_9"
+                          value="太平區"
+                        />
+                        <label class="form-check-label" for="address_9">
+                          {" "}
+                          太平區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_10"
+                          value="大里區"
+                        />
+                        <label class="form-check-label" for="address_10">
+                          {" "}
+                          大里區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_11"
+                          value="霧峰區"
+                        />
+                        <label class="form-check-label" for="address_11">
+                          {" "}
+                          霧峰區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_12"
+                          value="烏日區"
+                        />
+                        <label class="form-check-label" for="address_12">
+                          {" "}
+                          烏日區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_13"
+                          value="豐原區"
+                        />
+                        <label class="form-check-label" for="address_13">
+                          {" "}
+                          豐原區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_14"
+                          value="后里區"
+                        />
+                        <label class="form-check-label" for="address_14">
+                          {" "}
+                          后里區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_15"
+                          value="石岡區"
+                        />
+                        <label class="form-check-label" for="address_15">
+                          {" "}
+                          石岡區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_16"
+                          value="東勢區"
+                        />
+                        <label class="form-check-label" for="address_16">
+                          {" "}
+                          東勢區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_17"
+                          value="新社區"
+                        />
+                        <label class="form-check-label" for="address_17">
+                          {" "}
+                          新社區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_18"
+                          value="潭子區"
+                        />
+                        <label class="form-check-label" for="address_18">
+                          {" "}
+                          潭子區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_19"
+                          value="大雅區"
+                        />
+                        <label class="form-check-label" for="address_19">
+                          {" "}
+                          大雅區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_20"
+                          value="神岡區"
+                        />
+                        <label class="form-check-label" for="address_20">
+                          {" "}
+                          神岡區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_21"
+                          value="大肚區"
+                        />
+                        <label class="form-check-label" for="address_21">
+                          {" "}
+                          大肚區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_22"
+                          value="沙鹿區"
+                        />
+                        <label class="form-check-label" for="address_22">
+                          {" "}
+                          沙鹿區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_23"
+                          value="龍井區"
+                        />
+                        <label class="form-check-label" for="address_23">
+                          {" "}
+                          龍井區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_24"
+                          value="梧棲區"
+                        />
+                        <label class="form-check-label" for="address_24">
+                          {" "}
+                          梧棲區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_25"
+                          value="清水區"
+                        />
+                        <label class="form-check-label" for="address_25">
+                          {" "}
+                          清水區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_26"
+                          value="大甲區"
+                        />
+                        <label class="form-check-label" for="address_26">
+                          {" "}
+                          大甲區{" "}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_27"
+                          value="外埔區"
+                        />
+                        <label class="form-check-label" for="address_27">
+                          {" "}
+                          外埔區{" "}
+                        </label>
+                      </div>
                     </div>
                   </div>
                   <div class="choose_classification_3">
@@ -242,6 +570,204 @@ class dian extends Component {
                 </div>
               </div>
               <div class="col-sm-7 col-md-8 col-lg-9 col-xxl-10 row choose_right">
+                <div class="col-lg-6 col-xxl-4 my-3">
+                  <div class="card">
+                    <div class="image">
+                      <img
+                        src={require("../img/mainproduct/8.png")}
+                        class="card-img-top"
+                        alt="..."
+                      />
+                      <img
+                        src={require("../img/logo/8.png")}
+                        class="logo"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="card-body">
+                      <div class="row information">
+                        <p class="col-3 score align-items-center d-flex align-items-center justify-content-center">
+                          <GradeIcon className="me-1" id="iconColor" />
+                          4.3
+                        </p>
+                        <p class="col-5 time">10:00~23:00</p>
+                        <p class="col-4 kilometre">約 0.2 公里</p>
+                      </div>
+                      <p class="card-title lh-sm">
+                        八曜和茶 台中五權門市店
+                        <br />
+                        <a href="https://www.google.com/maps/place/台中市北區五權路238號">
+                          台中市北區五權路238號
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-xxl-4 my-3">
+                  <div class="card">
+                    <div class="image">
+                      <img
+                        src={require("../img/mainproduct/8.png")}
+                        class="card-img-top"
+                        alt="..."
+                      />
+                      <img
+                        src={require("../img/logo/8.png")}
+                        class="logo"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="card-body">
+                      <div class="row information">
+                        <p class="col-3 score align-items-center d-flex align-items-center justify-content-center">
+                          <GradeIcon className="me-1" id="iconColor" />
+                          4.3
+                        </p>
+                        <p class="col-5 time">10:00~23:00</p>
+                        <p class="col-4 kilometre">約 0.2 公里</p>
+                      </div>
+                      <p class="card-title lh-sm">
+                        八曜和茶 台中五權門市店
+                        <br />
+                        <a href="https://www.google.com/maps/place/台中市北區五權路238號">
+                          台中市北區五權路238號
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-xxl-4 my-3">
+                  <div class="card">
+                    <div class="image">
+                      <img
+                        src={require("../img/mainproduct/8.png")}
+                        class="card-img-top"
+                        alt="..."
+                      />
+                      <img
+                        src={require("../img/logo/8.png")}
+                        class="logo"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="card-body">
+                      <div class="row information">
+                        <p class="col-3 score align-items-center d-flex align-items-center justify-content-center">
+                          <GradeIcon className="me-1" id="iconColor" />
+                          4.3
+                        </p>
+                        <p class="col-5 time">10:00~23:00</p>
+                        <p class="col-4 kilometre">約 0.2 公里</p>
+                      </div>
+                      <p class="card-title lh-sm">
+                        八曜和茶 台中五權門市店
+                        <br />
+                        <a href="https://www.google.com/maps/place/台中市北區五權路238號">
+                          台中市北區五權路238號
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-xxl-4 my-3">
+                  <div class="card">
+                    <div class="image">
+                      <img
+                        src={require("../img/mainproduct/8.png")}
+                        class="card-img-top"
+                        alt="..."
+                      />
+                      <img
+                        src={require("../img/logo/8.png")}
+                        class="logo"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="card-body">
+                      <div class="row information">
+                        <p class="col-3 score align-items-center d-flex align-items-center justify-content-center">
+                          <GradeIcon className="me-1" id="iconColor" />
+                          4.3
+                        </p>
+                        <p class="col-5 time">10:00~23:00</p>
+                        <p class="col-4 kilometre">約 0.2 公里</p>
+                      </div>
+                      <p class="card-title lh-sm">
+                        八曜和茶 台中五權門市店
+                        <br />
+                        <a href="https://www.google.com/maps/place/台中市北區五權路238號">
+                          台中市北區五權路238號
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-xxl-4 my-3">
+                  <div class="card">
+                    <div class="image">
+                      <img
+                        src={require("../img/mainproduct/8.png")}
+                        class="card-img-top"
+                        alt="..."
+                      />
+                      <img
+                        src={require("../img/logo/8.png")}
+                        class="logo"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="card-body">
+                      <div class="row information">
+                        <p class="col-3 score align-items-center d-flex align-items-center justify-content-center">
+                          <GradeIcon className="me-1" id="iconColor" />
+                          4.3
+                        </p>
+                        <p class="col-5 time">10:00~23:00</p>
+                        <p class="col-4 kilometre">約 0.2 公里</p>
+                      </div>
+                      <p class="card-title lh-sm">
+                        八曜和茶 台中五權門市店
+                        <br />
+                        <a href="https://www.google.com/maps/place/台中市北區五權路238號">
+                          台中市北區五權路238號
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-xxl-4 my-3">
+                  <div class="card">
+                    <div class="image">
+                      <img
+                        src={require("../img/mainproduct/8.png")}
+                        class="card-img-top"
+                        alt="..."
+                      />
+                      <img
+                        src={require("../img/logo/8.png")}
+                        class="logo"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="card-body">
+                      <div class="row information">
+                        <p class="col-3 score align-items-center d-flex align-items-center justify-content-center">
+                          <GradeIcon className="me-1" id="iconColor" />
+                          4.3
+                        </p>
+                        <p class="col-5 time">10:00~23:00</p>
+                        <p class="col-4 kilometre">約 0.2 公里</p>
+                      </div>
+                      <p class="card-title lh-sm">
+                        八曜和茶 台中五權門市店
+                        <br />
+                        <a href="https://www.google.com/maps/place/台中市北區五權路238號">
+                          台中市北區五權路238號
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 <div class="col-lg-6 col-xxl-4 my-3">
                   <div class="card">
                     <div class="image">
