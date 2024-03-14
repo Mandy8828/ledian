@@ -199,7 +199,7 @@ class dian extends Component {
                         id="score_1"
                       />
                       <label class="form-check-label" for="score_1">
-                        <GradeIcon className="me-1" /> 4.5以上
+                        <GradeIcon className="me-1" id="iconColor" /> 4.5以上
                       </label>
                     </div>
                     <div class="form-check">
@@ -211,7 +211,7 @@ class dian extends Component {
                         checked
                       />
                       <label class="form-check-label" for="score_2">
-                        <GradeIcon className="me-1" /> 4.0以上
+                        <GradeIcon className="me-1" id="iconColor" /> 4.0以上
                       </label>
                     </div>
                     <div class="form-check">
@@ -223,7 +223,7 @@ class dian extends Component {
                         checked
                       />
                       <label class="form-check-label" for="score_2">
-                        <GradeIcon className="me-1" /> 3.5以上
+                        <GradeIcon className="me-1" id="iconColor" /> 3.5以上
                       </label>
                     </div>
                     <div class="form-check">
@@ -235,7 +235,7 @@ class dian extends Component {
                         checked
                       />
                       <label class="form-check-label" for="score_2">
-                        <GradeIcon className="me-1" /> 3.0以上
+                        <GradeIcon className="me-1" id="iconColor" /> 3.0以上
                       </label>
                     </div>
                   </div>
@@ -259,7 +259,7 @@ class dian extends Component {
                     <div class="card-body">
                       <div class="row information">
                         <p class="col-3 score align-items-center d-flex align-items-center justify-content-center">
-                          <GradeIcon className="me-1" />
+                          <GradeIcon className="me-1" id="iconColor" />
                           4.3
                         </p>
                         <p class="col-5 time">10:00~23:00</p>
@@ -292,7 +292,7 @@ class dian extends Component {
                     <div class="card-body">
                       <div class="row information">
                         <p class="col-3 score align-items-center d-flex align-items-center justify-content-center">
-                          <GradeIcon className="me-1" />
+                          <GradeIcon className="me-1" id="iconColor" />
                           4.3
                         </p>
                         <p class="col-5 time">10:00~23:00</p>
@@ -325,7 +325,7 @@ class dian extends Component {
                     <div class="card-body">
                       <div class="row information">
                         <p class="col-3 score align-items-center d-flex align-items-center justify-content-center">
-                          <GradeIcon className="me-1" />
+                          <GradeIcon className="me-1" id="iconColor" />
                           4.3
                         </p>
                         <p class="col-5 time">10:00~23:00</p>
