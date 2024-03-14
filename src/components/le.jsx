@@ -132,7 +132,7 @@ class le extends Component {
         <main>
           <div class="container">
             <div class="row">
-              <div class="col-2">
+              <div class="col-sm-5 col-md-4 col-lg-3 col-xxl-2">
                 <div class="choose_left">
                   <div class="choose_left_1">透過以下分類篩選</div>
                   <div class="choose_classification">
@@ -194,7 +194,7 @@ class le extends Component {
                   </div>
                 </div>
               </div>
-              <div class="col-10 row choose_right">
+              <div class="col-sm-7 col-md-8 col-lg-9 col-xxl-10 row choose_right">
                 <div class="col-lg-6 col-xxl-4 my-3">
                   <div class="card">
                     <div class="image">

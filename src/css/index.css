@@ -181,9 +181,12 @@ main div.choose_left div.choose_left_1 {
 
 main div.choose_left div.choose_classification {
   margin-top: 20px;
-  padding: 0 10%;
 }
 
+main div.choose_classification div.form-check {
+  display: block;
+  margin: 0 20%;
+}
 /* 飲料選擇 (右) */
 main div.choose_right div.col-4 {
   margin: 15px 0px;
@@ -271,6 +274,10 @@ main div.choose_right div.image img.logo {
 
 main div.choose_right div.image img.card-img-top {
   z-index: 1;
+}
+
+.choose_right {
+  margin-top: 30px;
 }
 
 /* 店家資訊 (右) */
