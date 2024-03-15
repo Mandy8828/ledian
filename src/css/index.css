@@ -21,7 +21,7 @@
 }
 
 #homeBtn {
-  color: #f2af21;
+  color: #f3b021;
 }
 
 #header .menuBtn {
@@ -87,7 +87,7 @@
   position: absolute;
   top: 70px;
   right: 30px;
-  border: 1px solid #f2af21;
+  border: 1px solid #f3b021;
   padding: 0px 10px;
   border-radius: 5px;
   background-color: white;
@@ -160,8 +160,37 @@
   .menuBtn {
     display: none;
   }
+
   .footerText {
     font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  main div.choose_left_de {
+    margin: 40px 0px !important;
+    padding: 20px 15px !important;
+    font-size: 16px;
+    border-radius: 20px !important;
+    height: 550px;
+  }
+
+  main div.choose_left_de div.choose_classification_1 {
+    margin: 10px !important;
+    padding: 0 10%;
+    border: 2px solid darkblue;
+  }
+
+  main div.choose_left_de div.choose_classification_2 {
+    margin: 10px !important;
+    padding: 0 10%;
+    border: 2px solid darkblue;
+  }
+
+  main div.choose_left_de div.choose_classification_3 {
+    margin: 10px !important;
+    padding: 0 10%;
+    border: 2px solid darkblue;
   }
 }
 
@@ -225,13 +254,10 @@ main div.choose_left_de div.choose_left_1 {
   text-align: center;
 }
 
-main div.choose_left_de div.choose_classification {
-  margin-top: 20px;
-}
-
 main div.choose_left_de div.choose_classification_1 {
   margin: 20% 0%;
   padding: 0 10%;
+  border: 2px solid darkblue;
 }
 
 main div.choose_left_de div.choose_classification_2 {
@@ -258,6 +284,21 @@ main div.choose_left_de div.choose_classification_3 {
 .addressall {
   height: 135px;
   overflow-y: scroll;
+}
+
+/* //捲軸底色 */
+.addressall::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px none;
+  background-color: none;
+}
+/* //捲軸寬度 */
+.addressall::-webkit-scrollbar {
+  width: 6px;
+  background-color: none;
+}
+/* //捲軸本體顏色 */
+.addressall::-webkit-scrollbar-thumb {
+  background-color: none;
 }
 
 /* 店家與飲料共同 */
@@ -288,7 +329,7 @@ main div.choose_right div.image img.card-img-top {
 /* main div.choose_right div.information {
   padding: 0% 2%;
 } */
-#iconColor {
+.iconColor {
   color: #f3b021;
 }
 
