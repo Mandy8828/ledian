@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import "../css/index.css";
+import "../css/ledian.css";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { PiMedal } from "react-icons/pi";
 import { PiCoins } from "react-icons/pi";
 import { GiCancel } from "react-icons/gi";
 import GradeIcon from "@mui/icons-material/Grade";
+// import Axios from "axios";
 
 class dian extends Component {
   state = {

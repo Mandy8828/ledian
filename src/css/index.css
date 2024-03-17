@@ -1,394 +1,286 @@
 @font-face {
-  font-family: FakePearl-Regular;
-  src: url(https://cdn.jsdelivr.net/gh/max32002/FakePearl@1.1/webfont/FakePearl-Regular.woff2)
-      format("woff2"),
-    url(https://cdn.jsdelivr.net/gh/max32002/FakePearl@1.1/webfont/FakePearl-Regular.woff)
-      format("woff");
+    font-family: FakePearl-Regular;
+    src: url(https://cdn.jsdelivr.net/gh/max32002/FakePearl@1.1/webfont/FakePearl-Regular.woff2) format("woff2")
+    , url(https://cdn.jsdelivr.net/gh/max32002/FakePearl@1.1/webfont/FakePearl-Regular.woff) format("woff");
+  }
+  
+*{
+    font-family: "FakePearl-Regular",Georgia, 'Times New Roman', Times, serif;
 }
 
-* {
-  font-family: "FakePearl-Regular", Georgia, "Times New Roman", Times, serif;
+.mainColor {
+    color: #003C95;
 }
 /* header */
 .headerText {
-  font-size: 26px;
-  font-weight: 500;
-  line-height: 100%;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 100%;
 }
 
 #banner {
-  width: 100%;
+    width: 100%;
 }
 
-#homeBtn {
-  color: #f3b021;
+#homeBtn,.iconGrade {
+    color: #F3B021;
 }
 
 #header .menuBtn {
-  color: #003c95;
+    color: #003C95;  
 }
 
 #header .menuBtn:active {
-  color: #003c95;
+    color: #003C95;  
 }
 
 #loginBtn {
-  color: #003c95;
+    color: #003C95;  
 }
 
 #header {
-  height: 100px;
-  width: 100%;
+    height: 100px;
+    width: 100%;
 }
 
 #pointinfo {
-  position: fixed;
-  top: -500px;
-  left: 30%;
-  width: 300px;
-  background-color: #fff;
-  color: #003c95;
-  padding: 20px 20px 10px 20px;
-  border: 2px solid #ccc;
-  border-radius: 20px;
-  box-shadow: 0 1px 5px #333;
-  z-index: 101;
-  transition: all 1s ease-out;
+    position: fixed;
+    top: -500px;
+    left: 30%;
+    width: 500px;
+    background-color: #fff;
+    color: #003C95;
+    padding: 20px 20px 10px 20px;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    box-shadow: 0 1px 5px #333;
+    z-index: 101;
+    transition: all 1s ease-out;
+    
 }
 
 #pointinfo h1 {
-  border-bottom: 1px dashed #7f7f7f;
-  margin: -20px -20px 0px -20px;
-  padding: 10px;
-  background-color: #003c95;
-  color: #fff;
-  border-radius: 20px 20px 0px 0px;
-  text-align: center;
+    border-bottom: 1px dashed #7F7F7F;
+    margin: -20px -20px 0px -20px;
+    padding: 10px;
+    background-color: #003C95;
+    color: #fff;
+    border-radius: 20px 20px 0px 0px;
+    text-align: center;
 }
 
-#pointinfo p {
-  margin: 10px;
-  font-size: 18px;
+#pointinfo p{
+    margin: 10px;
+    font-size: 18px;
 }
 
 #pointinfoclose {
-  background-color: initial;
-  border: none;
-  position: absolute;
-  top: 28px;
-  right: 35px;
-  width: 30px;
-  height: 30px;
-  margin-top: -30px;
-  margin-right: -30px;
+    background-color: initial;
+    border: none;
+    position: absolute;   
+    top: 28px; 
+    right: 35px;
+    width: 30px;
+    height: 30px;
+    margin-top: -30px;
+    margin-right: -30px;
 }
 
-#memberNav {
-  position: absolute;
-  top: 70px;
-  right: 30px;
-  border: 1px solid #f3b021;
-  padding: 0px 10px;
-  border-radius: 5px;
-  background-color: white;
+#memberNav{
+    position: absolute;
+    top: 70px;
+    right: 30px;
+    border:1px solid #F3B021;
+    padding: 0px 10px;
+    border-radius: 5px;
+    background-color: white;
+    z-index: 50;
 }
 
 #memberNav h4 {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 #memberNavImg {
-  position: absolute;
-  right: 0px;
-  width: 100%;
-  opacity: 0.2;
+    position: absolute;
+    right: 0px;
+    width: 100%;
+    opacity: 0.2;
+    top: 50px;
 }
+
+/* roulette */
+
+#rouletteArea {
+    width: 100%;
+    height: 900px;
+    margin-bottom: 0px;
+    background-image: url('../img/index/roulette_background.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+
+.rouletteBrand{
+    color: #F3B021;
+}
+.rouletteProduct{
+    color: #F3B021;
+}
+
+
 
 /* footer */
 #footer {
-  margin-top: 50px;
-  background-image: url("../img/Footer_Background.png");
-  background-size: 100%;
-  background-repeat: no-repeat;
+    background-image: url('../img/index/Footer_Background.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    z-index: -1;
 }
 
 #footerlink img {
-  cursor: pointer;
+    cursor: pointer;
 }
 #footerInfo p {
-  cursor: pointer;
+    cursor: pointer;
 }
-
-/* RWD */
-@media screen and (max-width: 1060px) {
-  #memberNav {
-    right: 25px;
-  }
-}
-@media screen and (max-width: 992px) {
-  .headerText {
+.footerText{
     font-size: 22px;
-  }
-}
-@media screen and (max-width: 800px) {
-  #memberNav {
-    top: 65px;
-    right: 20px;
-  }
-  .footerText {
-    font-size: 14px;
-  }
-}
-@media screen and (max-width: 768px) {
-  .headerText {
-    font-size: 18px;
-  }
-  .footerText {
-    font-size: 12px;
-  }
-}
-@media screen and (max-width: 650px) {
-  .headerText {
-    font-size: 16px;
-  }
-}
-@media screen and (max-width: 600px) {
-  .headerText {
-    font-size: 18px;
-  }
-
-  .menuBtn {
-    display: none;
-  }
-
-  .footerText {
-    font-size: 10px;
-  }
-}
-
-@media screen and (max-width: 575px) {
-  main div.choose_left_de {
-    margin: 40px 0px 0px 0px !important;
-    padding: 20px 15px !important;
-    font-size: 16px;
-    border-radius: 20px !important;
-    height: 550px;
-    text-align: center;
-  }
-
-  main div.choose_left_de div.choose_classification_1 {
-    margin: 5% 20% !important;
-    padding: 0 10%;
-  }
-
-  main div.choose_left_de div.choose_classification_2 {
-    margin: 5% 20% !important;
-    padding: 0 10%;
-  }
-
-  main div.choose_left_de div.choose_classification_3 {
-    margin: 5% 20% !important;
-    padding: 0 10%;
-  }
-
-  main div.choose_left_de div.form-check {
-    margin: 0 10% !important;
-  }
-
-  main div.choose_left {
-    margin: 40px 0px 0px 0px !important;
-    background-color: #f2f2f2;
-    height: 280px !important;
-    padding: 40px 15px;
-    font-size: 18px;
-    border-radius: 20px;
-  }
-
-  main div.choose_left div.choose_classification {
-    margin-top: 20px;
-  }
-
-  main div.choose_classification div.form-check {
-    display: block;
-    margin: 0 34% !important;
-    text-align: center;
-  }
-}
-
-/* 飲料選擇 (左) */
-main div.choose_left {
-  margin: 40px 0px;
-  background-color: #f2f2f2;
-  height: 400px;
-  padding: 40px 15px;
-  font-size: 18px;
-  border-radius: 20px;
-}
-
-main div.choose_left div.choose_left_1 {
-  text-align: center;
-}
-
-main div.choose_left div.choose_classification {
-  margin-top: 20px;
-}
-
-main div.choose_classification div.form-check {
-  display: block;
-  margin: 0 20%;
-}
-/* 飲料選擇 (右) */
-main div.choose_right div.col-4 {
-  margin: 15px 0px;
-}
-
-main div.card-title {
-  display: flex;
-  margin: 5% 10% 0;
-  font-size: 24px;
-}
-
-main div.card-body_la {
-  display: flex;
-  margin: 0 10%;
-  font-size: 20px;
-}
-
-main div.card-body_la p.card-text {
-  width: 100%;
-}
-
-main div.card-body_la p.price_1 {
-  margin-right: 5%;
-}
-
-/* 店家資訊 (左) */
-main div.choose_left_de {
-  margin: 40px 0px;
-  background-color: #f2f2f2;
-  padding: 40px 15px;
-  font-size: 18px;
-  border-radius: 20px;
-}
-
-main div.choose_left_de div.choose_left_1 {
-  text-align: center;
-}
-
-main div.choose_left_de div.choose_classification_1 {
-  margin: 20% 0%;
-  padding: 0 10%;
-}
-
-main div.choose_left_de div.choose_classification_2 {
-  margin: 20% 0%;
-  padding: 0 10%;
-}
-
-main div.choose_left_de div.choose_classification_3 {
-  margin: 20% 0%;
-  padding: 0 10%;
-}
-
-.classification_title {
-  font-size: 20px;
-  margin-bottom: 5px;
-}
-
-.form-check-label {
-  display: flex;
-  align-content: center;
-  align-items: center;
-}
-
-.addressall {
-  height: 135px;
-  overflow-y: scroll;
-}
-
-/* //捲軸底色 */
-.addressall::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px none;
-  background-color: #f2f2f2;
-}
-/* //捲軸寬度 */
-.addressall::-webkit-scrollbar {
-  width: 6px;
-  background-color: #f2f2f2;
-}
-/* //捲軸本體顏色 */
-.addressall::-webkit-scrollbar-thumb {
-  background-color: #7f7f7f;
-}
-
-/* 店家與飲料共同 */
-main div.choose_right div.image {
-  position: relative;
-}
-
-main div.choose_right div.image img.logo {
-  width: 65px;
-  height: 65px;
-  z-index: 3;
-  position: absolute;
-  top: 5%;
-  left: 5%;
-  border-radius: 50%;
-  border: 1px solid #aaaaaa;
-}
-
-main div.choose_right div.image img.card-img-top {
-  z-index: 1;
-}
-
-.choose_right {
-  margin-top: 30px;
 }
 
 /* 店家資訊 (右) */
-/* main div.choose_right div.information {
-  padding: 0% 2%;
-} */
-.iconColor {
-  color: #f3b021;
+.choose_right div.image {
+    position: relative;
+  }
+  
+.choose_right div.image img.logo {
+    width: 65px;
+    height: 65px;
+    z-index: 3;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    border-radius: 50%;
+    border: 1px solid #aaaaaa;
+  }
+  
+.choose_right div.image img.card-img-top {
+    z-index: 1;
+  }
+  
+.choose_right div.information {
+    padding: 0% 2%;
+  }
+  
+.choose_right div.information .score {
+    background-color: #f2f2f2;
+    padding: 1% 2%;
+    border-radius: 20px;
+    text-align: center;
+    margin: 0% auto;
+    
+  }
+
+.choose_right div.information p.time {
+    background-color: #f2f2f2;
+    padding: 1% 2%;
+    border-radius: 20px;
+    text-align: center;
+    margin: 0% auto;
+  }
+  
+.choose_right div.information p.kilometre {
+    background-color: #f2f2f2;
+    padding: 1% 2%;
+    border-radius: 20px;
+    text-align: center;
+    margin: 0% auto;
+  }
+  
+.choose_right p.card-title {
+    font-size: 1.3rem;
+    margin-top: 5%;
+    padding-left: 2%;
+  }
+  
+.choose_right p.card-title a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+  }
+
+/* RWD */
+@media screen and (max-width:1060px) {
+    #memberNav{
+        right: 25px;
+    }
+    .footerText{
+        font-size: 18px;
+    }
+}
+@media screen and (max-width:992px) {
+    .headerText {
+        font-size: 21px;
+    }
+}
+@media screen and (max-width:800px) {
+    #memberNav{
+        top:65px;
+        right: 20px;
+    }
+    .footerText{
+        font-size: 14px;
+    }
+    #rouletteArea {
+        height: 300px;
+        background-position-y: 0px;
 }
 
-main div.choose_right div.information p.score {
-  background-color: #f2f2f2;
-  padding: 1% 2%;
-  border-radius: 20px;
-  text-align: center;
-  margin: 0% auto;
 }
-
-main div.choose_right div.information p.score i {
-  color: #f3b021;
+@media screen and (max-width:768px) {
+    .headerText {
+        font-size: 18px;
+    }
+    .footerText{
+        font-size: 12px;
+    }
+    .rouletteBrand{
+        font-size: 16px;
+    }
+    .rouletteProduct{
+        font-size: 14px;
+    }
 }
-
-main div.choose_right div.information p.time {
-  background-color: #f2f2f2;
-  padding: 1% 2%;
-  border-radius: 20px;
-  text-align: center;
-  margin: 0% auto;
+@media screen and (max-width:650px) {
+    .headerText {
+        font-size: 16px;
+    }
 }
-
-main div.choose_right div.information p.kilometre {
-  background-color: #f2f2f2;
-  padding: 1% 2%;
-  border-radius: 20px;
-  text-align: center;
-  margin: 0% auto;
+@media screen and (max-width:600px) {
+    .headerText {
+        font-size: 14px;
+    }
+    .footerText{
+        font-size: 10px;
+    }
+    #pointinfo {
+        width: 300px;
+    }
 }
+@media screen and (max-width:500px) {
 
-main div.choose_right p.card-title {
-  font-size: 1.3rem;
-  margin-top: 5%;
-  padding-left: 2%;
+    .footerText{
+        font-size: 8px;
+    }
+    .rouletteBrand{
+        font-size: 14px;
+    }
+    .rouletteProduct{
+        font-size: 12px;
+    }
 }
-
-main div.choose_right p.card-title a {
-  text-decoration: none;
-  color: black;
-  font-size: 16px;
+@media screen and (max-width:374px) {
+    .headerText {
+        font-size: 12px;
+    }
 }

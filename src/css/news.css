@@ -1,0 +1,240 @@
+@font-face {
+    font-family: FakePearl-Regular;
+    src: url(https://cdn.jsdelivr.net/gh/max32002/FakePearl@1.1/webfont/FakePearl-Regular.woff2) format("woff2")
+    , url(https://cdn.jsdelivr.net/gh/max32002/FakePearl@1.1/webfont/FakePearl-Regular.woff) format("woff");
+  }
+  
+*{
+    font-family: "FakePearl-Regular",Georgia, 'Times New Roman', Times, serif;
+}
+
+.mainColor {
+    color: #003C95;
+}
+/* header */
+.headerText {
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 100%;
+}
+
+#banner {
+    width: 100%;
+}
+
+#homeBtn {
+    color: #F3B021;
+}
+
+#header .menuBtn {
+    color: #003C95;  
+}
+
+#header .menuBtn:active {
+    color: #003C95;  
+}
+
+#loginBtn {
+    color: #003C95;  
+}
+
+#header {
+    height: 100px;
+    width: 100%;
+}
+
+#pointinfo {
+    position: fixed;
+    top: -500px;
+    left: 30%;
+    width: 500px;
+    background-color: #fff;
+    color: #003C95;
+    padding: 20px 20px 10px 20px;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    box-shadow: 0 1px 5px #333;
+    z-index: 101;
+    transition: all 1s ease-out;
+    
+}
+
+#pointinfo h1 {
+    border-bottom: 1px dashed #7F7F7F;
+    margin: -20px -20px 0px -20px;
+    padding: 10px;
+    background-color: #003C95;
+    color: #fff;
+    border-radius: 20px 20px 0px 0px;
+    text-align: center;
+}
+
+#pointinfo p{
+    margin: 10px;
+    font-size: 18px;
+}
+
+#pointinfoclose {
+    background-color: initial;
+    border: none;
+    position: absolute;   
+    top: 28px; 
+    right: 35px;
+    width: 30px;
+    height: 30px;
+    margin-top: -30px;
+    margin-right: -30px;
+}
+
+#memberNav{
+    position: absolute;
+    top: 70px;
+    right: 30px;
+    border:1px solid #F3B021;
+    padding: 0px 10px;
+    border-radius: 5px;
+    background-color: white;
+    z-index: 50;
+}
+
+#memberNav h4 {
+    cursor: pointer;
+}
+
+#memberNavImg {
+    position: absolute;
+    right: 0px;
+    width: 100%;
+    opacity: 0.2;
+    top: 50px;
+}
+
+/* news */
+.newsCard {
+    height: 100%;
+}
+
+/* roulette */
+
+#rouletteArea {
+    width: 100%;
+    height: 900px;
+    margin-bottom: 0px;
+    background-image: url('../img/index/roulette_background.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+
+.rouletteBrand{
+    color: #F3B021;
+}
+.rouletteProduct{
+    color: #F3B021;
+}
+
+
+
+
+/* footer */
+#footer {
+    background-image: url('../img/index/Footer_Background.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+#footerlink img {
+    cursor: pointer;
+}
+#footerInfo p {
+    cursor: pointer;
+}
+
+.footerText{
+    font-size: 22px;
+}
+
+/* RWD */
+@media screen and (max-width:1300px) {
+    #rouletteArea {
+        height: 700px;
+    }    
+}
+@media screen and (max-width:1060px) {
+    #memberNav{
+        right: 25px;
+    }
+    .footerText{
+        font-size: 18px;
+    }
+}
+@media screen and (max-width:992px) {
+    .headerText {
+        font-size: 21px;
+    }
+    #rouletteArea {
+        height: 400px;
+    }    
+}
+@media screen and (max-width:800px) {
+    #memberNav{
+        top:65px;
+        right: 20px;
+    }
+    .footerText{
+        font-size: 14px;
+    }
+    #rouletteArea {
+        height: 300px;
+        background-position-y: 0px;
+    
+}
+}
+@media screen and (max-width:768px) {
+    .headerText {
+        font-size: 18px;
+    }
+    .footerText{
+        font-size: 12px;
+    }
+    .rouletteBrand{
+        font-size: 16px;
+    }
+    .rouletteProduct{
+        font-size: 14px;
+    }
+
+}
+@media screen and (max-width:650px) {
+    .headerText {
+        font-size: 16px;
+    }
+}
+@media screen and (max-width:600px) {
+    .headerText {
+        font-size: 14px;
+    }
+    .footerText{
+        font-size: 10px;
+    }
+    #pointinfo {
+        width: 300px;
+    }
+}
+@media screen and (max-width:500px) {
+    .footerText{
+        font-size: 8px;
+    }
+    .rouletteBrand{
+        font-size: 14px;
+    }
+    .rouletteProduct{
+        font-size: 12px;
+    }
+}
+@media screen and (max-width:374px) {
+    .headerText {
+        font-size: 12px;
+    }
+}
