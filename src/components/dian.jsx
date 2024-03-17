@@ -14,52 +14,53 @@ class dian extends Component {
     return (
       <React.Fragment>
         <div id="header" className="d-flex justify-content-between">
-          <div className="col-6  d-flex ms-2 justify-content-between align-items-center">
+          <div className="col-9 col-sm-7 col-md-6 d-flex ms-2 justify-content-between align-items-center">
             <h4
               id="homeBtn"
-              className="my-auto btn headerText"
+              className="my-auto btn headerText text-nowrap"
               onClick={() => {
                 window.location = "/index";
               }}
             >
               首頁
             </h4>
-            <h4 className="my-auto p-0 btn headerText menuBtn">
-              <HiOutlineShoppingBag className="fs-6" />
+            <h4 className="my-auto p-0 btn headerText menuBtn d-flex align-items-center justify-content-center">
+              <HiOutlineShoppingBag className="fs-4" />
               購物車
             </h4>
             <h4
-              className="my-auto p-0 btn headerText menuBtn"
+              className="my-auto p-0 btn headerText menuBtn d-flex align-items-center justify-content-center"
               onClick={() => {
                 window.location = "/brand";
               }}
             >
-              <PiMedal className="fs-6" />
+              <PiMedal className="fs-4" />
               品牌專區
             </h4>
             <h4
-              className="my-auto p-0 btn headerText menuBtn"
+              className="my-auto p-0 btn headerText menuBtn d-flex align-items-center justify-content-center"
               onClick={this.pointinfoShow}
             >
-              <PiCoins className="fs-6" />
+              <PiCoins className="fs-4" />
               集點資訊
             </h4>
           </div>
           <div id="pointinfo">
             <button id="pointinfoclose" onClick={this.pointinfoHide}>
-              <GiCancel className="fs-2    text-light" />
+              <GiCancel className="fs-2 text-light" />
             </button>
             <h1>集點資訊</h1>
             <p>．每消費20元即可累積1點。</p>
             <p>．每點可折抵1元消費金額。</p>
             <p>．點數可在下次消費時折抵使用。</p>
             <p>．點數不可轉讓，不可兌換現金，不可合併使用。</p>
-            <p>．本集點活動以本站公告為準，如有更改，恕不另行通知。</p>
+            <p>．本集點活動以公告為準，如有更改，恕不另行通知。</p>
           </div>
+
           <div className="d-flex me-2  align-items-center">
             <h4
               id="loginBtn"
-              className="my-auto btn headerText"
+              className="my-auto btn headerText text-nowrap"
               onClick={this.toggleMemberNav}
             >
               登入/註冊▼
@@ -67,21 +68,24 @@ class dian extends Component {
             <div id="memberNav" className="collapse">
               <img
                 id="memberNavImg"
-                src={require("../img/LeDian_LOGO-05.png")}
+                src={require("../img/index/LeDian_LOGO-05.png")}
                 alt="logo"
               ></img>
               <div>
-                <h4 className="headerText my-2">個人檔案</h4>
-                <h4 className="headerText my-2">帳號管理</h4>
-                <h4 className="headerText my-2">歷史訂單</h4>
-                <h4 className="headerText my-2">載具存取</h4>
+                <h4 className="headerText my-3">個人檔案</h4>
+                <hr />
+                <h4 className="headerText my-3">帳號管理</h4>
+                <hr />
+                <h4 className="headerText my-3">歷史訂單</h4>
+                <hr />
+                <h4 className="headerText my-3">載具存取</h4>
               </div>
             </div>
           </div>
         </div>
         <div id="banner" className="d-flex justify-content-center">
           <img
-            src={require("../img/Home Banner_01.jpg")}
+            src={require("../img/index/Home_Banner_01.jpg")}
             alt="homeBanner"
             className="img-fluid"
           ></img>
@@ -95,7 +99,7 @@ class dian extends Component {
               }}
             >
               <img
-                src={require("../img/LeDian_BANNER-01.jpg")}
+                src={require("../img/index/LeDian_BANNER-01.jpg")}
                 alt="navImg"
                 className="img-fluid"
               ></img>
@@ -107,14 +111,19 @@ class dian extends Component {
               }}
             >
               <img
-                src={require("../img/LeDian_BANNER-02.jpg")}
+                src={require("../img/index/LeDian_BANNER-02.jpg")}
                 alt="navImg"
                 className="img-fluid"
               ></img>
             </div>
-            <div className="navImg col-4 btn">
+            <div
+              className="navImg col-4 btn"
+              onClick={() => {
+                window.location = "/news";
+              }}
+            >
               <img
-                src={require("../img/LeDian_BANNER-05.jpg")}
+                src={require("../img/index/LeDian_BANNER-05.jpg")}
                 alt="navImg"
                 className="img-fluid"
               ></img>
@@ -133,7 +142,7 @@ class dian extends Component {
         <main>
           <div class="container">
             <div class="row">
-              <div class="col-sm-5 col-md-4 col-lg-3 col-xxl-2">
+              <div class="col-sm-5 col-md-4 col-lg-3 col-xxl-2 justify-content-center">
                 <div class="choose_left_de">
                   <div class="choose_left_1">透過以下分類篩選</div>
                   <div class="choose_classification_1">
@@ -569,7 +578,7 @@ class dian extends Component {
                   </div>
                 </div>
               </div>
-              <div class="col-sm-7 col-md-8 col-lg-9 col-xxl-10 row choose_right">
+              <div class="col-sm-7 col-md-8 col-lg-9 col-xxl-10 row choose_right justify-content-center">
                 <div class="col-lg-6 col-xxl-4 my-3">
                   <div class="card">
                     <div class="image">
@@ -877,7 +886,7 @@ class dian extends Component {
             <img
               id='"footerImg"'
               className="img-fluid"
-              src={require("../img/LeDian_LOGO-04.png")}
+              src={require("../img/index/LeDian_LOGO-04.png")}
               alt="footerLogo"
             />
           </div>
@@ -887,21 +896,21 @@ class dian extends Component {
                 <div>
                   <img
                     className="img-fluid"
-                    src={require("../img/facebook.png")}
+                    src={require("../img/index/facebook.png")}
                     alt="fackbook"
                   />
                 </div>
                 <div>
                   <img
                     className="img-fluid"
-                    src={require("../img/instagram.png")}
+                    src={require("../img/index/instagram.png")}
                     alt="instagram"
                   />
                 </div>
                 <div>
                   <img
                     className="img-fluid"
-                    src={require("../img/line.png")}
+                    src={require("../img/index/line.png")}
                     alt="line"
                   />
                 </div>
@@ -946,6 +955,8 @@ class dian extends Component {
   };
   pointinfoShow = function (event) {
     document.getElementById("pointinfo").style.top = event.clientY + "px";
+    document.getElementById("pointinfo").style.left =
+      event.clientX - 250 + "px";
   };
 
   pointinfoHide = function (event) {

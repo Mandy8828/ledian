@@ -168,29 +168,50 @@
 
 @media screen and (max-width: 575px) {
   main div.choose_left_de {
-    margin: 40px 0px !important;
+    margin: 40px 0px 0px 0px !important;
     padding: 20px 15px !important;
     font-size: 16px;
     border-radius: 20px !important;
     height: 550px;
+    text-align: center;
   }
 
   main div.choose_left_de div.choose_classification_1 {
-    margin: 10px !important;
+    margin: 5% 20% !important;
     padding: 0 10%;
-    border: 2px solid darkblue;
   }
 
   main div.choose_left_de div.choose_classification_2 {
-    margin: 10px !important;
+    margin: 5% 20% !important;
     padding: 0 10%;
-    border: 2px solid darkblue;
   }
 
   main div.choose_left_de div.choose_classification_3 {
-    margin: 10px !important;
+    margin: 5% 20% !important;
     padding: 0 10%;
-    border: 2px solid darkblue;
+  }
+
+  main div.choose_left_de div.form-check {
+    margin: 0 10% !important;
+  }
+
+  main div.choose_left {
+    margin: 40px 0px 0px 0px !important;
+    background-color: #f2f2f2;
+    height: 280px !important;
+    padding: 40px 15px;
+    font-size: 18px;
+    border-radius: 20px;
+  }
+
+  main div.choose_left div.choose_classification {
+    margin-top: 20px;
+  }
+
+  main div.choose_classification div.form-check {
+    display: block;
+    margin: 0 34% !important;
+    text-align: center;
   }
 }
 
@@ -257,7 +278,6 @@ main div.choose_left_de div.choose_left_1 {
 main div.choose_left_de div.choose_classification_1 {
   margin: 20% 0%;
   padding: 0 10%;
-  border: 2px solid darkblue;
 }
 
 main div.choose_left_de div.choose_classification_2 {
@@ -289,16 +309,16 @@ main div.choose_left_de div.choose_classification_3 {
 /* //捲軸底色 */
 .addressall::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px none;
-  background-color: none;
+  background-color: #f2f2f2;
 }
 /* //捲軸寬度 */
 .addressall::-webkit-scrollbar {
   width: 6px;
-  background-color: none;
+  background-color: #f2f2f2;
 }
 /* //捲軸本體顏色 */
 .addressall::-webkit-scrollbar-thumb {
-  background-color: none;
+  background-color: #7f7f7f;
 }
 
 /* 店家與飲料共同 */
