@@ -10,10 +10,11 @@ class le extends Component {
   state = {
     search: "搜尋店家",
     resultle1: [],
-    // resultle2: [],
-    // resultle3: [],
-    // resultle4: [],
-    // resultle5: [],
+    resultlebrand: [],
+    resultle2: [],
+    resultle3: [],
+    resultle4: [],
+    resultle5: [],
   };
   render() {
     return (
@@ -169,6 +170,7 @@ class le extends Component {
                         type="checkbox"
                         value=""
                         id="classification_2"
+                        onChange={this.handleCheckboxChange}
                       />
                       <label class="form-check-label" for="classification_2">
                         茶品精選
@@ -180,6 +182,7 @@ class le extends Component {
                         type="checkbox"
                         value=""
                         id="classification_3"
+                        onChange={this.handleCheckboxChange}
                       />
                       <label class="form-check-label" for="classification_3">
                         拿鐵探查
@@ -191,6 +194,7 @@ class le extends Component {
                         type="checkbox"
                         value=""
                         id="classification_4"
+                        onChange={this.handleCheckboxChange}
                       />
                       <label class="form-check-label" for="classification_4">
                         口感尋覓
@@ -202,6 +206,7 @@ class le extends Component {
                         type="checkbox"
                         value=""
                         id="classification_5"
+                        onChange={this.handleCheckboxChange}
                       />
                       <label class="form-check-label" for="classification_5">
                         新鮮探勘
@@ -229,7 +234,154 @@ class le extends Component {
                         />
                       </div>
                       {/* 動態設定標題 */}
-                      <div class="card-title">{item.brand_id}</div>
+                      <div className="card-title">
+                        {this.state.resultlebrand
+                          .filter((brand) => brand.brand_id === item.brand_id) // 過濾出符合 brand_id 的品牌
+                          .map((brand) => (
+                            <span key={brand.brand_id}>{brand.brand_name}</span>
+                          ))}
+                      </div>
+
+                      {/* 動態設定內容 */}
+                      <div class="card-body_la">
+                        <p class="card-text">{item.product_name}</p>
+                        <p class="price_1">${item.products_price_0}</p>
+                        <p class="price_2">${item.products_price_1}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                {this.state.resultle2.map((item, index) => (
+                  <div key={index} className="col-lg-6 col-xxl-4 my-3">
+                    <div class="card">
+                      <div class="image">
+                        {/* 動態設定圖片路徑 */}
+                        <img
+                          src={`/img/class/${item.product_img}.png`}
+                          class="card-img-top"
+                          alt="..."
+                        />
+                        {/* 動態設定 logo 路徑 */}
+                        <img
+                          src={`/img/logo/${item.brand_id}.png`}
+                          class="logo"
+                          alt="..."
+                        />
+                      </div>
+                      {/* 動態設定標題 */}
+                      <div className="card-title">
+                        {this.state.resultlebrand
+                          .filter((brand) => brand.brand_id === item.brand_id) // 過濾出符合 brand_id 的品牌
+                          .map((brand) => (
+                            <span key={brand.brand_id}>{brand.brand_name}</span>
+                          ))}
+                      </div>
+
+                      {/* 動態設定內容 */}
+                      <div class="card-body_la">
+                        <p class="card-text">{item.product_name}</p>
+                        <p class="price_1">${item.products_price_0}</p>
+                        <p class="price_2">${item.products_price_1}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                {this.state.resultle3.map((item, index) => (
+                  <div key={index} className="col-lg-6 col-xxl-4 my-3">
+                    <div class="card">
+                      <div class="image">
+                        {/* 動態設定圖片路徑 */}
+                        <img
+                          src={`/img/class/${item.product_img}.png`}
+                          class="card-img-top"
+                          alt="..."
+                        />
+                        {/* 動態設定 logo 路徑 */}
+                        <img
+                          src={`/img/logo/${item.brand_id}.png`}
+                          class="logo"
+                          alt="..."
+                        />
+                      </div>
+                      {/* 動態設定標題 */}
+                      <div className="card-title">
+                        {this.state.resultlebrand
+                          .filter((brand) => brand.brand_id === item.brand_id) // 過濾出符合 brand_id 的品牌
+                          .map((brand) => (
+                            <span key={brand.brand_id}>{brand.brand_name}</span>
+                          ))}
+                      </div>
+
+                      {/* 動態設定內容 */}
+                      <div class="card-body_la">
+                        <p class="card-text">{item.product_name}</p>
+                        <p class="price_1">${item.products_price_0}</p>
+                        <p class="price_2">${item.products_price_1}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                {this.state.resultle4.map((item, index) => (
+                  <div key={index} className="col-lg-6 col-xxl-4 my-3">
+                    <div class="card">
+                      <div class="image">
+                        {/* 動態設定圖片路徑 */}
+                        <img
+                          src={`/img/class/${item.product_img}.png`}
+                          class="card-img-top"
+                          alt="..."
+                        />
+                        {/* 動態設定 logo 路徑 */}
+                        <img
+                          src={`/img/logo/${item.brand_id}.png`}
+                          class="logo"
+                          alt="..."
+                        />
+                      </div>
+                      {/* 動態設定標題 */}
+                      <div className="card-title">
+                        {this.state.resultlebrand
+                          .filter((brand) => brand.brand_id === item.brand_id) // 過濾出符合 brand_id 的品牌
+                          .map((brand) => (
+                            <span key={brand.brand_id}>{brand.brand_name}</span>
+                          ))}
+                      </div>
+
+                      {/* 動態設定內容 */}
+                      <div class="card-body_la">
+                        <p class="card-text">{item.product_name}</p>
+                        <p class="price_1">${item.products_price_0}</p>
+                        <p class="price_2">${item.products_price_1}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                {this.state.resultle5.map((item, index) => (
+                  <div key={index} className="col-lg-6 col-xxl-4 my-3">
+                    <div class="card">
+                      <div class="image">
+                        {/* 動態設定圖片路徑 */}
+                        <img
+                          src={`/img/class/${item.product_img}.png`}
+                          class="card-img-top"
+                          alt="..."
+                        />
+                        {/* 動態設定 logo 路徑 */}
+                        <img
+                          src={`/img/logo/${item.brand_id}.png`}
+                          class="logo"
+                          alt="..."
+                        />
+                      </div>
+                      {/* 動態設定標題 */}
+                      <div className="card-title">
+                        {this.state.resultlebrand
+                          .filter((brand) => brand.brand_id === item.brand_id) // 過濾出符合 brand_id 的品牌
+                          .map((brand) => (
+                            <span key={brand.brand_id}>{brand.brand_name}</span>
+                          ))}
+                      </div>
+
                       {/* 動態設定內容 */}
                       <div class="card-body_la">
                         <p class="card-text">{item.product_name}</p>
@@ -334,31 +486,141 @@ class le extends Component {
   componentDidMount = async () => {
     try {
       var resultle1 = await axios.get("http://localhost:8000/le1/product");
-      //   var resultle2 = await axios.get("http://localhost:8000/le2");
-      //   var resultle3 = await axios.get("http://localhost:8000/le3");
-      //   var resultle4 = await axios.get("http://localhost:8000/le4");
-      //   var resultle5 = await axios.get("http://localhost:8000/le5");
+      var resultlebrand = await axios.get("http://localhost:8000/le/brand");
+      var resultle2 = await axios.get("http://localhost:8000/le2/product");
+      var resultle3 = await axios.get("http://localhost:8000/le3/product");
+      var resultle4 = await axios.get("http://localhost:8000/le4/product");
+      var resultle5 = await axios.get("http://localhost:8000/le5/product");
 
-      console.log(resultle1); // 使用 console.log 而不是 console
-
-      var newState = { ...this.state };
-      newState.resultle1 = resultle1.data; // 將數據存儲到 resultle1 中
-      this.setState(newState);
+      this.setState({
+        resultle1: resultle1.data,
+        resultle2: resultle2.data,
+        resultle3: resultle3.data,
+        resultle4: resultle4.data,
+        resultle5: resultle5.data,
+        resultlebrand: resultlebrand.data,
+      });
     } catch (error) {
       console.error(error);
     }
   };
 
+  // handleCheckboxChange = async (event) => {
+  //   if (event.target.id === "classification_1" && event.target.checked) {
+  //     try {
+  //       const resultle1 = await axios.get("http://localhost:8000/le1/product");
+  //       const resultlebrand = await axios.get("http://localhost:8000/le/brand");
+
+  //       // 將品牌資料整理成以 brand_id 為鍵的物件，方便後續查找
+  //       const brandMap = resultlebrand.data.reduce((acc, brand) => {
+  //         acc[brand.brand_id] = brand.brand_name;
+  //         return acc;
+  //       }, {});
+
+  //       // 將商品資料中的品牌名稱加入
+  //       const productsWithBrandNames = resultle1.data.map((product) => ({
+  //         ...product,
+  //         brand_name: brandMap[product.brand_id], // 根據 brand_id 查找品牌名稱
+  //       }));
+
+  //       this.setState({
+  //         resultle1: productsWithBrandNames,
+  //         resultlebrand: resultlebrand.data,
+  //       });
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  // };
+
+  // handleCheckboxChange = async (event) => {
+  //   const checkboxId = event.target.id;
+
+  //   try {
+  //     if (checkboxId === "classification_1" && event.target.checked) {
+  //       const resultle1 = await axios.get("http://localhost:8000/le1/product");
+  //       const resultlebrand = await axios.get("http://localhost:8000/le/brand");
+
+  //       // 將品牌資料整理成以 brand_id 為鍵的物件，方便後續查找
+  //       const brandMap = resultlebrand.data.reduce((acc, brand) => {
+  //         acc[brand.brand_id] = brand.brand_name;
+  //         return acc;
+  //       }, {});
+
+  //       // 將商品資料中的品牌名稱加入
+  //       const productsWithBrandNames = resultle1.data.map((product) => ({
+  //         ...product,
+  //         brand_name: brandMap[product.brand_id], // 根據 brand_id 查找品牌名稱
+  //       }));
+
+  //       this.setState({
+  //         resultle1: productsWithBrandNames,
+  //         resultlebrand: resultlebrand.data,
+  //       });
+  //     }
+  //     // 其他分類的處理邏輯類似...
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
   handleCheckboxChange = async (event) => {
-    if (event.target.id === "classification_1" && event.target.checked) {
-      try {
-        var resultle1 = await axios.get("http://localhost:8000/le1/product");
-        var newState = { ...this.state };
-        newState.resultle1 = resultle1.data; // 將數據存儲到 resultle1 中
-        this.setState(newState);
-      } catch (error) {
-        console.error(error);
+    const checkboxId = event.target.id;
+
+    try {
+      // Initialize an empty array to hold the selected category data
+      let selectedCategoryData = [];
+
+      // Fetch data based on the selected checkbox
+      switch (checkboxId) {
+        case "classification_1":
+          selectedCategoryData = await axios.get(
+            "http://localhost:8000/le1/product"
+          );
+          break;
+        case "classification_2":
+          selectedCategoryData = await axios.get(
+            "http://localhost:8000/le2/product"
+          );
+          break;
+        case "classification_3":
+          selectedCategoryData = await axios.get(
+            "http://localhost:8000/le3/product"
+          );
+          break;
+        case "classification_4":
+          selectedCategoryData = await axios.get(
+            "http://localhost:8000/le4/product"
+          );
+          break;
+        case "classification_5":
+          selectedCategoryData = await axios.get(
+            "http://localhost:8000/le5/product"
+          );
+          break;
+        default:
+          // If no checkbox is selected, fetch all products
+          selectedCategoryData = await axios.get(
+            "http://localhost:8000/all/products"
+          );
+          break;
       }
+
+      // Update state with the selected category data
+      this.setState({
+        resultle1:
+          checkboxId === "classification_1" ? selectedCategoryData.data : [],
+        resultle2:
+          checkboxId === "classification_2" ? selectedCategoryData.data : [],
+        resultle3:
+          checkboxId === "classification_3" ? selectedCategoryData.data : [],
+        resultle4:
+          checkboxId === "classification_4" ? selectedCategoryData.data : [],
+        resultle5:
+          checkboxId === "classification_5" ? selectedCategoryData.data : [],
+      });
+    } catch (error) {
+      console.error(error);
     }
   };
 }

@@ -48,46 +48,44 @@ app.get("/le1/product", function (req, res) {
   );
 });
 
-app.get("/le1/brand", function (req, res) {
+app.get("/le/brand", function (req, res) {
   conn.query("select * from brand", function (err, rows) {
     res.send(JSON.stringify(rows));
   });
 });
 
-// app.get("/todo/item/:id", function (req, res) {
-//     conn.query("select * from todoTable where todoTableId = ?",
-//         [req.params.id],
-//         function (err, rows) {
-//             res.send( JSON.stringify(rows[0]) );
-//         }
-//     )
-// })
+app.get("/le2/product", function (req, res) {
+  conn.query(
+    "select product_img, product_id, product_name, products_price_0, products_price_1, brand_id from products where product_class_2 = 1",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
 
-// app.post("/todo/create", function (req, res) {
-//     conn.query("insert into todoTable (title, isComplete) values (?, ?)",
-//         [req.body.title, req.body.isComplete],
-//         function (err, rows) {
-//             res.send( JSON.stringify( req.body ));
-//         }
-//     )
+app.get("/le3/product", function (req, res) {
+  conn.query(
+    "select product_img, product_id, product_name, products_price_0, products_price_1, brand_id from products where product_class_3 = 1",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
 
-// })
+app.get("/le4/product", function (req, res) {
+  conn.query(
+    "select product_img, product_id, product_name, products_price_0, products_price_1, brand_id from products where product_class_4 = 1",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
 
-// app.put("/todo/item", function (req, res) {
-//     conn.query("update todoTable set title= ?, isComplete = ? where todoTableId = ?",
-//         [req.body.title, req.body.isComplete, req.body.todoTableId],
-//         function (err, rows) {
-//             res.send( JSON.stringify( req.body ));
-//         }
-//     )
-
-// })
-
-// app.delete("/todo/delete/:id", function (req, res) {
-//     conn.query("delete from todoTable where todoTableId = ?",
-//         [req.params.id],
-//         function (err, rows) {
-//             res.send("#" + req.params.id + " deleted");
-//         }
-//     )
-// })
+app.get("/le5/product", function (req, res) {
+  conn.query(
+    "select product_img, product_id, product_name, products_price_0, products_price_1, brand_id from products where product_class_5 = 1",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
