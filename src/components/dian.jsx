@@ -5,7 +5,7 @@ import { PiMedal } from "react-icons/pi";
 import { PiCoins } from "react-icons/pi";
 import { GiCancel } from "react-icons/gi";
 import GradeIcon from "@mui/icons-material/Grade";
-// import Axios from "axios";
+// import axios from "axios";
 
 class dian extends Component {
   state = {
@@ -584,15 +584,11 @@ class dian extends Component {
                   <div class="card">
                     <div class="image">
                       <img
-                        src={require("../img/mainproduct/8.png")}
+                        src={"/img/mainproduct/8.png"}
                         class="card-img-top"
                         alt="..."
                       />
-                      <img
-                        src={require("../img/logo/8.png")}
-                        class="logo"
-                        alt="..."
-                      />
+                      <img src={"/img/logo/8.png"} class="logo" alt="..." />
                     </div>
                     <div class="card-body">
                       <div class="row information">
@@ -617,15 +613,11 @@ class dian extends Component {
                   <div class="card">
                     <div class="image">
                       <img
-                        src={require("../img/mainproduct/8.png")}
+                        src={"/img/mainproduct/8.png"}
                         class="card-img-top"
                         alt="..."
                       />
-                      <img
-                        src={require("../img/logo/8.png")}
-                        class="logo"
-                        alt="..."
-                      />
+                      <img src={"/img/logo/8.png"} class="logo" alt="..." />
                     </div>
                     <div class="card-body">
                       <div class="row information">
@@ -650,15 +642,11 @@ class dian extends Component {
                   <div class="card">
                     <div class="image">
                       <img
-                        src={require("../img/mainproduct/8.png")}
+                        src={"/img/mainproduct/8.png"}
                         class="card-img-top"
                         alt="..."
                       />
-                      <img
-                        src={require("../img/logo/8.png")}
-                        class="logo"
-                        alt="..."
-                      />
+                      <img src={"/img/logo/8.png"} class="logo" alt="..." />
                     </div>
                     <div class="card-body">
                       <div class="row information">
@@ -683,15 +671,11 @@ class dian extends Component {
                   <div class="card">
                     <div class="image">
                       <img
-                        src={require("../img/mainproduct/8.png")}
+                        src={"/img/mainproduct/8.png"}
                         class="card-img-top"
                         alt="..."
                       />
-                      <img
-                        src={require("../img/logo/8.png")}
-                        class="logo"
-                        alt="..."
-                      />
+                      <img src={"/img/logo/8.png"} class="logo" alt="..." />
                     </div>
                     <div class="card-body">
                       <div class="row information">
@@ -716,15 +700,11 @@ class dian extends Component {
                   <div class="card">
                     <div class="image">
                       <img
-                        src={require("../img/mainproduct/8.png")}
+                        src={"/img/mainproduct/8.png"}
                         class="card-img-top"
                         alt="..."
                       />
-                      <img
-                        src={require("../img/logo/8.png")}
-                        class="logo"
-                        alt="..."
-                      />
+                      <img src={"/img/logo/8.png"} class="logo" alt="..." />
                     </div>
                     <div class="card-body">
                       <div class="row information">
@@ -749,15 +729,11 @@ class dian extends Component {
                   <div class="card">
                     <div class="image">
                       <img
-                        src={require("../img/mainproduct/8.png")}
+                        src={"/img/mainproduct/8.png"}
                         class="card-img-top"
                         alt="..."
                       />
-                      <img
-                        src={require("../img/logo/8.png")}
-                        class="logo"
-                        alt="..."
-                      />
+                      <img src={"/img/logo/8.png"} class="logo" alt="..." />
                     </div>
                     <div class="card-body">
                       <div class="row information">
@@ -782,15 +758,11 @@ class dian extends Component {
                   <div class="card">
                     <div class="image">
                       <img
-                        src={require("../img/mainproduct/8.png")}
+                        src={"/img/mainproduct/8.png"}
                         class="card-img-top"
                         alt="..."
                       />
-                      <img
-                        src={require("../img/logo/8.png")}
-                        class="logo"
-                        alt="..."
-                      />
+                      <img src={"/img/logo/8.png"} class="logo" alt="..." />
                     </div>
                     <div class="card-body">
                       <div class="row information">
@@ -815,15 +787,11 @@ class dian extends Component {
                   <div class="card">
                     <div class="image">
                       <img
-                        src={require("../img/mainproduct/8.png")}
+                        src={"/img/mainproduct/8.png"}
                         class="card-img-top"
                         alt="..."
                       />
-                      <img
-                        src={require("../img/logo/8.png")}
-                        class="logo"
-                        alt="..."
-                      />
+                      <img src={"/img/logo/8.png"} class="logo" alt="..." />
                     </div>
                     <div class="card-body">
                       <div class="row information">
@@ -848,15 +816,11 @@ class dian extends Component {
                   <div class="card">
                     <div class="image">
                       <img
-                        src={require("../img/mainproduct/8.png")}
+                        src={"/img/mainproduct/8.png"}
                         class="card-img-top"
                         alt="..."
                       />
-                      <img
-                        src={require("../img/logo/8.png")}
-                        class="logo"
-                        alt="..."
-                      />
+                      <img src={"/img/logo/8.png"} class="logo" alt="..." />
                     </div>
                     <div class="card-body">
                       <div class="row information">
@@ -968,6 +932,14 @@ class dian extends Component {
   toggleMemberNav = () => {
     document.getElementById("memberNav").classList.toggle("collapse");
   };
+
+  // componentDidMount = async () => {
+  //   var resultdian = await axios.get("http://localhost:8000/dian");
+  //   console("resultdian");
+  //   var newState = { ...this.state };
+  //   newState.products = resultdian.data;
+  //   this.setState(newState);
+  // };
 }
 
 export default dian;

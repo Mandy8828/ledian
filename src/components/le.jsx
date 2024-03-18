@@ -4,11 +4,16 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 import { PiMedal } from "react-icons/pi";
 import { PiCoins } from "react-icons/pi";
 import { GiCancel } from "react-icons/gi";
-// import Axios from "axios";
+import axios from "axios";
 
 class le extends Component {
   state = {
     search: "搜尋店家",
+    resultle1: [],
+    // resultle2: [],
+    // resultle3: [],
+    // resultle4: [],
+    // resultle5: [],
   };
   render() {
     return (
@@ -152,6 +157,7 @@ class le extends Component {
                         type="checkbox"
                         value=""
                         id="classification_1"
+                        onChange={this.handleCheckboxChange}
                       />
                       <label class="form-check-label" for="classification_1">
                         精選推味
@@ -205,138 +211,34 @@ class le extends Component {
                 </div>
               </div>
               <div class="col-sm-7 col-md-8 col-lg-9 col-xxl-10 row choose_right">
-                <div class="col-lg-6 col-xxl-4 my-3">
-                  <div class="card">
-                    <div class="image">
-                      <img
-                        src={require("../img/class/8_345.png")}
-                        class="card-img-top"
-                        alt="..."
-                      />
-                      <img
-                        src={require("../img/logo/8.png")}
-                        class="logo"
-                        alt="..."
-                      />
-                    </div>
-                    <div class="card-title">八曜和茶</div>
-                    <div class="card-body_la">
-                      <p class="card-text">極上307</p>
-                      <p class="price_1">$37</p>
-                      <p class="price_2">$37</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 col-xxl-4 my-3">
-                  <div class="card">
-                    <div class="image">
-                      <img
-                        src={require("../img/class/8_345.png")}
-                        class="card-img-top"
-                        alt="..."
-                      />
-                      <img
-                        src={require("../img/logo/8.png")}
-                        class="logo"
-                        alt="..."
-                      />
-                    </div>
-                    <div class="card-title">八曜和茶</div>
-                    <div class="card-body_la">
-                      <p class="card-text">極上307</p>
-                      <p class="price_1">$37</p>
-                      <p class="price_2">$37</p>
+                {this.state.resultle1.map((item, index) => (
+                  <div key={index} className="col-lg-6 col-xxl-4 my-3">
+                    <div class="card">
+                      <div class="image">
+                        {/* 動態設定圖片路徑 */}
+                        <img
+                          src={`/img/class/${item.product_img}.png`}
+                          class="card-img-top"
+                          alt="..."
+                        />
+                        {/* 動態設定 logo 路徑 */}
+                        <img
+                          src={`/img/logo/${item.brand_id}.png`}
+                          class="logo"
+                          alt="..."
+                        />
+                      </div>
+                      {/* 動態設定標題 */}
+                      <div class="card-title">{item.brand_id}</div>
+                      {/* 動態設定內容 */}
+                      <div class="card-body_la">
+                        <p class="card-text">{item.product_name}</p>
+                        <p class="price_1">${item.products_price_0}</p>
+                        <p class="price_2">${item.products_price_1}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-lg-6 col-xxl-4 my-3">
-                  <div class="card">
-                    <div class="image">
-                      <img
-                        src={require("../img/class/8_345.png")}
-                        class="card-img-top"
-                        alt="..."
-                      />
-                      <img
-                        src={require("../img/logo/8.png")}
-                        class="logo"
-                        alt="..."
-                      />
-                    </div>
-                    <div class="card-title">八曜和茶</div>
-                    <div class="card-body_la">
-                      <p class="card-text">極上307</p>
-                      <p class="price_1">$37</p>
-                      <p class="price_2">$37</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 col-xxl-4 my-3">
-                  <div class="card">
-                    <div class="image">
-                      <img
-                        src={require("../img/class/8_345.png")}
-                        class="card-img-top"
-                        alt="..."
-                      />
-                      <img
-                        src={require("../img/logo/8.png")}
-                        class="logo"
-                        alt="..."
-                      />
-                    </div>
-                    <div class="card-title">八曜和茶</div>
-                    <div class="card-body_la">
-                      <p class="card-text">極上307</p>
-                      <p class="price_1">$37</p>
-                      <p class="price_2">$37</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 col-xxl-4 my-3">
-                  <div class="card">
-                    <div class="image">
-                      <img
-                        src={require("../img/class/8_345.png")}
-                        class="card-img-top"
-                        alt="..."
-                      />
-                      <img
-                        src={require("../img/logo/8.png")}
-                        class="logo"
-                        alt="..."
-                      />
-                    </div>
-                    <div class="card-title">八曜和茶</div>
-                    <div class="card-body_la">
-                      <p class="card-text">極上307</p>
-                      <p class="price_1">$37</p>
-                      <p class="price_2">$37</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 col-xxl-4 my-3">
-                  <div class="card">
-                    <div class="image">
-                      <img
-                        src={require("../img/class/8_345.png")}
-                        class="card-img-top"
-                        alt="..."
-                      />
-                      <img
-                        src={require("../img/logo/8.png")}
-                        class="logo"
-                        alt="..."
-                      />
-                    </div>
-                    <div class="card-title">八曜和茶</div>
-                    <div class="card-body_la">
-                      <p class="card-text">極上307</p>
-                      <p class="price_1">$37</p>
-                      <p class="price_2">$37</p>
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
@@ -427,6 +329,37 @@ class le extends Component {
 
   toggleMemberNav = () => {
     document.getElementById("memberNav").classList.toggle("collapse");
+  };
+
+  componentDidMount = async () => {
+    try {
+      var resultle1 = await axios.get("http://localhost:8000/le1/product");
+      //   var resultle2 = await axios.get("http://localhost:8000/le2");
+      //   var resultle3 = await axios.get("http://localhost:8000/le3");
+      //   var resultle4 = await axios.get("http://localhost:8000/le4");
+      //   var resultle5 = await axios.get("http://localhost:8000/le5");
+
+      console.log(resultle1); // 使用 console.log 而不是 console
+
+      var newState = { ...this.state };
+      newState.resultle1 = resultle1.data; // 將數據存儲到 resultle1 中
+      this.setState(newState);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  handleCheckboxChange = async (event) => {
+    if (event.target.id === "classification_1" && event.target.checked) {
+      try {
+        var resultle1 = await axios.get("http://localhost:8000/le1/product");
+        var newState = { ...this.state };
+        newState.resultle1 = resultle1.data; // 將數據存儲到 resultle1 中
+        this.setState(newState);
+      } catch (error) {
+        console.error(error);
+      }
+    }
   };
 }
 
