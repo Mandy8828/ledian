@@ -39,6 +39,16 @@ app.get("/index/products", function (req, res) {
   );
 });
 
+// 全部飲料
+app.get("/all/products", function (req, res) {
+  conn.query(
+    "select product_img, product_id, product_name, products_price_0, products_price_1, brand_id from products",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
 // 飲料部分
 app.get("/le1/product", function (req, res) {
   conn.query(
@@ -91,7 +101,14 @@ app.get("/le5/product", function (req, res) {
   );
 });
 
-// 店家部分-附近店家
+// 店家部分-附近店家(x)
+
 // 店家部分-評級4以上(星評優選)
+app.get("/dian/star4", function (req, res) {
+  conn.query("select * from branch", function (err, rows) {
+    res.send(JSON.stringify(rows));
+  });
+});
+
 // 店家部分-地區
 // 店家部分-評分

@@ -15,6 +15,7 @@ class le extends Component {
     resultle3: [],
     resultle4: [],
     resultle5: [],
+    resultle: [],
   };
   render() {
     return (
@@ -231,147 +232,7 @@ class le extends Component {
                 </div>
               </div>
               <div className="col-sm-7 col-md-8 col-lg-9 col-xxl-10 row choose_right">
-                {this.state.resultle1.map((item, index) => (
-                  <div key={index} className="col-lg-6 col-xxl-4 my-3">
-                    <div className="card">
-                      <div className="image">
-                        {/* 動態設定圖片路徑 */}
-                        <img
-                          src={`/img/class/${item.product_img}.png`}
-                          className="card-img-top"
-                          alt="..."
-                        />
-                        {/* 動態設定 logo 路徑 */}
-                        <img
-                          src={`/img/logo/${item.brand_id}.png`}
-                          className="logo"
-                          alt="..."
-                        />
-                      </div>
-                      {/* 動態設定標題 */}
-                      <div className="card-title">
-                        {this.state.resultlebrand
-                          .filter((brand) => brand.brand_id === item.brand_id) // 過濾出符合 brand_id 的品牌
-                          .map((brand) => (
-                            <span key={brand.brand_id}>{brand.brand_name}</span>
-                          ))}
-                      </div>
-
-                      {/* 動態設定內容 */}
-                      <div className="card-body_la">
-                        <p className="card-text">{item.product_name}</p>
-                        <p className="price_1">${item.products_price_0}</p>
-                        <p className="price_2">${item.products_price_1}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                {this.state.resultle2.map((item, index) => (
-                  <div key={index} className="col-lg-6 col-xxl-4 my-3">
-                    <div className="card">
-                      <div className="image">
-                        {/* 動態設定圖片路徑 */}
-                        <img
-                          src={`/img/class/${item.product_img}.png`}
-                          className="card-img-top"
-                          alt="..."
-                        />
-                        {/* 動態設定 logo 路徑 */}
-                        <img
-                          src={`/img/logo/${item.brand_id}.png`}
-                          className="logo"
-                          alt="..."
-                        />
-                      </div>
-                      {/* 動態設定標題 */}
-                      <div className="card-title">
-                        {this.state.resultlebrand
-                          .filter((brand) => brand.brand_id === item.brand_id) // 過濾出符合 brand_id 的品牌
-                          .map((brand) => (
-                            <span key={brand.brand_id}>{brand.brand_name}</span>
-                          ))}
-                      </div>
-
-                      {/* 動態設定內容 */}
-                      <div className="card-body_la">
-                        <p className="card-text">{item.product_name}</p>
-                        <p className="price_1">${item.products_price_0}</p>
-                        <p className="price_2">${item.products_price_1}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                {this.state.resultle3.map((item, index) => (
-                  <div key={index} className="col-lg-6 col-xxl-4 my-3">
-                    <div className="card">
-                      <div className="image">
-                        {/* 動態設定圖片路徑 */}
-                        <img
-                          src={`/img/class/${item.product_img}.png`}
-                          className="card-img-top"
-                          alt="..."
-                        />
-                        {/* 動態設定 logo 路徑 */}
-                        <img
-                          src={`/img/logo/${item.brand_id}.png`}
-                          className="logo"
-                          alt="..."
-                        />
-                      </div>
-                      {/* 動態設定標題 */}
-                      <div className="card-title">
-                        {this.state.resultlebrand
-                          .filter((brand) => brand.brand_id === item.brand_id) // 過濾出符合 brand_id 的品牌
-                          .map((brand) => (
-                            <span key={brand.brand_id}>{brand.brand_name}</span>
-                          ))}
-                      </div>
-
-                      {/* 動態設定內容 */}
-                      <div className="card-body_la">
-                        <p className="card-text">{item.product_name}</p>
-                        <p className="price_1">${item.products_price_0}</p>
-                        <p className="price_2">${item.products_price_1}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                {this.state.resultle4.map((item, index) => (
-                  <div key={index} className="col-lg-6 col-xxl-4 my-3">
-                    <div className="card">
-                      <div className="image">
-                        {/* 動態設定圖片路徑 */}
-                        <img
-                          src={`/img/class/${item.product_img}.png`}
-                          className="card-img-top"
-                          alt="..."
-                        />
-                        {/* 動態設定 logo 路徑 */}
-                        <img
-                          src={`/img/logo/${item.brand_id}.png`}
-                          className="logo"
-                          alt="..."
-                        />
-                      </div>
-                      {/* 動態設定標題 */}
-                      <div className="card-title">
-                        {this.state.resultlebrand
-                          .filter((brand) => brand.brand_id === item.brand_id) // 過濾出符合 brand_id 的品牌
-                          .map((brand) => (
-                            <span key={brand.brand_id}>{brand.brand_name}</span>
-                          ))}
-                      </div>
-
-                      {/* 動態設定內容 */}
-                      <div className="card-body_la">
-                        <p className="card-text">{item.product_name}</p>
-                        <p className="price_1">${item.products_price_0}</p>
-                        <p className="price_2">${item.products_price_1}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                {this.state.resultle5.map((item, index) => (
+                {this.state.resultle.map((item, index) => (
                   <div key={index} className="col-lg-6 col-xxl-4 my-3">
                     <div className="card">
                       <div className="image">
@@ -506,6 +367,7 @@ class le extends Component {
       var resultle3 = await axios.get("http://localhost:8000/le3/product");
       var resultle4 = await axios.get("http://localhost:8000/le4/product");
       var resultle5 = await axios.get("http://localhost:8000/le5/product");
+      var resultleall = await axios.get("http://localhost:8000/all/products");
 
       this.setState({
         resultle1: resultle1.data,
@@ -514,7 +376,10 @@ class le extends Component {
         resultle4: resultle4.data,
         resultle5: resultle5.data,
         resultlebrand: resultlebrand.data,
+        resultleall: resultleall.data,
+        resultle: resultleall.data,
       });
+      console.log(this.state);
     } catch (error) {
       console.error(error);
     }
