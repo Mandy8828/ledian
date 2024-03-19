@@ -39,6 +39,7 @@ app.get("/index/products", function (req, res) {
   );
 });
 
+// 飲料部分
 app.get("/le1/product", function (req, res) {
   conn.query(
     "select product_img, product_id, product_name, products_price_0, products_price_1, brand_id from products where product_class_1 = 1",
@@ -89,3 +90,8 @@ app.get("/le5/product", function (req, res) {
     }
   );
 });
+
+// 店家部分-附近店家
+// 店家部分-評級4以上(星評優選)
+// 店家部分-地區
+// 店家部分-評分

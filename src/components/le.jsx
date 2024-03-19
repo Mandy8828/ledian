@@ -146,90 +146,105 @@ class le extends Component {
         </div>
 
         <main>
-          <div class="container">
-            <div class="row">
-              <div class="col-sm-5 col-md-4 col-lg-3 col-xxl-2">
-                <div class="choose_left">
-                  <div class="choose_left_1">透過以下分類篩選</div>
-                  <div class="choose_classification">
-                    <div class="form-check">
+          <div className="container">
+            <div className="row">
+              <div className="col-sm-5 col-md-4 col-lg-3 col-xxl-2">
+                <div className="choose_left">
+                  <div className="choose_left_1">透過以下分類篩選</div>
+                  <div className="choose_classification">
+                    <div className="form-check">
                       <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="checkbox"
                         value=""
                         id="classification_1"
                         onChange={this.handleCheckboxChange}
                       />
-                      <label class="form-check-label" for="classification_1">
+                      <label
+                        className="form-check-label"
+                        htmlFor="classification_1"
+                      >
                         精選推味
                       </label>
                     </div>
-                    <div class="form-check">
+                    <div className="form-check">
                       <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="checkbox"
                         value=""
                         id="classification_2"
                         onChange={this.handleCheckboxChange}
                       />
-                      <label class="form-check-label" for="classification_2">
+                      <label
+                        className="form-check-label"
+                        htmlFor="classification_2"
+                      >
                         茶品精選
                       </label>
                     </div>
-                    <div class="form-check">
+                    <div className="form-check">
                       <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="checkbox"
                         value=""
                         id="classification_3"
                         onChange={this.handleCheckboxChange}
                       />
-                      <label class="form-check-label" for="classification_3">
+                      <label
+                        className="form-check-label"
+                        htmlFor="classification_3"
+                      >
                         拿鐵探查
                       </label>
                     </div>
-                    <div class="form-check">
+                    <div className="form-check">
                       <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="checkbox"
                         value=""
                         id="classification_4"
                         onChange={this.handleCheckboxChange}
                       />
-                      <label class="form-check-label" for="classification_4">
+                      <label
+                        className="form-check-label"
+                        htmlFor="classification_4"
+                      >
                         口感尋覓
                       </label>
                     </div>
-                    <div class="form-check">
+                    <div className="form-check">
                       <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="checkbox"
                         value=""
                         id="classification_5"
                         onChange={this.handleCheckboxChange}
                       />
-                      <label class="form-check-label" for="classification_5">
+                      <label
+                        className="form-check-label"
+                        htmlFor="classification_5"
+                      >
                         新鮮探勘
                       </label>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-sm-7 col-md-8 col-lg-9 col-xxl-10 row choose_right">
+              <div className="col-sm-7 col-md-8 col-lg-9 col-xxl-10 row choose_right">
                 {this.state.resultle1.map((item, index) => (
                   <div key={index} className="col-lg-6 col-xxl-4 my-3">
-                    <div class="card">
-                      <div class="image">
+                    <div className="card">
+                      <div className="image">
                         {/* 動態設定圖片路徑 */}
                         <img
                           src={`/img/class/${item.product_img}.png`}
-                          class="card-img-top"
+                          className="card-img-top"
                           alt="..."
                         />
                         {/* 動態設定 logo 路徑 */}
                         <img
                           src={`/img/logo/${item.brand_id}.png`}
-                          class="logo"
+                          className="logo"
                           alt="..."
                         />
                       </div>
@@ -243,28 +258,28 @@ class le extends Component {
                       </div>
 
                       {/* 動態設定內容 */}
-                      <div class="card-body_la">
-                        <p class="card-text">{item.product_name}</p>
-                        <p class="price_1">${item.products_price_0}</p>
-                        <p class="price_2">${item.products_price_1}</p>
+                      <div className="card-body_la">
+                        <p className="card-text">{item.product_name}</p>
+                        <p className="price_1">${item.products_price_0}</p>
+                        <p className="price_2">${item.products_price_1}</p>
                       </div>
                     </div>
                   </div>
                 ))}
                 {this.state.resultle2.map((item, index) => (
                   <div key={index} className="col-lg-6 col-xxl-4 my-3">
-                    <div class="card">
-                      <div class="image">
+                    <div className="card">
+                      <div className="image">
                         {/* 動態設定圖片路徑 */}
                         <img
                           src={`/img/class/${item.product_img}.png`}
-                          class="card-img-top"
+                          className="card-img-top"
                           alt="..."
                         />
                         {/* 動態設定 logo 路徑 */}
                         <img
                           src={`/img/logo/${item.brand_id}.png`}
-                          class="logo"
+                          className="logo"
                           alt="..."
                         />
                       </div>
@@ -278,28 +293,28 @@ class le extends Component {
                       </div>
 
                       {/* 動態設定內容 */}
-                      <div class="card-body_la">
-                        <p class="card-text">{item.product_name}</p>
-                        <p class="price_1">${item.products_price_0}</p>
-                        <p class="price_2">${item.products_price_1}</p>
+                      <div className="card-body_la">
+                        <p className="card-text">{item.product_name}</p>
+                        <p className="price_1">${item.products_price_0}</p>
+                        <p className="price_2">${item.products_price_1}</p>
                       </div>
                     </div>
                   </div>
                 ))}
                 {this.state.resultle3.map((item, index) => (
                   <div key={index} className="col-lg-6 col-xxl-4 my-3">
-                    <div class="card">
-                      <div class="image">
+                    <div className="card">
+                      <div className="image">
                         {/* 動態設定圖片路徑 */}
                         <img
                           src={`/img/class/${item.product_img}.png`}
-                          class="card-img-top"
+                          className="card-img-top"
                           alt="..."
                         />
                         {/* 動態設定 logo 路徑 */}
                         <img
                           src={`/img/logo/${item.brand_id}.png`}
-                          class="logo"
+                          className="logo"
                           alt="..."
                         />
                       </div>
@@ -313,28 +328,28 @@ class le extends Component {
                       </div>
 
                       {/* 動態設定內容 */}
-                      <div class="card-body_la">
-                        <p class="card-text">{item.product_name}</p>
-                        <p class="price_1">${item.products_price_0}</p>
-                        <p class="price_2">${item.products_price_1}</p>
+                      <div className="card-body_la">
+                        <p className="card-text">{item.product_name}</p>
+                        <p className="price_1">${item.products_price_0}</p>
+                        <p className="price_2">${item.products_price_1}</p>
                       </div>
                     </div>
                   </div>
                 ))}
                 {this.state.resultle4.map((item, index) => (
                   <div key={index} className="col-lg-6 col-xxl-4 my-3">
-                    <div class="card">
-                      <div class="image">
+                    <div className="card">
+                      <div className="image">
                         {/* 動態設定圖片路徑 */}
                         <img
                           src={`/img/class/${item.product_img}.png`}
-                          class="card-img-top"
+                          className="card-img-top"
                           alt="..."
                         />
                         {/* 動態設定 logo 路徑 */}
                         <img
                           src={`/img/logo/${item.brand_id}.png`}
-                          class="logo"
+                          className="logo"
                           alt="..."
                         />
                       </div>
@@ -348,28 +363,28 @@ class le extends Component {
                       </div>
 
                       {/* 動態設定內容 */}
-                      <div class="card-body_la">
-                        <p class="card-text">{item.product_name}</p>
-                        <p class="price_1">${item.products_price_0}</p>
-                        <p class="price_2">${item.products_price_1}</p>
+                      <div className="card-body_la">
+                        <p className="card-text">{item.product_name}</p>
+                        <p className="price_1">${item.products_price_0}</p>
+                        <p className="price_2">${item.products_price_1}</p>
                       </div>
                     </div>
                   </div>
                 ))}
                 {this.state.resultle5.map((item, index) => (
                   <div key={index} className="col-lg-6 col-xxl-4 my-3">
-                    <div class="card">
-                      <div class="image">
+                    <div className="card">
+                      <div className="image">
                         {/* 動態設定圖片路徑 */}
                         <img
                           src={`/img/class/${item.product_img}.png`}
-                          class="card-img-top"
+                          className="card-img-top"
                           alt="..."
                         />
                         {/* 動態設定 logo 路徑 */}
                         <img
                           src={`/img/logo/${item.brand_id}.png`}
-                          class="logo"
+                          className="logo"
                           alt="..."
                         />
                       </div>
@@ -383,10 +398,10 @@ class le extends Component {
                       </div>
 
                       {/* 動態設定內容 */}
-                      <div class="card-body_la">
-                        <p class="card-text">{item.product_name}</p>
-                        <p class="price_1">${item.products_price_0}</p>
-                        <p class="price_2">${item.products_price_1}</p>
+                      <div className="card-body_la">
+                        <p className="card-text">{item.product_name}</p>
+                        <p className="price_1">${item.products_price_0}</p>
+                        <p className="price_2">${item.products_price_1}</p>
                       </div>
                     </div>
                   </div>
@@ -505,65 +520,7 @@ class le extends Component {
     }
   };
 
-  // handleCheckboxChange = async (event) => {
-  //   if (event.target.id === "classification_1" && event.target.checked) {
-  //     try {
-  //       const resultle1 = await axios.get("http://localhost:8000/le1/product");
-  //       const resultlebrand = await axios.get("http://localhost:8000/le/brand");
-
-  //       // 將品牌資料整理成以 brand_id 為鍵的物件，方便後續查找
-  //       const brandMap = resultlebrand.data.reduce((acc, brand) => {
-  //         acc[brand.brand_id] = brand.brand_name;
-  //         return acc;
-  //       }, {});
-
-  //       // 將商品資料中的品牌名稱加入
-  //       const productsWithBrandNames = resultle1.data.map((product) => ({
-  //         ...product,
-  //         brand_name: brandMap[product.brand_id], // 根據 brand_id 查找品牌名稱
-  //       }));
-
-  //       this.setState({
-  //         resultle1: productsWithBrandNames,
-  //         resultlebrand: resultlebrand.data,
-  //       });
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  // };
-
-  // handleCheckboxChange = async (event) => {
-  //   const checkboxId = event.target.id;
-
-  //   try {
-  //     if (checkboxId === "classification_1" && event.target.checked) {
-  //       const resultle1 = await axios.get("http://localhost:8000/le1/product");
-  //       const resultlebrand = await axios.get("http://localhost:8000/le/brand");
-
-  //       // 將品牌資料整理成以 brand_id 為鍵的物件，方便後續查找
-  //       const brandMap = resultlebrand.data.reduce((acc, brand) => {
-  //         acc[brand.brand_id] = brand.brand_name;
-  //         return acc;
-  //       }, {});
-
-  //       // 將商品資料中的品牌名稱加入
-  //       const productsWithBrandNames = resultle1.data.map((product) => ({
-  //         ...product,
-  //         brand_name: brandMap[product.brand_id], // 根據 brand_id 查找品牌名稱
-  //       }));
-
-  //       this.setState({
-  //         resultle1: productsWithBrandNames,
-  //         resultlebrand: resultlebrand.data,
-  //       });
-  //     }
-  //     // 其他分類的處理邏輯類似...
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
+  // 可以使用，但無法篩選出重複的品項
   handleCheckboxChange = async (event) => {
     const checkboxId = event.target.id;
 
@@ -623,6 +580,145 @@ class le extends Component {
       console.error(error);
     }
   };
+
+  // handleCheckboxChange = async (event) => {
+  //   const checkboxId = event.target.id;
+
+  //   try {
+  //     let selectedCategories = []; // 用來儲存已選擇的分類
+
+  //     // 獲取所有已選擇的分類
+  //     const checkboxes = document.querySelectorAll(".form-check-input:checked");
+  //     checkboxes.forEach((checkbox) => {
+  //       selectedCategories.push(checkbox.id);
+  //     });
+
+  //     let selectedCategoryData = []; // 用來儲存已選擇分類的資料
+
+  //     // 根據已選擇的分類獲取資料
+  //     for (let category of selectedCategories) {
+  //       switch (category) {
+  //         case "classification_1":
+  //           selectedCategoryData.push(
+  //             await axios.get("http://localhost:8000/le1/product")
+  //           );
+  //           break;
+  //         case "classification_2":
+  //           selectedCategoryData.push(
+  //             await axios.get("http://localhost:8000/le2/product")
+  //           );
+  //           break;
+  //         case "classification_3":
+  //           selectedCategoryData.push(
+  //             await axios.get("http://localhost:8000/le3/product")
+  //           );
+  //           break;
+  //         case "classification_4":
+  //           selectedCategoryData.push(
+  //             await axios.get("http://localhost:8000/le4/product")
+  //           );
+  //           break;
+  //         case "classification_5":
+  //           selectedCategoryData.push(
+  //             await axios.get("http://localhost:8000/le5/product")
+  //           );
+  //           break;
+  //         default:
+  //           break;
+  //       }
+  //     }
+
+  //     // 找出已選擇分類中共同的產品
+  //     let commonProducts = [];
+  //     if (selectedCategoryData.length > 1) {
+  //       commonProducts = selectedCategoryData
+  //         .reduce((accumulator, current) => {
+  //           return accumulator.filter(({ product_id }) =>
+  //             current.data.some(({ product_id: id }) => id === product_id)
+  //           );
+  //         })
+  //         .map(({ data }) => data);
+  //     } else {
+  //       commonProducts = selectedCategoryData[0].data;
+  //     }
+
+  //     // 使用共同的產品來更新狀態
+  //     this.setState({
+  //       resultle1: commonProducts,
+  //       resultle2: commonProducts,
+  //       resultle3: commonProducts,
+  //       resultle4: commonProducts,
+  //       resultle5: commonProducts,
+  //     });
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  // handleCheckboxChange = async (event) => {
+  //   const checkboxId = event.target.id;
+
+  //   try {
+  //     let selectedCategoryData = [];
+
+  //     switch (checkboxId) {
+  //       case "classification_1":
+  //         selectedCategoryData = await axios.get(
+  //           "http://localhost:8000/le1/product"
+  //         );
+  //         break;
+  //       case "classification_2":
+  //         selectedCategoryData = await axios.get(
+  //           "http://localhost:8000/le2/product"
+  //         );
+  //         break;
+  //       case "classification_3":
+  //         selectedCategoryData = await axios.get(
+  //           "http://localhost:8000/le3/product"
+  //         );
+  //         break;
+  //       case "classification_4":
+  //         selectedCategoryData = await axios.get(
+  //           "http://localhost:8000/le4/product"
+  //         );
+  //         break;
+  //       case "classification_5":
+  //         selectedCategoryData = await axios.get(
+  //           "http://localhost:8000/le5/product"
+  //         );
+  //         break;
+  //       default:
+  //         // 如果未選擇任何選項，則隨機選擇所有飲料內容
+  //         selectedCategoryData = await axios.get(
+  //           "http://localhost:8000/all/products"
+  //         );
+  //         break;
+  //     }
+
+  //     // 如果該分類有飲料數據，則隨機選擇一個飲料
+  //     if (selectedCategoryData.data.length > 0) {
+  //       const randomIndex = Math.floor(
+  //         Math.random() * selectedCategoryData.data.length
+  //       );
+  //       const randomDrink = selectedCategoryData.data[randomIndex];
+
+  //       // Log the selected drink for debugging
+  //       console.log("Selected drink:", randomDrink);
+
+  //       // 更新狀態以渲染隨機選擇的飲料內容
+  //       this.setState({
+  //         selectedDrink: randomDrink,
+  //       });
+  //     } else {
+  //       // 如果該分類下沒有飲料數據，則清空狀態
+  //       this.setState({
+  //         selectedDrink: null,
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 }
 
 export default le;
