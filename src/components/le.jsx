@@ -4,20 +4,85 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 import { PiMedal } from "react-icons/pi";
 import { PiCoins } from "react-icons/pi";
 import { GiCancel } from "react-icons/gi";
-import axios from "axios";
+// import axios from "axios";
 
 class le extends Component {
-  state = {
-    search: "搜尋店家",
-    resultle1: [],
-    resultlebrand: [],
-    resultle2: [],
-    resultle3: [],
-    resultle4: [],
-    resultle5: [],
-    resultle: [],
+  constructor(props) {
+    super(props);
+    this.state = {
+      filters: {
+        classification_1: false,
+        classification_2: false,
+        classification_3: false,
+        classification_4: false,
+        classification_5: false,
+      },
+      data: [],
+      filteredData: [], // 新增 filteredData 狀態來保存篩選後的數據
+      resultlebrand: [], // 初始化 resultlebrand 狀態
+    };
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:8000/all/products")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Fetched data:", data); // 在此處檢查數據
+        this.setState({ data });
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }
+
+  handleFilterChange = (filter) => {
+    this.setState(
+      (prevState) => ({
+        filters: {
+          ...prevState.filters,
+          [filter]: !prevState.filters[filter],
+        },
+      }),
+      () => {
+        // 在狀態更新後重新篩選資料並更新 UI
+        console.log("New Filters:", this.state.filters); // 檢查更新後的篩選器狀態
+        this.filterData();
+      }
+    );
   };
+
+  filterData() {
+    const { data, filters } = this.state;
+    console.log("Filters:", filters); // 檢查篩選器的狀態
+    console.log("Data:", data); // 檢查原始數據的狀態
+
+    // 篩選條件函數，根據每個篩選選項的狀態對應到項目的不同屬性進行篩選
+    const filterCondition = (item) => {
+      return Object.keys(filters).every((filter) => {
+        // 將篩選器的鍵映射到對應的數據屬性名稱
+        const dataKey = `product_class_${filter.slice(-1)}`;
+        console.log("dataKey", dataKey);
+
+        // 檢查篩選器值是否為 true，以及數據屬性是否等於 1
+        return filters[filter] && item[dataKey] === 1;
+      });
+    };
+
+    // 使用 filterCondition 函數進行篩選
+    const filteredData = data.filter(filterCondition);
+
+    console.log("Filtered Data:", filteredData); // 檢查篩選後的數據
+    return filteredData; // 直接返回篩選後的數據
+  }
+
   render() {
+    const { filters, filteredData } = this.state;
+
+    // 如果 filteredData 未定義，顯示載入中的訊息或採取其他適當的措施
+    if (!filteredData) {
+      return <div>Loading...</div>;
+    }
+
     return (
       <React.Fragment>
         <div id="header" className="d-flex justify-content-between">
@@ -157,9 +222,11 @@ class le extends Component {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        value=""
                         id="classification_1"
-                        onChange={this.handleCheckboxChange}
+                        checked={filters.classification_1}
+                        onChange={() =>
+                          this.handleFilterChange("classification_1")
+                        }
                       />
                       <label
                         className="form-check-label"
@@ -174,7 +241,10 @@ class le extends Component {
                         type="checkbox"
                         value=""
                         id="classification_2"
-                        onChange={this.handleCheckboxChange}
+                        checked={filters.classification_2}
+                        onChange={() =>
+                          this.handleFilterChange("classification_2")
+                        }
                       />
                       <label
                         className="form-check-label"
@@ -189,7 +259,10 @@ class le extends Component {
                         type="checkbox"
                         value=""
                         id="classification_3"
-                        onChange={this.handleCheckboxChange}
+                        checked={filters.classification_3}
+                        onChange={() =>
+                          this.handleFilterChange("classification_3")
+                        }
                       />
                       <label
                         className="form-check-label"
@@ -204,7 +277,10 @@ class le extends Component {
                         type="checkbox"
                         value=""
                         id="classification_4"
-                        onChange={this.handleCheckboxChange}
+                        checked={filters.classification_4}
+                        onChange={() =>
+                          this.handleFilterChange("classification_4")
+                        }
                       />
                       <label
                         className="form-check-label"
@@ -219,7 +295,10 @@ class le extends Component {
                         type="checkbox"
                         value=""
                         id="classification_5"
-                        onChange={this.handleCheckboxChange}
+                        checked={filters.classification_5}
+                        onChange={() =>
+                          this.handleFilterChange("classification_5")
+                        }
                       />
                       <label
                         className="form-check-label"
@@ -232,8 +311,8 @@ class le extends Component {
                 </div>
               </div>
               <div className="col-sm-7 col-md-8 col-lg-9 col-xxl-10 row choose_right">
-                {this.state.resultle.map((item, index) => (
-                  <div key={index} className="col-lg-6 col-xxl-4 my-3">
+                {filteredData.map((item) => (
+                  <div key={item.id} className="col-lg-6 col-xxl-4 my-3">
                     <div className="card">
                       <div className="image">
                         {/* 動態設定圖片路徑 */}
@@ -251,9 +330,8 @@ class le extends Component {
                       </div>
                       {/* 動態設定標題 */}
                       <div className="card-title">
-                        {this.state.resultlebrand
-                          .filter((brand) => brand.brand_id === item.brand_id) // 過濾出符合 brand_id 的品牌
-                          .map((brand) => (
+                        {this.state.resultlebrand.length > 0 &&
+                          this.state.resultlebrand.map((brand) => (
                             <span key={brand.brand_id}>{brand.brand_name}</span>
                           ))}
                       </div>
@@ -358,232 +436,6 @@ class le extends Component {
   toggleMemberNav = () => {
     document.getElementById("memberNav").classList.toggle("collapse");
   };
-
-  componentDidMount = async () => {
-    try {
-      var resultle1 = await axios.get("http://localhost:8000/le1/product");
-      var resultlebrand = await axios.get("http://localhost:8000/le/brand");
-      var resultle2 = await axios.get("http://localhost:8000/le2/product");
-      var resultle3 = await axios.get("http://localhost:8000/le3/product");
-      var resultle4 = await axios.get("http://localhost:8000/le4/product");
-      var resultle5 = await axios.get("http://localhost:8000/le5/product");
-      var resultleall = await axios.get("http://localhost:8000/all/products");
-
-      this.setState({
-        resultle1: resultle1.data,
-        resultle2: resultle2.data,
-        resultle3: resultle3.data,
-        resultle4: resultle4.data,
-        resultle5: resultle5.data,
-        resultlebrand: resultlebrand.data,
-        resultleall: resultleall.data,
-        resultle: resultleall.data,
-      });
-      console.log(this.state);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  // 可以使用，但無法篩選出重複的品項
-  handleCheckboxChange = async (event) => {
-    const checkboxId = event.target.id;
-
-    try {
-      // Initialize an empty array to hold the selected category data
-      let selectedCategoryData = [];
-
-      // Fetch data based on the selected checkbox
-      switch (checkboxId) {
-        case "classification_1":
-          selectedCategoryData = await axios.get(
-            "http://localhost:8000/le1/product"
-          );
-          break;
-        case "classification_2":
-          selectedCategoryData = await axios.get(
-            "http://localhost:8000/le2/product"
-          );
-          break;
-        case "classification_3":
-          selectedCategoryData = await axios.get(
-            "http://localhost:8000/le3/product"
-          );
-          break;
-        case "classification_4":
-          selectedCategoryData = await axios.get(
-            "http://localhost:8000/le4/product"
-          );
-          break;
-        case "classification_5":
-          selectedCategoryData = await axios.get(
-            "http://localhost:8000/le5/product"
-          );
-          break;
-        default:
-          // If no checkbox is selected, fetch all products
-          selectedCategoryData = await axios.get(
-            "http://localhost:8000/all/products"
-          );
-          break;
-      }
-
-      // Update state with the selected category data
-      this.setState({
-        resultle1:
-          checkboxId === "classification_1" ? selectedCategoryData.data : [],
-        resultle2:
-          checkboxId === "classification_2" ? selectedCategoryData.data : [],
-        resultle3:
-          checkboxId === "classification_3" ? selectedCategoryData.data : [],
-        resultle4:
-          checkboxId === "classification_4" ? selectedCategoryData.data : [],
-        resultle5:
-          checkboxId === "classification_5" ? selectedCategoryData.data : [],
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  // handleCheckboxChange = async (event) => {
-  //   const checkboxId = event.target.id;
-
-  //   try {
-  //     let selectedCategories = []; // 用來儲存已選擇的分類
-
-  //     // 獲取所有已選擇的分類
-  //     const checkboxes = document.querySelectorAll(".form-check-input:checked");
-  //     checkboxes.forEach((checkbox) => {
-  //       selectedCategories.push(checkbox.id);
-  //     });
-
-  //     let selectedCategoryData = []; // 用來儲存已選擇分類的資料
-
-  //     // 根據已選擇的分類獲取資料
-  //     for (let category of selectedCategories) {
-  //       switch (category) {
-  //         case "classification_1":
-  //           selectedCategoryData.push(
-  //             await axios.get("http://localhost:8000/le1/product")
-  //           );
-  //           break;
-  //         case "classification_2":
-  //           selectedCategoryData.push(
-  //             await axios.get("http://localhost:8000/le2/product")
-  //           );
-  //           break;
-  //         case "classification_3":
-  //           selectedCategoryData.push(
-  //             await axios.get("http://localhost:8000/le3/product")
-  //           );
-  //           break;
-  //         case "classification_4":
-  //           selectedCategoryData.push(
-  //             await axios.get("http://localhost:8000/le4/product")
-  //           );
-  //           break;
-  //         case "classification_5":
-  //           selectedCategoryData.push(
-  //             await axios.get("http://localhost:8000/le5/product")
-  //           );
-  //           break;
-  //         default:
-  //           break;
-  //       }
-  //     }
-
-  //     // 找出已選擇分類中共同的產品
-  //     let commonProducts = [];
-  //     if (selectedCategoryData.length > 1) {
-  //       commonProducts = selectedCategoryData
-  //         .reduce((accumulator, current) => {
-  //           return accumulator.filter(({ product_id }) =>
-  //             current.data.some(({ product_id: id }) => id === product_id)
-  //           );
-  //         })
-  //         .map(({ data }) => data);
-  //     } else {
-  //       commonProducts = selectedCategoryData[0].data;
-  //     }
-
-  //     // 使用共同的產品來更新狀態
-  //     this.setState({
-  //       resultle1: commonProducts,
-  //       resultle2: commonProducts,
-  //       resultle3: commonProducts,
-  //       resultle4: commonProducts,
-  //       resultle5: commonProducts,
-  //     });
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  // handleCheckboxChange = async (event) => {
-  //   const checkboxId = event.target.id;
-
-  //   try {
-  //     let selectedCategoryData = [];
-
-  //     switch (checkboxId) {
-  //       case "classification_1":
-  //         selectedCategoryData = await axios.get(
-  //           "http://localhost:8000/le1/product"
-  //         );
-  //         break;
-  //       case "classification_2":
-  //         selectedCategoryData = await axios.get(
-  //           "http://localhost:8000/le2/product"
-  //         );
-  //         break;
-  //       case "classification_3":
-  //         selectedCategoryData = await axios.get(
-  //           "http://localhost:8000/le3/product"
-  //         );
-  //         break;
-  //       case "classification_4":
-  //         selectedCategoryData = await axios.get(
-  //           "http://localhost:8000/le4/product"
-  //         );
-  //         break;
-  //       case "classification_5":
-  //         selectedCategoryData = await axios.get(
-  //           "http://localhost:8000/le5/product"
-  //         );
-  //         break;
-  //       default:
-  //         // 如果未選擇任何選項，則隨機選擇所有飲料內容
-  //         selectedCategoryData = await axios.get(
-  //           "http://localhost:8000/all/products"
-  //         );
-  //         break;
-  //     }
-
-  //     // 如果該分類有飲料數據，則隨機選擇一個飲料
-  //     if (selectedCategoryData.data.length > 0) {
-  //       const randomIndex = Math.floor(
-  //         Math.random() * selectedCategoryData.data.length
-  //       );
-  //       const randomDrink = selectedCategoryData.data[randomIndex];
-
-  //       // Log the selected drink for debugging
-  //       console.log("Selected drink:", randomDrink);
-
-  //       // 更新狀態以渲染隨機選擇的飲料內容
-  //       this.setState({
-  //         selectedDrink: randomDrink,
-  //       });
-  //     } else {
-  //       // 如果該分類下沒有飲料數據，則清空狀態
-  //       this.setState({
-  //         selectedDrink: null,
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
 }
 
 export default le;

@@ -41,12 +41,9 @@ app.get("/index/products", function (req, res) {
 
 // 全部飲料
 app.get("/all/products", function (req, res) {
-  conn.query(
-    "select product_img, product_id, product_name, products_price_0, products_price_1, brand_id from products",
-    function (err, rows) {
-      res.send(JSON.stringify(rows));
-    }
-  );
+  conn.query("select * from products", function (err, rows) {
+    res.send(JSON.stringify(rows));
+  });
 });
 
 // 飲料部分
