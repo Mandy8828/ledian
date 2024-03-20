@@ -224,14 +224,24 @@ class le extends Component {
         </div>
         <div className="container">
           <div className="navbar row">
-            <div className="navImg col-4 btn">
+            <div
+              className="navImg col-4 btn"
+              onClick={() => {
+                window.location = "/le";
+              }}
+            >
               <img
                 src={"/img/index/LeDian_BANNER-01.jpg"}
                 alt="navImg"
                 className="img-fluid"
               ></img>
             </div>
-            <div className="navImg col-4 btn">
+            <div
+              className="navImg col-4 btn"
+              onClick={() => {
+                window.location = "/dian";
+              }}
+            >
               <img
                 src={"/img/index/LeDian_BANNER-02.jpg"}
                 alt="navImg"
