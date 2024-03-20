@@ -56,15 +56,25 @@ class le extends Component {
     console.log("Filters:", filters); // 檢查篩選器的狀態
     console.log("Data:", data); // 檢查原始數據的狀態
 
-    // 篩選條件函數，根據每個篩選選項的狀態對應到項目的不同屬性進行篩選
     const filterCondition = (item) => {
       return Object.keys(filters).every((filter) => {
         // 將篩選器的鍵映射到對應的數據屬性名稱
-        const dataKey = `product_class_${filter.slice(-1)}`;
-        console.log("dataKey", dataKey);
+        const dataKey = `product_class_${filter.split("_")[1]}`; // 提取下劃線後的數字部分
 
-        // 檢查篩選器值是否為 true，以及數據屬性是否等於 1
-        return filters[filter] && item[dataKey] === 1;
+        // 檢查篩選器值是否為 true
+        if (filters[filter]) {
+          // 檢查數據屬性是否等於 1
+          if (item[dataKey] === 1) {
+            // 滿足篩選條件
+            return true;
+          } else {
+            // 不滿足篩選條件
+            return false;
+          }
+        } else {
+          // 如果篩選器為 false，則不進行篩選，直接返回 true
+          return true;
+        }
       });
     };
 
@@ -72,6 +82,8 @@ class le extends Component {
     const filteredData = data.filter(filterCondition);
 
     console.log("Filtered Data:", filteredData); // 檢查篩選後的數據
+    this.setState({ filteredData });
+
     return filteredData; // 直接返回篩選後的數據
   }
 
