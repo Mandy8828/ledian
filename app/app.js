@@ -101,11 +101,19 @@ app.get("/le5/product", function (req, res) {
 // 店家部分-附近店家(x)
 
 // 店家部分-評級4以上(星評優選)
-app.get("/dian/star4", function (req, res) {
-  conn.query("select * from branch", function (err, rows) {
-    res.send(JSON.stringify(rows));
-  });
-});
+// app.get("/dian/star4", function (req, res) {
+//   conn.query("select * from branch", function (err, rows) {
+//     res.send(JSON.stringify(rows));
+//   });
+// });
 
 // 店家部分-地區
+app.get("/dian0321/:id", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = ?",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
 // 店家部分-評分

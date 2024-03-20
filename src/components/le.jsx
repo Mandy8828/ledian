@@ -492,19 +492,22 @@ class le extends Component {
     newState.search = e.target.value;
     this.setState(newState);
   };
-  pointinfoShow = function (event) {
-    document.getElementById("pointinfo").style.top = event.clientY + "px";
+  pointinfoShow = (event) => {
+    document.getElementById("pointinfo").style.top = event.clientY + 50 + "px";
     document.getElementById("pointinfo").style.left =
-      event.clientX - 250 + "px";
+      event.clientX - 150 + "px";
   };
 
-  pointinfoHide = function (event) {
+  pointinfoHide = (event) => {
     document.getElementById("pointinfo").style.top = "-500px";
     event.cancelBubble = true;
   };
 
   toggleMemberNav = () => {
     document.getElementById("memberNav").classList.toggle("collapse");
+  };
+  toggleMenuNav = () => {
+    document.getElementById("menuNav").classList.toggle("menuNav");
   };
 }
 

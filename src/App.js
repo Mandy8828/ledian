@@ -8,6 +8,7 @@ import news from "./components/news";
 import branch from "./components/branch";
 import le from "./components/le";
 import dian from "./components/dian";
+import dian0321 from "./components/dian0321";
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
             <Route path="/branch" component={branch} exact />
             <Route path="/le" component={le} exact />
             <Route path="/dian" component={dian} exact />
+            <Route path="/dian0321" component={dian0321} exact />
 
             <Route component={Error} />
           </Switch>
