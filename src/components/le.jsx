@@ -20,6 +20,7 @@ class le extends Component {
       data: [],
       filteredData: [], // 新增 filteredData 狀態來保存篩選後的數據
       resultlebrand: [], // 初始化 resultlebrand 狀態
+      search: "搜尋店家",
     };
   }
 
@@ -28,7 +29,10 @@ class le extends Component {
       .then((response) => response.json())
       .then((data) => {
         console.log("Fetched data:", data); // 在此處檢查數據
-        this.setState({ data });
+        this.setState({ data }, () => {
+          // 在數據加載完畢後執行一次篩選以顯示所有飲料
+          this.filterData();
+        });
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -97,16 +101,31 @@ class le extends Component {
 
     return (
       <React.Fragment>
-        <div id="header" className="d-flex justify-content-between">
-          <div className="col-9 col-sm-7 col-md-6 d-flex ms-2 justify-content-between align-items-center">
+        <div
+          id="header"
+          style={{
+            boxShadow: "1px 3px 10px #cccccc",
+            marginBottom: "4px",
+          }}
+          className="d-flex justify-content-between"
+        >
+          <div className="col-7 col-sm-7 col-md-6 col-xl-5 d-flex ms-2 justify-content-between align-items-center">
+            <div id="menu" className="col-8">
+              <h2
+                className="btn text-start  my-auto fs-4"
+                onClick={this.toggleMenuNav}
+              >
+                ☰
+              </h2>
+            </div>
             <h4
               id="homeBtn"
-              className="my-auto btn headerText text-nowrap"
+              className="my-auto btn"
               onClick={() => {
                 window.location = "/index";
               }}
             >
-              首頁
+              <img id="logo" src="/img/index/LeDian_LOGO-05.png"></img>
             </h4>
             <h4 className="my-auto p-0 btn headerText menuBtn d-flex align-items-center justify-content-center">
               <HiOutlineShoppingBag className="fs-4" />
@@ -144,7 +163,7 @@ class le extends Component {
           <div className="d-flex me-2  align-items-center">
             <h4
               id="loginBtn"
-              className="my-auto btn headerText text-nowrap"
+              className="my-auto btn headerText"
               onClick={this.toggleMemberNav}
             >
               登入/註冊▼
@@ -152,50 +171,69 @@ class le extends Component {
             <div id="memberNav" className="collapse">
               <img
                 id="memberNavImg"
-                src={require("../img/index/LeDian_LOGO-05.png")}
+                src={"/img/index/LeDian_LOGO-05.png"}
                 alt="logo"
               ></img>
               <div>
-                <h4 className="headerText my-3">個人檔案</h4>
+                <h4 className="headerText text-center my-3">個人檔案</h4>
                 <hr />
-                <h4 className="headerText my-3">帳號管理</h4>
+                <h4 className="headerText text-center my-3">帳號管理</h4>
                 <hr />
-                <h4 className="headerText my-3">歷史訂單</h4>
+                <h4 className="headerText text-center my-3">歷史訂單</h4>
                 <hr />
-                <h4 className="headerText my-3">載具存取</h4>
+                <h4 className="headerText text-center my-3">載具存取</h4>
+                <hr />
+                <h4 className="headerText text-center my-3">登出</h4>
               </div>
             </div>
           </div>
         </div>
+        <div
+          id="menuNav"
+          className="menuNav d-flex flex-column align-items-center"
+        >
+          <h4 className="menuText my-3 mainColor border-bottom border-secondary">
+            <HiOutlineShoppingBag className="fs-4" />
+            購物車
+          </h4>
+          <h4
+            className="menuText my-3 mainColor border-bottom border-secondary"
+            onClick={() => {
+              window.location = "/brand";
+            }}
+          >
+            <PiMedal className="fs-4" />
+            品牌專區
+          </h4>
+          <h4
+            className="menuText my-3 mainColor border-bottom border-secondary"
+            onClick={this.pointinfoShow}
+          >
+            <PiCoins className="fs-4" />
+            集點資訊
+          </h4>
+        </div>
+
         <div id="banner" className="d-flex justify-content-center">
           <img
-            src={require("../img/index/Home_Banner_01.jpg")}
+            id="bannerImg"
+            src={"/img/index/Home_Banner_01.jpg"}
             alt="homeBanner"
             className="img-fluid"
           ></img>
         </div>
         <div className="container">
           <div className="navbar row">
-            <div
-              className="navImg col-4 btn"
-              onClick={() => {
-                window.location = "/le";
-              }}
-            >
+            <div className="navImg col-4 btn">
               <img
-                src={require("../img/index/LeDian_BANNER-01.jpg")}
+                src={"/img/index/LeDian_BANNER-01.jpg"}
                 alt="navImg"
                 className="img-fluid"
               ></img>
             </div>
-            <div
-              className="navImg col-4 btn"
-              onClick={() => {
-                window.location = "/dian";
-              }}
-            >
+            <div className="navImg col-4 btn">
               <img
-                src={require("../img/index/LeDian_BANNER-02.jpg")}
+                src={"/img/index/LeDian_BANNER-02.jpg"}
                 alt="navImg"
                 className="img-fluid"
               ></img>
@@ -207,7 +245,7 @@ class le extends Component {
               }}
             >
               <img
-                src={require("../img/index/LeDian_BANNER-05.jpg")}
+                src={"/img/index/LeDian_BANNER-05.jpg"}
                 alt="navImg"
                 className="img-fluid"
               ></img>
@@ -351,8 +389,18 @@ class le extends Component {
                       {/* 動態設定內容 */}
                       <div className="card-body_la">
                         <p className="card-text">{item.product_name}</p>
-                        <p className="price_1">${item.products_price_0}</p>
-                        <p className="price_2">${item.products_price_1}</p>
+                        <div className="d-flex justify-content-center">
+                          <p className="price_1 text-center ms-1">
+                            {item.products_price_0
+                              ? `M${item.products_price_0}`
+                              : ""}
+                          </p>
+                          <p className="price_2 text-center mx-1">
+                            {item.products_price_1
+                              ? `L${item.products_price_1}`
+                              : ""}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -367,7 +415,7 @@ class le extends Component {
             <img
               id='"footerImg"'
               className="img-fluid"
-              src={require("../img/index/LeDian_LOGO-04.png")}
+              src={"/img/index/LeDian_LOGO-04.png"}
               alt="footerLogo"
             />
           </div>
@@ -377,21 +425,21 @@ class le extends Component {
                 <div>
                   <img
                     className="img-fluid"
-                    src={require("../img/index/facebook.png")}
+                    src={"/img/index/facebook.png"}
                     alt="fackbook"
                   />
                 </div>
                 <div>
                   <img
                     className="img-fluid"
-                    src={require("../img/index/instagram.png")}
+                    src={"/img/index/instagram.png"}
                     alt="instagram"
                   />
                 </div>
                 <div>
                   <img
                     className="img-fluid"
-                    src={require("../img/index/line.png")}
+                    src={"/img/index/line.png"}
                     alt="line"
                   />
                 </div>
@@ -403,7 +451,7 @@ class le extends Component {
           </div>
           <div
             id="footerInfo"
-            className="col-3 d-flex row align-items-center justify-content-center"
+            className="col-3 d-flex row align-items-center justify-content-center pe-1"
           >
             <div className="col-3 col-sm-6 d-flex flex-column align-items-center">
               <p className="footerText m-0 py-1 text-nowrap text-white">
