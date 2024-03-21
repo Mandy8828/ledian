@@ -18,9 +18,8 @@ class le extends Component {
         classification_5: false,
       },
       data: [],
-      filteredData: [], // 新增 filteredData 狀態來保存篩選後的數據
-      resultlebrand: [], // 初始化 resultlebrand 狀態
-      search: "搜尋店家",
+      filteredData: [],
+      resultlebrand: [],
     };
   }
 
@@ -28,9 +27,8 @@ class le extends Component {
     fetch("http://localhost:8000/all/products")
       .then((response) => response.json())
       .then((data) => {
-        console.log("Fetched data:", data); // 在此處檢查數據
+        console.log("Fetched data:", data);
         this.setState({ data }, () => {
-          // 在數據加載完畢後執行一次篩選以顯示所有飲料
           this.filterData();
         });
       })
@@ -48,8 +46,7 @@ class le extends Component {
         },
       }),
       () => {
-        // 在狀態更新後重新篩選資料並更新 UI
-        console.log("New Filters:", this.state.filters); // 檢查更新後的篩選器狀態
+        console.log("New Filters:", this.state.filters);
         this.filterData();
       }
     );
@@ -57,26 +54,20 @@ class le extends Component {
 
   filterData() {
     const { data, filters } = this.state;
-    console.log("Filters:", filters); // 檢查篩選器的狀態
-    console.log("Data:", data); // 檢查原始數據的狀態
+    console.log("Filters:", filters);
+    console.log("Data:", data);
 
     const filterCondition = (item) => {
       return Object.keys(filters).every((filter) => {
-        // 將篩選器的鍵映射到對應的數據屬性名稱
-        const dataKey = `product_class_${filter.split("_")[1]}`; // 提取下劃線後的數字部分
+        const dataKey = `product_class_${filter.split("_")[1]}`;
 
-        // 檢查篩選器值是否為 true
         if (filters[filter]) {
-          // 檢查數據屬性是否等於 1
           if (item[dataKey] === 1) {
-            // 滿足篩選條件
             return true;
           } else {
-            // 不滿足篩選條件
             return false;
           }
         } else {
-          // 如果篩選器為 false，則不進行篩選，直接返回 true
           return true;
         }
       });
@@ -85,16 +76,15 @@ class le extends Component {
     // 使用 filterCondition 函數進行篩選
     const filteredData = data.filter(filterCondition);
 
-    console.log("Filtered Data:", filteredData); // 檢查篩選後的數據
+    console.log("Filtered Data:", filteredData);
     this.setState({ filteredData });
 
-    return filteredData; // 直接返回篩選後的數據
+    return filteredData;
   }
 
   render() {
     const { filters, filteredData } = this.state;
 
-    // 如果 filteredData 未定義，顯示載入中的訊息或採取其他適當的措施
     if (!filteredData) {
       return <div>Loading...</div>;
     }
@@ -263,14 +253,6 @@ class le extends Component {
               ></img>
             </div>
           </div>
-          <input
-            type="text"
-            id="search"
-            name="search"
-            onChange={this.searchChange}
-            value={this.state.search}
-            className="form-control rounded-pill ps-4 bg-secondary-subtle"
-          ></input>
         </div>
 
         <main>
@@ -372,7 +354,7 @@ class le extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-sm-7 col-md-8 col-lg-9 col-xxl-10 row choose_right">
+              <div className="col-sm-7 col-md-8 col-lg-9 col-xxl-10 row choose_right mx-auto">
                 {shuffledData.map((item) => (
                   <div key={item.id} className="col-lg-6 col-xxl-4 my-3">
                     <div className="card">
@@ -405,12 +387,7 @@ class le extends Component {
                           <p className="price_1 text-center ms-1">
                             {item.products_price_0
                               ? `M${item.products_price_0}`
-                              : ""}
-                          </p>
-                          <p className="price_2 text-center mx-1">
-                            {item.products_price_1
-                              ? `L${item.products_price_1}`
-                              : ""}
+                              : `L${item.products_price_1}`}
                           </p>
                         </div>
                       </div>
@@ -489,11 +466,7 @@ class le extends Component {
       </React.Fragment>
     );
   }
-  searchChange = (e) => {
-    var newState = { ...this.state };
-    newState.search = e.target.value;
-    this.setState(newState);
-  };
+
   pointinfoShow = (event) => {
     document.getElementById("pointinfo").style.top = event.clientY + 50 + "px";
     document.getElementById("pointinfo").style.left =

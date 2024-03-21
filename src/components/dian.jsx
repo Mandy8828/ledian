@@ -18,7 +18,6 @@ class dian extends Component {
   }
 
   componentDidMount() {
-    // 初始化資料，預設獲取中區的商家資料
     this.handleOptionChange("400");
   }
 
@@ -26,8 +25,8 @@ class dian extends Component {
     try {
       this.setState({ score: "" });
 
-      let url = ""; // 請修改為相應的路徑或端點
-      // 根據選項設置不同的路徑
+      let url = "";
+
       if (selectedOption === "400") {
         url = "http://localhost:8000/dian/address_400";
       } else if (selectedOption === "401") {
@@ -39,7 +38,7 @@ class dian extends Component {
       } else if (selectedOption === "404") {
         url = "http://localhost:8000/dian/address_404";
       }
-      // 發送請求
+
       const response = await axios.get(url);
       this.setState({ selectedOption: selectedOption, content: response.data });
     } catch (error) {
@@ -51,8 +50,7 @@ class dian extends Component {
     try {
       this.setState({ selectedOption: "" });
 
-      let url = ""; // 请修改为相应的路径或端点
-      // 根据选择的评分设置不同的路径
+      let url = "";
       if (selectedScore === "4.5") {
         url = "http://localhost:8000/dian/score_4.5";
       } else if (selectedScore === "4.0") {
@@ -62,11 +60,11 @@ class dian extends Component {
       } else if (selectedScore === "3.0") {
         url = "http://localhost:8000/dian/score_3.0";
       }
-      // 发送请求
+
       const response = await axios.get(url);
       this.setState({ score: selectedScore, content: response.data });
     } catch (error) {
-      console.error("获取数据时出错:", error);
+      console.error("錯誤:", error);
     }
   };
 
@@ -425,7 +423,7 @@ class dian extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-sm-7 col-md-8 col-lg-9 col-xxl-10 row choose_right justify-content-center">
+              <div className="col-sm-7 col-md-8 col-lg-9 col-xxl-10 row choose_right justify-content-center mx-auto">
                 {/* 台中探索、尋星饗宴、星評優選 */}
                 {shuffledContent.map((item, index) => (
                   <div key={index} className="col-lg-6 col-xxl-4 my-3">
