@@ -99,6 +99,8 @@ class le extends Component {
       return <div>Loading...</div>;
     }
 
+    const shuffledData = filteredData.sort(() => Math.random() - 0.5);
+
     return (
       <React.Fragment>
         <div
@@ -371,7 +373,7 @@ class le extends Component {
                 </div>
               </div>
               <div className="col-sm-7 col-md-8 col-lg-9 col-xxl-10 row choose_right">
-                {filteredData.map((item) => (
+                {shuffledData.map((item) => (
                   <div key={item.id} className="col-lg-6 col-xxl-4 my-3">
                     <div className="card">
                       <div className="image">

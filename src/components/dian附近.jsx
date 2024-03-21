@@ -6,13 +6,128 @@ import { PiCoins } from "react-icons/pi";
 import { GiCancel } from "react-icons/gi";
 import GradeIcon from "@mui/icons-material/Grade";
 import Axios from "axios";
+import {
+  GoogleMap,
+  LoadScript,
+  Marker,
+  StandaloneSearchBox,
+  Autocomplete,
+  DistanceMatrixService,
+} from "@react-google-maps/api";
+// import axios from "axios";
 
-class dian0321 extends Component {
+<head>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxryD8kH56hfiJ0bJt6r_KQ6G4MEZY6dI&loading=async&libraries=places,drawing,geometry&callback=initMap&v=weekly"></script>
+</head>;
+
+class dian extends Component {
   state = {
+    currentLocation: { lat: null, lng: null },
     search: "搜尋店家",
+    branchList: [{}],
+    brandList: [{}],
+    branchPosition: [
+      {
+        branchId: 1,
+        branchAddress: "台中市西屯區中工三路181號1樓",
+        lat: 24.1767266,
+        lng: 120.6183528,
+      },
+    ],
+    distances: {},
+    productList: [{}],
+    // nearbyChecked: false, // 新增一个状态来跟踪复选框的状态
+    // starChecked: false, // 添加星评优选选项的状态
+    star4: [],
+  };
+
+  async componentDidMount() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        ({ coords: { latitude: lat, longitude: lng } }) => {
+          const pos = { lat, lng };
+          this.setState({ currentLocation: pos }, () => {
+            this.getData();
+          });
+        },
+        (error) => {
+          console.error("Error getting geolocation:", error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  }
+
+  getData = async () => {
+    try {
+      const resultBranch = await Axios.get(
+        "http://localhost:8000/index/branch"
+      );
+      const resultBrand = await Axios.get("http://localhost:8000/index/brand");
+      const resultProduct = await Axios.get(
+        "http://localhost:8000/index/products"
+      );
+      const newState = { ...this.state };
+      newState.branchList = resultBranch.data;
+      newState.brandList = resultBrand.data;
+      newState.productList = resultProduct.data;
+      newState.productList.map((item, i) => {
+        newState.path[
+          i
+        ] = `/img/class/${newState.productList[i].product_img}.png`;
+      });
+
+      newState.branchPosition = resultBranch.data.map((branch) => ({
+        branchId: branch.branch_id,
+        branchAddress: branch.branch_address,
+        lat: branch.branch_latitude,
+        lng: branch.branch_longitude,
+      }));
+      this.setState(newState, () => {
+        this.calculateDistances();
+      });
+      console.log(this.state);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  calculateDistances = () => {
+    const currentLat = this.state.currentLocation.lat;
+    const currentLng = this.state.currentLocation.lng;
+    const branchPosition = this.state.branchPosition;
+    if (currentLat !== null && currentLng !== null) {
+      const R = 6371; // 地球平均半径（km）
+      const distances = {};
+      branchPosition.forEach((branch) => {
+        const { branchId, lat, lng } = branch;
+        const dLat = this.deg2rad(lat - currentLat);
+        const dLng = this.deg2rad(lng - currentLng);
+        const a =
+          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos(this.deg2rad(currentLat)) *
+            Math.cos(this.deg2rad(lat)) *
+            Math.sin(dLng / 2) *
+            Math.sin(dLng / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        distances[branchId] = (R * c).toFixed(1); // 保留一位小数
+      });
+      this.setState({ distances });
+    }
+  };
+
+  deg2rad = (deg) => {
+    return deg * (Math.PI / 180);
   };
 
   render() {
+    const currentLat = this.state.currentLocation.lat;
+    const currentLng = this.state.currentLocation.lng;
+    const distances = this.state.distances;
+    // const nearbyChecked = this.state.nearbyChecked; // 获取复选框状态
+    // const starChecked = this.state.starChecked; // 获取星评优选选项的状态
+
     return (
       <React.Fragment>
         <div
@@ -199,6 +314,8 @@ class dian0321 extends Component {
                         type="radio"
                         value=""
                         id="classification_1"
+                        name="nearbyChecked"
+                        onChange={this.handleCheckboxChange} // 在复选框的onChange事件中调用handleCheckboxChange函数
                       />
                       <label
                         className="form-check-label"
@@ -213,6 +330,8 @@ class dian0321 extends Component {
                         type="radio"
                         value=""
                         id="classification_2"
+                        name="starChecked" // 设置复选框的name属性，用于标识不同的选项
+                        // onChange={this.handleCheckboxChange}
                       />
                       <label
                         className="form-check-label"
@@ -682,9 +801,150 @@ class dian0321 extends Component {
                 </div>
               </div>
               <div className="col-sm-7 col-md-8 col-lg-9 col-xxl-10 row choose_right justify-content-center">
-                {/* 星評優選 */}
+                {/* 附近店鋪 */}
+                {currentLat !== null && currentLng !== null ? (
+                  <>
+                    {Object.entries(distances)
+                      .filter(([branchId, distance]) => distance < 1.5)
+                      .sort((a, b) => a[1] - b[1])
+                      .map(([branchid, distance]) => (
+                        <div key={branchid} className="col-lg-6 col-xxl-4 my-3">
+                          <div className="card">
+                            <div className="image">
+                              {this.state.branchList.map((branch) => {
+                                if (branch.branch_id == branchid) {
+                                  var id = branch.brand_id;
+                                  return this.state.brandList.map(function (
+                                    brand
+                                  ) {
+                                    if (brand.brand_id == id) {
+                                      return (
+                                        <img
+                                          src={`/img/mainproduct/${brand.brand_id}.png`}
+                                          className="card-img-top"
+                                          alt="..."
+                                          key={branch.branch_id}
+                                        />
+                                      );
+                                    } else {
+                                      return null;
+                                    }
+                                  });
+                                } else {
+                                  return null;
+                                }
+                              })}
+                            </div>
+                            <div className="card-body">
+                              <div className="row information">
+                                <p className="col-3 score align-items-center d-flex align-items-center justify-content-center">
+                                  <GradeIcon className="me-1 iconColor" />
+                                  {/* 評分 */}
+                                  {this.state.branchList.map(function (e) {
+                                    if (e.branch_id == branchid) {
+                                      return e.branch_score.toFixed(1); //小數點後補0
+                                    } else {
+                                      return null;
+                                    }
+                                  })}
+                                </p>
 
-                {/* 台中探索 */}
+                                <p className="col-5 time">
+                                  {/* 營業時間 */}
+
+                                  {this.state.branchList.map((branch) => {
+                                    if (branch.branch_id == branchid) {
+                                      const day = new Date().getDay();
+                                      const openTime = [
+                                        branch.Sun_start,
+                                        branch.Mon_start,
+                                        branch.Tue_start,
+                                        branch.Wed_start,
+                                        branch.Thu_start,
+                                        branch.Fri_start,
+                                        branch.Sat_start,
+                                      ];
+                                      const closeTime = [
+                                        branch.Sun_end,
+                                        branch.Mon_end,
+                                        branch.Tue_end,
+                                        branch.Wed_end,
+                                        branch.Thu_end,
+                                        branch.Fri_end,
+                                        branch.Sat_end,
+                                      ];
+                                      if (
+                                        (openTime[day] == "店休") |
+                                        (closeTime[day] == "店休")
+                                      ) {
+                                        return "店休";
+                                      } else {
+                                        return `${openTime[day]}~${closeTime[day]}`;
+                                      }
+                                    } else {
+                                      return null;
+                                    }
+                                  })}
+                                </p>
+                                <p className="col-4 kilometre">
+                                  約 {distance} 公里
+                                </p>
+                              </div>
+                              <p className="card-title lh-sm">
+                                {/* 品牌名 */}
+                                {this.state.branchList.map((branch) => {
+                                  if (branch.branch_id == branchid) {
+                                    var id = branch.brand_id;
+                                    return this.state.brandList.map(function (
+                                      brand
+                                    ) {
+                                      if (brand.brand_id == id) {
+                                        return brand.brand_name;
+                                      } else {
+                                        return null;
+                                      }
+                                    });
+                                  } else {
+                                    return null;
+                                  }
+                                })}{" "}
+                                {/* 店名 */}
+                                {this.state.branchList.map(function (e) {
+                                  if (e.branch_id == branchid) {
+                                    return e.branch_name;
+                                  } else {
+                                    return null;
+                                  }
+                                })}
+                                <br />
+                                {this.state.branchList.map(function (e) {
+                                  if (e.branch_id == branchid) {
+                                    return (
+                                      <a
+                                        key={branchid}
+                                        href={
+                                          "https://www.google.com/maps/place/" +
+                                          e.branch_address
+                                        }
+                                      >
+                                        {e.branch_address}
+                                      </a>
+                                    );
+                                  } else {
+                                    return null;
+                                  }
+                                })}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                  </>
+                ) : (
+                  <h3>無法讀取位置...</h3>
+                )}
+
+                {/* 星評優選 */}
               </div>
             </div>
           </div>
@@ -781,66 +1041,27 @@ class dian0321 extends Component {
     document.getElementById("menuNav").classList.toggle("menuNav");
   };
 
-  // 可以使用，但無法篩選出重複的品項
-  handleCheckboxChange = async (event) => {
-    const checkboxId = event.target.id;
+  // componentDidMount = async () => {
+  //   try {
+  //     var resultstar4 = await axios.get("http://localhost:8000/dian/star4");
+  //     var branchList = await axios.get("http://localhost:8000/index/branch");
+  //     var brandList = await axios.get("http://localhost:8000/index/brand");
 
-    try {
-      // Initialize an empty array to hold the selected category data
-      let selectedCategoryData = [];
+  //     this.setState({
+  //       resultstar4: resultstar4.data,
+  //       branchList: branchList.data,
+  //       brandList: brandList.data,
+  //     });
+  //     console.log(this.state);
+  //   } catch (ereor) {
+  //     console.error("Error", error);
+  //   }
+  // };
 
-      // Fetch data based on the selected checkbox
-      switch (checkboxId) {
-        case "classification_1":
-          selectedCategoryData = await axios.get(
-            "http://localhost:8000/le1/product"
-          );
-          break;
-        case "classification_2":
-          selectedCategoryData = await axios.get(
-            "http://localhost:8000/le2/product"
-          );
-          break;
-        case "classification_3":
-          selectedCategoryData = await axios.get(
-            "http://localhost:8000/le3/product"
-          );
-          break;
-        case "classification_4":
-          selectedCategoryData = await axios.get(
-            "http://localhost:8000/le4/product"
-          );
-          break;
-        case "classification_5":
-          selectedCategoryData = await axios.get(
-            "http://localhost:8000/le5/product"
-          );
-          break;
-        default:
-          // If no checkbox is selected, fetch all products
-          selectedCategoryData = await axios.get(
-            "http://localhost:8000/all/products"
-          );
-          break;
-      }
-
-      // Update state with the selected category data
-      this.setState({
-        resultle1:
-          checkboxId === "classification_1" ? selectedCategoryData.data : [],
-        resultle2:
-          checkboxId === "classification_2" ? selectedCategoryData.data : [],
-        resultle3:
-          checkboxId === "classification_3" ? selectedCategoryData.data : [],
-        resultle4:
-          checkboxId === "classification_4" ? selectedCategoryData.data : [],
-        resultle5:
-          checkboxId === "classification_5" ? selectedCategoryData.data : [],
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  handleCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+    this.setState({ [name]: checked }); // 更新对应选项的状态
   };
 }
 
-export default dian0321;
+export default dian;

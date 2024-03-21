@@ -5,128 +5,74 @@ import { PiMedal } from "react-icons/pi";
 import { PiCoins } from "react-icons/pi";
 import { GiCancel } from "react-icons/gi";
 import GradeIcon from "@mui/icons-material/Grade";
-import Axios from "axios";
-import {
-  GoogleMap,
-  LoadScript,
-  Marker,
-  StandaloneSearchBox,
-  Autocomplete,
-  DistanceMatrixService,
-} from "@react-google-maps/api";
-// import axios from "axios";
-
-<head>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxryD8kH56hfiJ0bJt6r_KQ6G4MEZY6dI&loading=async&libraries=places,drawing,geometry&callback=initMap&v=weekly"></script>
-</head>;
+import axios from "axios";
 
 class dian extends Component {
-  state = {
-    currentLocation: { lat: null, lng: null },
-    search: "搜尋店家",
-    branchList: [{}],
-    brandList: [{}],
-    branchPosition: [
-      {
-        branchId: 1,
-        branchAddress: "台中市西屯區中工三路181號1樓",
-        lat: 24.1767266,
-        lng: 120.6183528,
-      },
-    ],
-    distances: {},
-    productList: [{}],
-    // nearbyChecked: false, // 新增一个状态来跟踪复选框的状态
-    // starChecked: false, // 添加星评优选选项的状态
-    star4: [],
-  };
-
-  async componentDidMount() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        ({ coords: { latitude: lat, longitude: lng } }) => {
-          const pos = { lat, lng };
-          this.setState({ currentLocation: pos }, () => {
-            this.getData();
-          });
-        },
-        (error) => {
-          console.error("Error getting geolocation:", error);
-        }
-      );
-    } else {
-      console.error("Geolocation is not supported by this browser.");
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedOption: "",
+      content: [],
+      score: [],
+    };
   }
 
-  getData = async () => {
+  componentDidMount() {
+    // 初始化資料，預設獲取中區的商家資料
+    this.handleOptionChange("400");
+  }
+
+  handleOptionChange = async (selectedOption) => {
     try {
-      const resultBranch = await Axios.get(
-        "http://localhost:8000/index/branch"
-      );
-      const resultBrand = await Axios.get("http://localhost:8000/index/brand");
-      const resultProduct = await Axios.get(
-        "http://localhost:8000/index/products"
-      );
-      const newState = { ...this.state };
-      newState.branchList = resultBranch.data;
-      newState.brandList = resultBrand.data;
-      newState.productList = resultProduct.data;
-      newState.productList.map((item, i) => {
-        newState.path[
-          i
-        ] = `/img/class/${newState.productList[i].product_img}.png`;
-      });
+      this.setState({ score: "" });
 
-      newState.branchPosition = resultBranch.data.map((branch) => ({
-        branchId: branch.branch_id,
-        branchAddress: branch.branch_address,
-        lat: branch.branch_latitude,
-        lng: branch.branch_longitude,
-      }));
-      this.setState(newState, () => {
-        this.calculateDistances();
-      });
-      console.log(this.state);
+      let url = ""; // 請修改為相應的路徑或端點
+      // 根據選項設置不同的路徑
+      if (selectedOption === "400") {
+        url = "http://localhost:8000/dian/address_400";
+      } else if (selectedOption === "401") {
+        url = "http://localhost:8000/dian/address_401";
+      } else if (selectedOption === "402") {
+        url = "http://localhost:8000/dian/address_402";
+      } else if (selectedOption === "403") {
+        url = "http://localhost:8000/dian/address_403";
+      } else if (selectedOption === "404") {
+        url = "http://localhost:8000/dian/address_404";
+      }
+      // 發送請求
+      const response = await axios.get(url);
+      this.setState({ selectedOption: selectedOption, content: response.data });
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error fetching data:", error);
     }
   };
 
-  calculateDistances = () => {
-    const currentLat = this.state.currentLocation.lat;
-    const currentLng = this.state.currentLocation.lng;
-    const branchPosition = this.state.branchPosition;
-    if (currentLat !== null && currentLng !== null) {
-      const R = 6371; // 地球平均半径（km）
-      const distances = {};
-      branchPosition.forEach((branch) => {
-        const { branchId, lat, lng } = branch;
-        const dLat = this.deg2rad(lat - currentLat);
-        const dLng = this.deg2rad(lng - currentLng);
-        const a =
-          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-          Math.cos(this.deg2rad(currentLat)) *
-            Math.cos(this.deg2rad(lat)) *
-            Math.sin(dLng / 2) *
-            Math.sin(dLng / 2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        distances[branchId] = (R * c).toFixed(1); // 保留一位小数
-      });
-      this.setState({ distances });
-    }
-  };
+  handleScoreChange = async (selectedScore) => {
+    try {
+      this.setState({ selectedOption: "" });
 
-  deg2rad = (deg) => {
-    return deg * (Math.PI / 180);
+      let url = ""; // 请修改为相应的路径或端点
+      // 根据选择的评分设置不同的路径
+      if (selectedScore === "4.5") {
+        url = "http://localhost:8000/dian/score_4.5";
+      } else if (selectedScore === "4.0") {
+        url = "http://localhost:8000/dian/score_4.0";
+      } else if (selectedScore === "3.5") {
+        url = "http://localhost:8000/dian/score_3.5";
+      } else if (selectedScore === "3.0") {
+        url = "http://localhost:8000/dian/score_3.0";
+      }
+      // 发送请求
+      const response = await axios.get(url);
+      this.setState({ score: selectedScore, content: response.data });
+    } catch (error) {
+      console.error("获取数据时出错:", error);
+    }
   };
 
   render() {
-    const currentLat = this.state.currentLocation.lat;
-    const currentLng = this.state.currentLocation.lng;
-    const distances = this.state.distances;
-    // const nearbyChecked = this.state.nearbyChecked; // 获取复选框状态
-    // const starChecked = this.state.starChecked; // 获取星评优选选项的状态
+    const { selectedOption, content } = this.state;
+    const shuffledContent = content.sort(() => Math.random() - 0.5);
 
     return (
       <React.Fragment>
@@ -314,8 +260,8 @@ class dian extends Component {
                         type="radio"
                         value=""
                         id="classification_1"
-                        name="nearbyChecked"
-                        onChange={this.handleCheckboxChange} // 在复选框的onChange事件中调用handleCheckboxChange函数
+                        checked={selectedOption === "nearby"}
+                        onChange={() => this.handleOptionChange("nearby")}
                       />
                       <label
                         className="form-check-label"
@@ -330,8 +276,8 @@ class dian extends Component {
                         type="radio"
                         value=""
                         id="classification_2"
-                        name="starChecked" // 设置复选框的name属性，用于标识不同的选项
-                        // onChange={this.handleCheckboxChange}
+                        checked={this.state.score === "4.0"}
+                        onChange={() => this.handleScoreChange("4.0")}
                       />
                       <label
                         className="form-check-label"
@@ -351,6 +297,9 @@ class dian extends Component {
                           name="address"
                           id="address_1"
                           value="中區"
+                          data-postcode
+                          checked={selectedOption === "400"}
+                          onChange={() => this.handleOptionChange("400")}
                         />
                         <label className="form-check-label" htmlFor="address_1">
                           {" "}
@@ -364,6 +313,8 @@ class dian extends Component {
                           name="address"
                           id="address_2"
                           value="東區"
+                          checked={selectedOption === "401"}
+                          onChange={() => this.handleOptionChange("401")}
                         />
                         <label className="form-check-label" htmlFor="address_2">
                           {" "}
@@ -377,6 +328,8 @@ class dian extends Component {
                           name="address"
                           id="address_3"
                           value="南區"
+                          checked={selectedOption === "402"}
+                          onChange={() => this.handleOptionChange("402")}
                         />
                         <label className="form-check-label" htmlFor="address_3">
                           {" "}
@@ -390,6 +343,8 @@ class dian extends Component {
                           name="address"
                           id="address_4"
                           value="西區"
+                          checked={selectedOption === "403"}
+                          onChange={() => this.handleOptionChange("403")}
                         />
                         <label className="form-check-label" htmlFor="address_4">
                           {" "}
@@ -403,350 +358,12 @@ class dian extends Component {
                           name="address"
                           id="address_5"
                           value="北區"
+                          checked={selectedOption === "404"}
+                          onChange={() => this.handleOptionChange("404")}
                         />
                         <label className="form-check-label" htmlFor="address_5">
                           {" "}
                           北區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_6"
-                          value="北屯區"
-                        />
-                        <label className="form-check-label" htmlFor="address_6">
-                          {" "}
-                          北屯區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_7"
-                          value="西屯區"
-                        />
-                        <label className="form-check-label" htmlFor="address_7">
-                          {" "}
-                          西屯區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_8"
-                          value="南屯區"
-                        />
-                        <label className="form-check-label" htmlFor="address_8">
-                          {" "}
-                          南屯區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_9"
-                          value="太平區"
-                        />
-                        <label className="form-check-label" htmlFor="address_9">
-                          {" "}
-                          太平區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_10"
-                          value="大里區"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="address_10"
-                        >
-                          {" "}
-                          大里區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_11"
-                          value="霧峰區"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="address_11"
-                        >
-                          {" "}
-                          霧峰區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_12"
-                          value="烏日區"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="address_12"
-                        >
-                          {" "}
-                          烏日區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_13"
-                          value="豐原區"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="address_13"
-                        >
-                          {" "}
-                          豐原區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_14"
-                          value="后里區"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="address_14"
-                        >
-                          {" "}
-                          后里區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_15"
-                          value="石岡區"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="address_15"
-                        >
-                          {" "}
-                          石岡區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_16"
-                          value="東勢區"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="address_16"
-                        >
-                          {" "}
-                          東勢區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_17"
-                          value="新社區"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="address_17"
-                        >
-                          {" "}
-                          新社區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_18"
-                          value="潭子區"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="address_18"
-                        >
-                          {" "}
-                          潭子區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_19"
-                          value="大雅區"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="address_19"
-                        >
-                          {" "}
-                          大雅區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_20"
-                          value="神岡區"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="address_20"
-                        >
-                          {" "}
-                          神岡區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_21"
-                          value="大肚區"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="address_21"
-                        >
-                          {" "}
-                          大肚區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_22"
-                          value="沙鹿區"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="address_22"
-                        >
-                          {" "}
-                          沙鹿區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_23"
-                          value="龍井區"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="address_23"
-                        >
-                          {" "}
-                          龍井區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_24"
-                          value="梧棲區"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="address_24"
-                        >
-                          {" "}
-                          梧棲區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_25"
-                          value="清水區"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="address_25"
-                        >
-                          {" "}
-                          清水區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_26"
-                          value="大甲區"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="address_26"
-                        >
-                          {" "}
-                          大甲區{" "}
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="address"
-                          id="address_27"
-                          value="外埔區"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="address_27"
-                        >
-                          {" "}
-                          外埔區{" "}
                         </label>
                       </div>
                     </div>
@@ -759,6 +376,8 @@ class dian extends Component {
                         type="radio"
                         name="score"
                         id="score_1"
+                        checked={this.state.score === "4.5"}
+                        onChange={() => this.handleScoreChange("4.5")}
                       />
                       <label className="form-check-label" htmlFor="score_1">
                         <GradeIcon className="me-1 iconColor" /> 4.5以上
@@ -770,6 +389,8 @@ class dian extends Component {
                         type="radio"
                         name="score"
                         id="score_2"
+                        checked={this.state.score === "4.0"}
+                        onChange={() => this.handleScoreChange("4.0")}
                       />
                       <label className="form-check-label" htmlFor="score_2">
                         <GradeIcon className="me-1 iconColor" /> 4.0以上
@@ -781,6 +402,8 @@ class dian extends Component {
                         type="radio"
                         name="score"
                         id="score_2"
+                        checked={this.state.score === "3.5"}
+                        onChange={() => this.handleScoreChange("3.5")}
                       />
                       <label className="form-check-label" htmlFor="score_2">
                         <GradeIcon className="me-1 iconColor" /> 3.5以上
@@ -792,6 +415,8 @@ class dian extends Component {
                         type="radio"
                         name="score"
                         id="score_2"
+                        checked={this.state.score === "3.0"}
+                        onChange={() => this.handleScoreChange("3.0")}
                       />
                       <label className="form-check-label" htmlFor="score_2">
                         <GradeIcon className="me-1 iconColor" /> 3.0以上
@@ -801,150 +426,44 @@ class dian extends Component {
                 </div>
               </div>
               <div className="col-sm-7 col-md-8 col-lg-9 col-xxl-10 row choose_right justify-content-center">
-                {/* 附近店鋪 */}
-                {currentLat !== null && currentLng !== null ? (
-                  <>
-                    {Object.entries(distances)
-                      .filter(([branchId, distance]) => distance < 1.5)
-                      .sort((a, b) => a[1] - b[1])
-                      .map(([branchid, distance]) => (
-                        <div key={branchid} className="col-lg-6 col-xxl-4 my-3">
-                          <div className="card">
-                            <div className="image">
-                              {this.state.branchList.map((branch) => {
-                                if (branch.branch_id == branchid) {
-                                  var id = branch.brand_id;
-                                  return this.state.brandList.map(function (
-                                    brand
-                                  ) {
-                                    if (brand.brand_id == id) {
-                                      return (
-                                        <img
-                                          src={`/img/mainproduct/${brand.brand_id}.png`}
-                                          className="card-img-top"
-                                          alt="..."
-                                          key={branch.branch_id}
-                                        />
-                                      );
-                                    } else {
-                                      return null;
-                                    }
-                                  });
-                                } else {
-                                  return null;
-                                }
-                              })}
-                            </div>
-                            <div className="card-body">
-                              <div className="row information">
-                                <p className="col-3 score align-items-center d-flex align-items-center justify-content-center">
-                                  <GradeIcon className="me-1 iconColor" />
-                                  {/* 評分 */}
-                                  {this.state.branchList.map(function (e) {
-                                    if (e.branch_id == branchid) {
-                                      return e.branch_score.toFixed(1); //小數點後補0
-                                    } else {
-                                      return null;
-                                    }
-                                  })}
-                                </p>
-
-                                <p className="col-5 time">
-                                  {/* 營業時間 */}
-
-                                  {this.state.branchList.map((branch) => {
-                                    if (branch.branch_id == branchid) {
-                                      const day = new Date().getDay();
-                                      const openTime = [
-                                        branch.Sun_start,
-                                        branch.Mon_start,
-                                        branch.Tue_start,
-                                        branch.Wed_start,
-                                        branch.Thu_start,
-                                        branch.Fri_start,
-                                        branch.Sat_start,
-                                      ];
-                                      const closeTime = [
-                                        branch.Sun_end,
-                                        branch.Mon_end,
-                                        branch.Tue_end,
-                                        branch.Wed_end,
-                                        branch.Thu_end,
-                                        branch.Fri_end,
-                                        branch.Sat_end,
-                                      ];
-                                      if (
-                                        (openTime[day] == "店休") |
-                                        (closeTime[day] == "店休")
-                                      ) {
-                                        return "店休";
-                                      } else {
-                                        return `${openTime[day]}~${closeTime[day]}`;
-                                      }
-                                    } else {
-                                      return null;
-                                    }
-                                  })}
-                                </p>
-                                <p className="col-4 kilometre">
-                                  約 {distance} 公里
-                                </p>
-                              </div>
-                              <p className="card-title lh-sm">
-                                {/* 品牌名 */}
-                                {this.state.branchList.map((branch) => {
-                                  if (branch.branch_id == branchid) {
-                                    var id = branch.brand_id;
-                                    return this.state.brandList.map(function (
-                                      brand
-                                    ) {
-                                      if (brand.brand_id == id) {
-                                        return brand.brand_name;
-                                      } else {
-                                        return null;
-                                      }
-                                    });
-                                  } else {
-                                    return null;
-                                  }
-                                })}{" "}
-                                {/* 店名 */}
-                                {this.state.branchList.map(function (e) {
-                                  if (e.branch_id == branchid) {
-                                    return e.branch_name;
-                                  } else {
-                                    return null;
-                                  }
-                                })}
-                                <br />
-                                {this.state.branchList.map(function (e) {
-                                  if (e.branch_id == branchid) {
-                                    return (
-                                      <a
-                                        key={branchid}
-                                        href={
-                                          "https://www.google.com/maps/place/" +
-                                          e.branch_address
-                                        }
-                                      >
-                                        {e.branch_address}
-                                      </a>
-                                    );
-                                  } else {
-                                    return null;
-                                  }
-                                })}
-                              </p>
-                            </div>
-                          </div>
+                {/* 台中探索、尋星饗宴、星評優選 */}
+                {shuffledContent.map((item, index) => (
+                  <div key={index} className="col-lg-6 col-xxl-4 my-3">
+                    <div className="card">
+                      <div className="image">
+                        <img
+                          src={`/img/mainproduct/${item.brand_id}.png`}
+                          className="card-img-top"
+                          alt="..."
+                        />
+                        <img
+                          src={`/img/logo/${item.brand_id}.png`}
+                          className="logo"
+                          alt="..."
+                        />
+                      </div>
+                      <div className="card-body">
+                        <div className="row information">
+                          <p className="col-3 score align-items-center d-flex align-items-center justify-content-center">
+                            <GradeIcon className="me-1 iconColor" />
+                            {item.branch_score.toFixed(1)}
+                          </p>
+                          <p className="col-5 time">10:00~23:00</p>
+                          <p className="col-4 kilometre">約 0.2 公里</p>
                         </div>
-                      ))}
-                  </>
-                ) : (
-                  <h3>無法讀取位置...</h3>
-                )}
-
-                {/* 星評優選 */}
+                        <p className="card-title lh-sm">
+                          {`${item.brand_id} ${item.branch_name}`}
+                          <br />
+                          <a
+                            href={`https://www.google.com/maps/place/${item.branch_address}`}
+                          >
+                            {item.branch_address}
+                          </a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -1039,28 +558,6 @@ class dian extends Component {
 
   toggleMenuNav = () => {
     document.getElementById("menuNav").classList.toggle("menuNav");
-  };
-
-  // componentDidMount = async () => {
-  //   try {
-  //     var resultstar4 = await axios.get("http://localhost:8000/dian/star4");
-  //     var branchList = await axios.get("http://localhost:8000/index/branch");
-  //     var brandList = await axios.get("http://localhost:8000/index/brand");
-
-  //     this.setState({
-  //       resultstar4: resultstar4.data,
-  //       branchList: branchList.data,
-  //       brandList: brandList.data,
-  //     });
-  //     console.log(this.state);
-  //   } catch (ereor) {
-  //     console.error("Error", error);
-  //   }
-  // };
-
-  handleCheckboxChange = (event) => {
-    const { name, checked } = event.target;
-    this.setState({ [name]: checked }); // 更新对应选项的状态
   };
 }
 
