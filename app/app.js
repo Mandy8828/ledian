@@ -46,52 +46,11 @@ app.get("/all/products", function (req, res) {
   });
 });
 
-// 飲料部分
-app.get("/le1/product", function (req, res) {
-  conn.query(
-    "select product_img, product_id, product_name, products_price_0, products_price_1, brand_id from products where product_class_1 = 1",
-    function (err, rows) {
-      res.send(JSON.stringify(rows));
-    }
-  );
-});
-
-app.get("/le/brand", function (req, res) {
+app.get("/all/brand", function (req, res) {
   conn.query("select * from brand", function (err, rows) {
     res.send(JSON.stringify(rows));
   });
 });
-
-// 店家部分-附近店家
-// app.get("/dian/address_nearby", function (req, res) {
-//   // 获取用户位置信息
-//   const userLatitude = parseFloat(req.query.latitude);
-//   const userLongitude = parseFloat(req.query.longitude);
-
-//   // 查询数据库以获取附近店家的信息
-//   conn.query(
-//     `SELECT branch_name, latitude, longitude FROM branch WHERE
-//     ( 6371 * acos( cos( radians(${userLatitude}) ) * cos( radians( latitude ) )
-//     * cos( radians( longitude ) - radians(${userLongitude}) ) + sin( radians(${userLatitude}) )
-//     * sin( radians( latitude ) ) ) ) < 1.5`, // 假设1.5是距离范围
-//     function (err, rows) {
-//       if (err) {
-//         console.error(err);
-//         res.status(500).send("Internal Server Error");
-//         return;
-//       }
-//       // 返回附近店家数据
-//       res.send(JSON.stringify(rows));
-//     }
-//   );
-// });
-
-// 店家部分-評級4以上(星評優選)
-// app.get("/dian/star4", function (req, res) {
-//   conn.query("select * from branch", function (err, rows) {
-//     res.send(JSON.stringify(rows));
-//   });
-// });
 
 // 店家部分-全部
 app.get("/dian/address", function (req, res) {

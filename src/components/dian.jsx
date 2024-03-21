@@ -14,16 +14,84 @@ class dian extends Component {
       selectedOption: "",
       content: [],
       score: [],
+      userLocation: null,
+      selectedNearby: "",
+      resultlebrand: [],
     };
   }
 
   componentDidMount() {
-    this.handleOptionChange("400");
+    this.handleScoreChange("4.0");
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const userLocation = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        };
+        console.log("User location:", userLocation);
+        this.setState({ userLocation });
+      },
+      (error) => {
+        console.error("Error getting user location:", error);
+      }
+    );
   }
+
+  calculateDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * (Math.PI / 180);
+    const dLon = (lon2 - lon1) * (Math.PI / 180);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+    return distance.toFixed(1);
+  };
+
+  handleNearbyChange = async (selectedNearby) => {
+    try {
+      this.setState({ score: "", selectedOption: "" });
+
+      let url = "";
+      if (selectedNearby === "nearby") {
+        url = "http://localhost:8000/dian/address";
+      }
+
+      const response = await axios.get(url);
+      const contentWithDistance = response.data
+        .map((item) => {
+          const distance = this.calculateDistance(
+            this.state.userLocation.latitude,
+            this.state.userLocation.longitude,
+            item.branch_latitude,
+            item.branch_longitude
+          );
+
+          // 只有當距離小於1.5公里時才將該地點添加到狀態中
+          if (parseFloat(distance) < 1.5) {
+            return {
+              ...item,
+              distance: distance,
+            };
+          }
+          return null; // 如果距離大於等於1.5公里，則返回 null
+        })
+        .filter((item) => item !== null); // 去除距離大於等於1.5公里的地點
+
+      this.setState({ selectedNearby, content: contentWithDistance });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   handleOptionChange = async (selectedOption) => {
     try {
-      this.setState({ score: "" });
+      this.setState({ score: "", selectedNearby: "" });
 
       let url = "";
 
@@ -40,7 +108,19 @@ class dian extends Component {
       }
 
       const response = await axios.get(url);
-      this.setState({ selectedOption: selectedOption, content: response.data });
+      const contentWithDistance = response.data.map((item) => {
+        const distance = this.calculateDistance(
+          this.state.userLocation.latitude,
+          this.state.userLocation.longitude,
+          item.branch_latitude,
+          item.branch_longitude
+        );
+        return {
+          ...item,
+          distance: distance,
+        };
+      });
+      this.setState({ selectedOption, content: contentWithDistance });
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -48,7 +128,7 @@ class dian extends Component {
 
   handleScoreChange = async (selectedScore) => {
     try {
-      this.setState({ selectedOption: "" });
+      this.setState({ selectedOption: "", selectedNearby: "" });
 
       let url = "";
       if (selectedScore === "4.5") {
@@ -62,14 +142,26 @@ class dian extends Component {
       }
 
       const response = await axios.get(url);
-      this.setState({ score: selectedScore, content: response.data });
+      const contentWithDistance = response.data.map((item) => {
+        const distance = this.calculateDistance(
+          this.state.userLocation.latitude,
+          this.state.userLocation.longitude,
+          item.branch_latitude,
+          item.branch_longitude
+        );
+        return {
+          ...item,
+          distance: parseFloat(distance).toFixed(1),
+        };
+      });
+      this.setState({ score: selectedScore, content: contentWithDistance });
     } catch (error) {
-      console.error("錯誤:", error);
+      console.error("Error fetching data:", error);
     }
   };
 
   render() {
-    const { selectedOption, content } = this.state;
+    const { selectedOption, content, selectedNearby } = this.state;
     const shuffledContent = content.sort(() => Math.random() - 0.5);
 
     return (
@@ -258,8 +350,8 @@ class dian extends Component {
                         type="radio"
                         value=""
                         id="classification_1"
-                        checked={selectedOption === "nearby"}
-                        onChange={() => this.handleOptionChange("nearby")}
+                        checked={selectedNearby === "nearby"}
+                        onChange={() => this.handleNearbyChange("nearby")}
                       />
                       <label
                         className="form-check-label"
@@ -425,43 +517,66 @@ class dian extends Component {
               </div>
               <div className="col-sm-7 col-md-8 col-lg-9 col-xxl-10 row choose_right justify-content-center mx-auto">
                 {/* 台中探索、尋星饗宴、星評優選 */}
-                {shuffledContent.map((item, index) => (
-                  <div key={index} className="col-lg-6 col-xxl-4 my-3">
-                    <div className="card">
-                      <div className="image">
-                        <img
-                          src={`/img/mainproduct/${item.brand_id}.png`}
-                          className="card-img-top"
-                          alt="..."
-                        />
-                        <img
-                          src={`/img/logo/${item.brand_id}.png`}
-                          className="logo"
-                          alt="..."
-                        />
-                      </div>
-                      <div className="card-body">
-                        <div className="row information">
-                          <p className="col-3 score align-items-center d-flex align-items-center justify-content-center">
-                            <GradeIcon className="me-1 iconColor" />
-                            {item.branch_score.toFixed(1)}
-                          </p>
-                          <p className="col-5 time">10:00~23:00</p>
-                          <p className="col-4 kilometre">約 0.2 公里</p>
+                {shuffledContent.map((item, index) => {
+                  let distance = "";
+
+                  if (this.state.userLocation) {
+                    distance = this.calculateDistance(
+                      this.state.userLocation.latitude,
+                      this.state.userLocation.longitude,
+                      item.branch_latitude,
+                      item.branch_longitude
+                    );
+                  } else {
+                    console.log("User location is not available yet.");
+                  }
+
+                  return (
+                    <div key={index} className="col-lg-6 col-xxl-4 my-3">
+                      <div className="card">
+                        <div className="image">
+                          <img
+                            src={`/img/mainproduct/${item.brand_id}.png`}
+                            className="card-img-top"
+                            alt="..."
+                          />
+                          <img
+                            src={`/img/logo/${item.brand_id}.png`}
+                            className="logo"
+                            alt="..."
+                          />
                         </div>
-                        <p className="card-title lh-sm">
-                          {`${item.brand_id} ${item.branch_name}`}
-                          <br />
-                          <a
-                            href={`https://www.google.com/maps/place/${item.branch_address}`}
-                          >
-                            {item.branch_address}
-                          </a>
-                        </p>
+                        <div className="card-body">
+                          <div className="row information">
+                            <p className="col-3 score align-items-center d-flex align-items-center justify-content-center">
+                              <GradeIcon className="me-1 iconColor" />
+                              {item.branch_score.toFixed(1)}
+                            </p>
+                            <p className="col-5 time">10:00~23:00</p>
+                            <p className="col-4 kilometre">
+                              約 {item.distance} 公里
+                            </p>
+                          </div>
+                          <p className="card-title lh-sm">
+                            {this.state.resultlebrand.length > 0 &&
+                              this.state.resultlebrand.map((brand) => (
+                                <span key={brand.brand_id}>
+                                  {brand.brand_name}
+                                </span>
+                              ))}
+                            {item.branch_name}
+                            <br />
+                            <a
+                              href={`https://www.google.com/maps/place/${item.branch_address}`}
+                            >
+                              {item.branch_address}
+                            </a>
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>
