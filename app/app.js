@@ -105,6 +105,204 @@ app.get("/dian/address_404", function (req, res) {
   );
 });
 
+app.get("/dian/address_406", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 406",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_407", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 407",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_408", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 408",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_411", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 411",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_412", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 412",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_413", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 413",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_414", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 414",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_420", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 420",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_421", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 421",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_422", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 422",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_423", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 423",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_426", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 426",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_427", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 427",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_428", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 428",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_429", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 429",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_432", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 432",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_433", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 433",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_434", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 434",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_435", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 435",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_436", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 436",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_437", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 437",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
+app.get("/dian/address_438", function (req, res) {
+  conn.query(
+    "select * from branch where branch_postcode = 438",
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+
 // 店家部分-評分(全)
 app.get("/dian/scoreall", function (req, res) {
   conn.query("select * from branch", function (err, rows) {

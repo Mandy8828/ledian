@@ -17,6 +17,7 @@ class dian extends Component {
       userLocation: null,
       selectedNearby: "",
       resultlebrand: [],
+      brand: [],
     };
   }
 
@@ -36,8 +37,22 @@ class dian extends Component {
         console.error("Error getting user location:", error);
       }
     );
+
+    this.fetchBrandData();
   }
 
+  fetchBrandData = async () => {
+    try {
+      var brand = await axios.get("http://localhost:8000/all/brand");
+
+      this.setState({
+        brand: brand.data,
+      });
+      console.log(this.state);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   calculateDistance = (lat1, lon1, lat2, lon2) => {
     const R = 6371;
     const dLat = (lat2 - lat1) * (Math.PI / 180);
@@ -105,6 +120,50 @@ class dian extends Component {
         url = "http://localhost:8000/dian/address_403";
       } else if (selectedOption === "404") {
         url = "http://localhost:8000/dian/address_404";
+      } else if (selectedOption === "406") {
+        url = "http://localhost:8000/dian/address_406";
+      } else if (selectedOption === "407") {
+        url = "http://localhost:8000/dian/address_407";
+      } else if (selectedOption === "408") {
+        url = "http://localhost:8000/dian/address_408";
+      } else if (selectedOption === "411") {
+        url = "http://localhost:8000/dian/address_411";
+      } else if (selectedOption === "412") {
+        url = "http://localhost:8000/dian/address_412";
+      } else if (selectedOption === "413") {
+        url = "http://localhost:8000/dian/address_413";
+      } else if (selectedOption === "414") {
+        url = "http://localhost:8000/dian/address_414";
+      } else if (selectedOption === "420") {
+        url = "http://localhost:8000/dian/address_420";
+      } else if (selectedOption === "421") {
+        url = "http://localhost:8000/dian/address_421";
+      } else if (selectedOption === "422") {
+        url = "http://localhost:8000/dian/address_422";
+      } else if (selectedOption === "423") {
+        url = "http://localhost:8000/dian/address_423";
+      } else if (selectedOption === "426") {
+        url = "http://localhost:8000/dian/address_426";
+      } else if (selectedOption === "427") {
+        url = "http://localhost:8000/dian/address_427";
+      } else if (selectedOption === "428") {
+        url = "http://localhost:8000/dian/address_428";
+      } else if (selectedOption === "429") {
+        url = "http://localhost:8000/dian/address_429";
+      } else if (selectedOption === "432") {
+        url = "http://localhost:8000/dian/address_432";
+      } else if (selectedOption === "433") {
+        url = "http://localhost:8000/dian/address_433";
+      } else if (selectedOption === "434") {
+        url = "http://localhost:8000/dian/address_434";
+      } else if (selectedOption === "435") {
+        url = "http://localhost:8000/dian/address_435";
+      } else if (selectedOption === "436") {
+        url = "http://localhost:8000/dian/address_436";
+      } else if (selectedOption === "437") {
+        url = "http://localhost:8000/dian/address_437";
+      } else if (selectedOption === "438") {
+        url = "http://localhost:8000/dian/address_438";
       }
 
       const response = await axios.get(url);
@@ -143,16 +202,23 @@ class dian extends Component {
 
       const response = await axios.get(url);
       const contentWithDistance = response.data.map((item) => {
-        const distance = this.calculateDistance(
-          this.state.userLocation.latitude,
-          this.state.userLocation.longitude,
-          item.branch_latitude,
-          item.branch_longitude
-        );
-        return {
-          ...item,
-          distance: parseFloat(distance).toFixed(1),
-        };
+        if (this.state.userLocation) {
+          const distance = this.calculateDistance(
+            this.state.userLocation.latitude,
+            this.state.userLocation.longitude,
+            item.branch_latitude,
+            item.branch_longitude
+          );
+          return {
+            ...item,
+            distance: parseFloat(distance).toFixed(1),
+          };
+        } else {
+          return {
+            ...item,
+            distance: "N/A", // 如果 userLocation 為 null，則設置距離為 N/A
+          };
+        }
       });
       this.setState({ score: selectedScore, content: contentWithDistance });
     } catch (error) {
@@ -456,6 +522,390 @@ class dian extends Component {
                           北區{" "}
                         </label>
                       </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_6"
+                          value="北屯區"
+                          checked={selectedOption === "406"}
+                          onChange={() => this.handleOptionChange("406")}
+                        />
+                        <label className="form-check-label" htmlFor="address_6">
+                          {" "}
+                          北屯區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_7"
+                          value="西屯區"
+                          checked={selectedOption === "407"}
+                          onChange={() => this.handleOptionChange("407")}
+                        />
+                        <label className="form-check-label" htmlFor="address_7">
+                          {" "}
+                          西屯區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_8"
+                          value="南屯區"
+                          checked={selectedOption === "408"}
+                          onChange={() => this.handleOptionChange("408")}
+                        />
+                        <label className="form-check-label" htmlFor="address_8">
+                          {" "}
+                          南屯區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_9"
+                          value="太平區"
+                          checked={selectedOption === "411"}
+                          onChange={() => this.handleOptionChange("411")}
+                        />
+                        <label className="form-check-label" htmlFor="address_9">
+                          {" "}
+                          太平區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_10"
+                          value="大里區"
+                          checked={selectedOption === "412"}
+                          onChange={() => this.handleOptionChange("412")}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="address_10"
+                        >
+                          {" "}
+                          大里區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_11"
+                          value="霧峰區"
+                          checked={selectedOption === "413"}
+                          onChange={() => this.handleOptionChange("413")}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="address_11"
+                        >
+                          {" "}
+                          霧峰區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_12"
+                          value="烏日區"
+                          checked={selectedOption === "414"}
+                          onChange={() => this.handleOptionChange("414")}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="address_12"
+                        >
+                          {" "}
+                          烏日區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_13"
+                          value="豐原區"
+                          checked={selectedOption === "420"}
+                          onChange={() => this.handleOptionChange("420")}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="address_13"
+                        >
+                          {" "}
+                          豐原區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_14"
+                          value="后里區"
+                          checked={selectedOption === "421"}
+                          onChange={() => this.handleOptionChange("421")}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="address_14"
+                        >
+                          {" "}
+                          后里區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_15"
+                          value="石岡區"
+                          checked={selectedOption === "422"}
+                          onChange={() => this.handleOptionChange("422")}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="address_15"
+                        >
+                          {" "}
+                          石岡區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_16"
+                          value="東勢區"
+                          checked={selectedOption === "423"}
+                          onChange={() => this.handleOptionChange("423")}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="address_16"
+                        >
+                          {" "}
+                          東勢區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_17"
+                          value="新社區"
+                          checked={selectedOption === "426"}
+                          onChange={() => this.handleOptionChange("426")}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="address_17"
+                        >
+                          {" "}
+                          新社區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_18"
+                          value="潭子區"
+                          checked={selectedOption === "427"}
+                          onChange={() => this.handleOptionChange("427")}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="address_18"
+                        >
+                          {" "}
+                          潭子區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_19"
+                          value="大雅區"
+                          checked={selectedOption === "428"}
+                          onChange={() => this.handleOptionChange("428")}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="address_19"
+                        >
+                          {" "}
+                          大雅區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_20"
+                          value="神岡區"
+                          checked={selectedOption === "429"}
+                          onChange={() => this.handleOptionChange("429")}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="address_20"
+                        >
+                          {" "}
+                          神岡區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_21"
+                          value="大肚區"
+                          checked={selectedOption === "432"}
+                          onChange={() => this.handleOptionChange("432")}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="address_21"
+                        >
+                          {" "}
+                          大肚區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_22"
+                          value="沙鹿區"
+                          checked={selectedOption === "433"}
+                          onChange={() => this.handleOptionChange("433")}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="address_22"
+                        >
+                          {" "}
+                          沙鹿區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_23"
+                          value="龍井區"
+                          checked={selectedOption === "434"}
+                          onChange={() => this.handleOptionChange("434")}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="address_23"
+                        >
+                          {" "}
+                          龍井區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_24"
+                          value="梧棲區"
+                          checked={selectedOption === "435"}
+                          onChange={() => this.handleOptionChange("435")}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="address_24"
+                        >
+                          {" "}
+                          梧棲區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_25"
+                          value="清水區"
+                          checked={selectedOption === "436"}
+                          onChange={() => this.handleOptionChange("436")}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="address_25"
+                        >
+                          {" "}
+                          清水區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_26"
+                          value="大甲區"
+                          checked={selectedOption === "437"}
+                          onChange={() => this.handleOptionChange("437")}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="address_26"
+                        >
+                          {" "}
+                          大甲區{" "}
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="address"
+                          id="address_27"
+                          value="外埔區"
+                          checked={selectedOption === "438"}
+                          onChange={() => this.handleOptionChange("438")}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="address_27"
+                        >
+                          {" "}
+                          外埔區{" "}
+                        </label>
+                      </div>
                     </div>
                   </div>
                   <div className="choose_classification_3">
@@ -558,12 +1008,15 @@ class dian extends Component {
                             </p>
                           </div>
                           <p className="card-title lh-sm">
-                            {this.state.resultlebrand.length > 0 &&
-                              this.state.resultlebrand.map((brand) => (
+                            {this.state.brand
+                              .filter(
+                                (brand) => brand.brand_id === item.brand_id
+                              ) // 過濾出符合 brand_id 的品牌
+                              .map((brand) => (
                                 <span key={brand.brand_id}>
                                   {brand.brand_name}
                                 </span>
-                              ))}
+                              ))}{" "}
                             {item.branch_name}
                             <br />
                             <a

@@ -4,7 +4,7 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 import { PiMedal } from "react-icons/pi";
 import { PiCoins } from "react-icons/pi";
 import { GiCancel } from "react-icons/gi";
-// import axios from "axios";
+import axios from "axios";
 
 class le extends Component {
   constructor(props) {
@@ -19,16 +19,23 @@ class le extends Component {
       },
       data: [],
       filteredData: [],
-      resultlebrand: [],
+      brand: [],
     };
   }
 
   componentDidMount() {
-    fetch("http://localhost:8000/all/products")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Fetched data:", data);
-        this.setState({ data }, () => {
+    Promise.all([
+      fetch("http://localhost:8000/all/products").then((response) =>
+        response.json()
+      ),
+      axios
+        .get("http://localhost:8000/all/brand")
+        .then((response) => response.data),
+    ])
+      .then(([productsData, brandData]) => {
+        console.log("Fetched products data:", productsData);
+        console.log("Fetched brand data:", brandData);
+        this.setState({ data: productsData, brand: brandData }, () => {
           this.filterData();
         });
       })
@@ -374,8 +381,9 @@ class le extends Component {
                       </div>
                       {/* 動態設定標題 */}
                       <div className="card-title">
-                        {this.state.resultlebrand.length > 0 &&
-                          this.state.resultlebrand.map((brand) => (
+                        {this.state.brand
+                          .filter((brand) => brand.brand_id === item.brand_id) // 過濾出符合 brand_id 的品牌
+                          .map((brand) => (
                             <span key={brand.brand_id}>{brand.brand_name}</span>
                           ))}
                       </div>
