@@ -392,14 +392,6 @@ class dian extends Component {
               ></img>
             </div>
           </div>
-          <input
-            type="text"
-            id="search"
-            name="search"
-            onChange={this.searchChange}
-            value={this.state.search}
-            className="form-control rounded-pill ps-4 bg-secondary-subtle"
-          ></input>
         </div>
 
         <main>
