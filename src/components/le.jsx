@@ -96,7 +96,7 @@ class le extends Component {
       return <div>Loading...</div>;
     }
 
-    // const shuffledData = filteredData.sort(() => Math.random() - 0.5);
+    const shuffledData = filteredData.sort(() => Math.random() - 0.5);
 
     return (
       <React.Fragment>
@@ -362,7 +362,7 @@ class le extends Component {
                 </div>
               </div>
               <div className="col-sm-7 col-md-8 col-lg-9 col-xxl-10 row choose_right mx-auto">
-                {filteredData.map((item) => (
+                {shuffledData.map((item) => (
                   <div key={item.id} className="col-lg-6 col-xxl-4 my-3">
                     <div className="card">
                       <div className="image">
@@ -371,7 +371,8 @@ class le extends Component {
                           src={`/img/class/${item.product_img}.png`}
                           className="card-img-top"
                           alt="..."
-                        />
+                        />{" "}
+                        {console.log(item)}
                         {/* 動態設定 logo 路徑 */}
                         <img
                           src={`/img/logo/${item.brand_id}.png`}
