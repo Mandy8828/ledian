@@ -38,6 +38,24 @@ app.get("/index/products", function (req, res) {
     }
   );
 });
+app.get("/branch/:id", function (req, res) {
+  conn.query(
+    "select * from branch where brand_id = ?",
+    [req.params.id],
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
+app.get("/brand/:id", function (req, res) {
+  conn.query(
+    "select * from brand where brand_id = ?",
+    [req.params.id],
+    function (err, rows) {
+      res.send(JSON.stringify(rows));
+    }
+  );
+});
 
 // 全部飲料
 app.get("/all/products", function (req, res) {

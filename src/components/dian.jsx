@@ -18,11 +18,12 @@ class dian extends Component {
       selectedNearby: "",
       resultlebrand: [],
       brand: [],
+      branchList: [{}],
     };
   }
 
   componentDidMount() {
-    this.handleScoreChange("4.0");
+    this.handleNearbyChange("nearby");
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -44,9 +45,11 @@ class dian extends Component {
   fetchBrandData = async () => {
     try {
       var brand = await axios.get("http://localhost:8000/all/brand");
+      var businessHours = await axios.get("http://localhost:8000/dian/address");
 
       this.setState({
         brand: brand.data,
+        branchList: businessHours.data,
       });
       console.log(this.state);
     } catch (error) {
@@ -256,7 +259,11 @@ class dian extends Component {
                 window.location = "/index";
               }}
             >
-              <img id="logo" src="/img/index/LeDian_LOGO-05.png"></img>
+              <img
+                id="logo"
+                src="/img/index/LeDian_LOGO-05.png"
+                alt="logo"
+              ></img>
             </h4>
             <h4 className="my-auto p-0 btn headerText menuBtn d-flex align-items-center justify-content-center">
               <HiOutlineShoppingBag className="fs-4" />
@@ -402,9 +409,9 @@ class dian extends Component {
                   <div className="choose_left_1">透過以下分類篩選</div>
                   <div className="choose_classification_1">
                     <div className="classification_title">快速篩選</div>
-                    <div className="form-check">
+                    <div className="form-check dian">
                       <input
-                        className="form-check-input"
+                        className="form-check-input dian_radio"
                         type="radio"
                         value=""
                         id="classification_1"
@@ -418,9 +425,9 @@ class dian extends Component {
                         附近店家
                       </label>
                     </div>
-                    <div className="form-check">
+                    <div className="form-check dian">
                       <input
-                        className="form-check-input"
+                        className="form-check-input dian_radio"
                         type="radio"
                         value=""
                         id="classification_2"
@@ -438,9 +445,9 @@ class dian extends Component {
                   <div className="choose_classification_2">
                     <div className="classification_title">台中探索</div>
                     <div className="addressall">
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_1"
@@ -454,9 +461,9 @@ class dian extends Component {
                           中區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_2"
@@ -469,9 +476,9 @@ class dian extends Component {
                           東區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_3"
@@ -484,9 +491,9 @@ class dian extends Component {
                           南區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_4"
@@ -499,9 +506,9 @@ class dian extends Component {
                           西區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_5"
@@ -514,9 +521,9 @@ class dian extends Component {
                           北區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_6"
@@ -529,9 +536,9 @@ class dian extends Component {
                           北屯區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_7"
@@ -544,9 +551,9 @@ class dian extends Component {
                           西屯區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_8"
@@ -559,9 +566,9 @@ class dian extends Component {
                           南屯區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_9"
@@ -574,9 +581,9 @@ class dian extends Component {
                           太平區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_10"
@@ -592,9 +599,9 @@ class dian extends Component {
                           大里區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_11"
@@ -610,9 +617,9 @@ class dian extends Component {
                           霧峰區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_12"
@@ -628,9 +635,9 @@ class dian extends Component {
                           烏日區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_13"
@@ -646,9 +653,9 @@ class dian extends Component {
                           豐原區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_14"
@@ -664,9 +671,9 @@ class dian extends Component {
                           后里區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_15"
@@ -682,9 +689,9 @@ class dian extends Component {
                           石岡區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_16"
@@ -700,9 +707,9 @@ class dian extends Component {
                           東勢區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_17"
@@ -718,9 +725,9 @@ class dian extends Component {
                           新社區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_18"
@@ -736,9 +743,9 @@ class dian extends Component {
                           潭子區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_19"
@@ -754,9 +761,9 @@ class dian extends Component {
                           大雅區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_20"
@@ -772,9 +779,9 @@ class dian extends Component {
                           神岡區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_21"
@@ -790,9 +797,9 @@ class dian extends Component {
                           大肚區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_22"
@@ -808,9 +815,9 @@ class dian extends Component {
                           沙鹿區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_23"
@@ -826,9 +833,9 @@ class dian extends Component {
                           龍井區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_24"
@@ -844,9 +851,9 @@ class dian extends Component {
                           梧棲區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_25"
@@ -862,9 +869,9 @@ class dian extends Component {
                           清水區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_26"
@@ -880,9 +887,9 @@ class dian extends Component {
                           大甲區{" "}
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="form-check dian">
                         <input
-                          className="form-check-input"
+                          className="form-check-input dian_radio"
                           type="radio"
                           name="address"
                           id="address_27"
@@ -902,9 +909,9 @@ class dian extends Component {
                   </div>
                   <div className="choose_classification_3">
                     <div className="classification_title">尋星饗宴</div>
-                    <div className="form-check">
+                    <div className="form-check dian">
                       <input
-                        className="form-check-input"
+                        className="form-check-input dian_radio"
                         type="radio"
                         name="score"
                         id="score_1"
@@ -915,9 +922,9 @@ class dian extends Component {
                         <GradeIcon className="me-1 iconColor" /> 4.5以上
                       </label>
                     </div>
-                    <div className="form-check">
+                    <div className="form-check dian">
                       <input
-                        className="form-check-input"
+                        className="form-check-input dian_radio"
                         type="radio"
                         name="score"
                         id="score_2"
@@ -928,9 +935,9 @@ class dian extends Component {
                         <GradeIcon className="me-1 iconColor" /> 4.0以上
                       </label>
                     </div>
-                    <div className="form-check">
+                    <div className="form-check dian">
                       <input
-                        className="form-check-input"
+                        className="form-check-input dian_radio"
                         type="radio"
                         name="score"
                         id="score_2"
@@ -941,9 +948,9 @@ class dian extends Component {
                         <GradeIcon className="me-1 iconColor" /> 3.5以上
                       </label>
                     </div>
-                    <div className="form-check">
+                    <div className="form-check dian">
                       <input
-                        className="form-check-input"
+                        className="form-check-input dian_radio"
                         type="radio"
                         name="score"
                         id="score_2"
@@ -974,7 +981,13 @@ class dian extends Component {
                   }
 
                   return (
-                    <div key={index} className="col-lg-6 col-xxl-4 my-3">
+                    <div
+                      key={index}
+                      className="col-lg-6 col-xxl-4 my-3"
+                      onClick={() => {
+                        window.location = `/order/${item.branch_id}`;
+                      }}
+                    >
                       <div className="card">
                         <div className="image">
                           <img
@@ -994,21 +1007,56 @@ class dian extends Component {
                               <GradeIcon className="me-1 iconColor" />
                               {item.branch_score.toFixed(1)}
                             </p>
-                            <p className="col-5 time">10:00~23:00</p>
+                            <p className="col-5 time">
+                              {this.state.branchList.map((branch) => {
+                                if (branch.branch_id === item.brand_id) {
+                                  const day = new Date().getDay();
+                                  const openTime = [
+                                    branch.Sun_start,
+                                    branch.Mon_start,
+                                    branch.Tue_start,
+                                    branch.Wed_start,
+                                    branch.Thu_start,
+                                    branch.Fri_start,
+                                    branch.Sat_start,
+                                  ];
+                                  const closeTime = [
+                                    branch.Sun_end,
+                                    branch.Mon_end,
+                                    branch.Tue_end,
+                                    branch.Wed_end,
+                                    branch.Thu_end,
+                                    branch.Fri_end,
+                                    branch.Sat_end,
+                                  ];
+                                  if (
+                                    openTime[day] == "店休" ||
+                                    closeTime[day] == "店休"
+                                  ) {
+                                    return "店休";
+                                  } else {
+                                    return `${openTime[day]}~${closeTime[day]}`;
+                                  }
+                                } else {
+                                  return null;
+                                }
+                              })}
+                            </p>
                             <p className="col-4 kilometre">
                               約 {item.distance} 公里
                             </p>
                           </div>
                           <p className="card-title lh-sm">
-                            {this.state.brand
-                              .filter(
-                                (brand) => brand.brand_id === item.brand_id
-                              ) // 過濾出符合 brand_id 的品牌
-                              .map((brand) => (
-                                <span key={brand.brand_id}>
-                                  {brand.brand_name}
-                                </span>
-                              ))}{" "}
+                            {this.state.brand &&
+                              this.state.brand
+                                .filter(
+                                  (brand) => brand.brand_id === item.brand_id
+                                )
+                                .map((brand) => (
+                                  <span key={brand.brand_id}>
+                                    {brand.brand_name}
+                                  </span>
+                                ))}{" "}
                             {item.branch_name}
                             <br />
                             <a

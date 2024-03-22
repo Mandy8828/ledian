@@ -124,7 +124,11 @@ class le extends Component {
                 window.location = "/index";
               }}
             >
-              <img id="logo" src="/img/index/LeDian_LOGO-05.png"></img>
+              <img
+                id="logo"
+                src="/img/index/LeDian_LOGO-05.png"
+                alt="logo"
+              ></img>
             </h4>
             <h4 className="my-auto p-0 btn headerText menuBtn d-flex align-items-center justify-content-center">
               <HiOutlineShoppingBag className="fs-4" />
@@ -269,9 +273,9 @@ class le extends Component {
                 <div className="choose_left">
                   <div className="choose_left_1">透過以下分類篩選</div>
                   <div className="choose_classification">
-                    <div className="form-check">
+                    <div className="form-check le">
                       <input
-                        className="form-check-input"
+                        className="form-check-input le_checkbox"
                         type="checkbox"
                         id="classification_1"
                         checked={filters.classification_1}
@@ -286,9 +290,9 @@ class le extends Component {
                         精選推味
                       </label>
                     </div>
-                    <div className="form-check">
+                    <div className="form-check le">
                       <input
-                        className="form-check-input"
+                        className="form-check-input le_checkbox"
                         type="checkbox"
                         value=""
                         id="classification_2"
@@ -304,9 +308,9 @@ class le extends Component {
                         茶品精選
                       </label>
                     </div>
-                    <div className="form-check">
+                    <div className="form-check le">
                       <input
-                        className="form-check-input"
+                        className="form-check-input le_checkbox"
                         type="checkbox"
                         value=""
                         id="classification_3"
@@ -322,9 +326,9 @@ class le extends Component {
                         拿鐵探查
                       </label>
                     </div>
-                    <div className="form-check">
+                    <div className="form-check le">
                       <input
-                        className="form-check-input"
+                        className="form-check-input le_checkbox"
                         type="checkbox"
                         value=""
                         id="classification_4"
@@ -340,9 +344,9 @@ class le extends Component {
                         口感尋覓
                       </label>
                     </div>
-                    <div className="form-check">
+                    <div className="form-check le">
                       <input
-                        className="form-check-input"
+                        className="form-check-input le_checkbox"
                         type="checkbox"
                         value=""
                         id="classification_5"
@@ -363,7 +367,13 @@ class le extends Component {
               </div>
               <div className="col-sm-7 col-md-8 col-lg-9 col-xxl-10 row choose_right mx-auto">
                 {shuffledData.map((item) => (
-                  <div key={item.id} className="col-lg-6 col-xxl-4 my-3">
+                  <div
+                    key={item.id}
+                    className="col-lg-6 col-xxl-4 my-3"
+                    onClick={() => {
+                      window.location = `/branch/${item.brand_id}`;
+                    }}
+                  >
                     <div className="card">
                       <div className="image">
                         {/* 動態設定圖片路徑 */}
