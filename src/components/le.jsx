@@ -4,6 +4,7 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 import { PiMedal } from "react-icons/pi";
 import { PiCoins } from "react-icons/pi";
 import { GiCancel } from "react-icons/gi";
+import { FaArrowCircleUp } from "react-icons/fa";
 import axios from "axios";
 
 class le extends Component {
@@ -482,6 +483,10 @@ class le extends Component {
             </div>
           </div>
         </div>
+
+        <button className="top" onClick={this.scrollToTop}>
+          <FaArrowCircleUp />
+        </button>
       </React.Fragment>
     );
   }
@@ -502,6 +507,13 @@ class le extends Component {
   };
   toggleMenuNav = () => {
     document.getElementById("menuNav").classList.toggle("menuNav");
+  };
+
+  scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // 平滑滾動
+    });
   };
 }
 
