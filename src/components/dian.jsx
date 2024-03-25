@@ -299,30 +299,25 @@ class dian extends Component {
             <p>．本集點活動以公告為準，如有更改，恕不另行通知。</p>
           </div>
 
-          <div className="d-flex me-2  align-items-center">
-            <h4
-              id="loginBtn"
-              className="my-auto btn headerText"
-              onClick={this.toggleMemberNav}
-            >
-              登入/註冊▼
-            </h4>
+          <div className="d-flex me-2 align-items-center">
+            {this.loginCheck()}
             <div id="memberNav" className="collapse">
-              <img
-                id="memberNavImg"
-                src={"/img/index/LeDian_LOGO-05.png"}
-                alt="logo"
-              ></img>
-              <div>
-                <h4 className="headerText text-center my-3">個人檔案</h4>
+              <div className="p-2">
+                <h4
+                  className="headerText text-center my-2"
+                  onClick={() => {
+                    window.location = "/profile";
+                  }}
+                >
+                  會員中心
+                </h4>
                 <hr />
-                <h4 className="headerText text-center my-3">帳號管理</h4>
-                <hr />
-                <h4 className="headerText text-center my-3">歷史訂單</h4>
-                <hr />
-                <h4 className="headerText text-center my-3">載具存取</h4>
-                <hr />
-                <h4 className="headerText text-center my-3">登出</h4>
+                <h4
+                  className="headerText text-center my-2"
+                  onClick={this.logoutClick}
+                >
+                  登出
+                </h4>
               </div>
             </div>
           </div>
@@ -400,6 +395,7 @@ class dian extends Component {
               ></img>
             </div>
           </div>
+          <h2 className="text-center mainColor m-2">附近店家</h2>
         </div>
 
         <main>
@@ -1117,7 +1113,7 @@ class dian extends Component {
           </div>
           <div
             id="footerInfo"
-            className="col-3 d-flex row align-items-center justify-content-center pe-1"
+            className="col-3 d-flex row align-items-center justify-content-center"
           >
             <div className="col-3 col-sm-6 d-flex flex-column align-items-center">
               <p className="footerText m-0 py-1 text-nowrap text-white">
@@ -1147,11 +1143,6 @@ class dian extends Component {
       </React.Fragment>
     );
   }
-  searchChange = (e) => {
-    var newState = { ...this.state };
-    newState.search = e.target.value;
-    this.setState(newState);
-  };
   pointinfoShow = (event) => {
     document.getElementById("pointinfo").style.top = event.clientY + 50 + "px";
     document.getElementById("pointinfo").style.left =
@@ -1164,11 +1155,66 @@ class dian extends Component {
   };
 
   toggleMemberNav = () => {
-    document.getElementById("memberNav").classList.toggle("collapse");
+    const userdata = localStorage.getItem("userdata");
+    if (userdata) {
+      document.getElementById("memberNav").classList.toggle("collapse");
+    } else {
+      const path = this.props.location.pathname;
+      sessionStorage.setItem("redirect", path);
+      window.location = "/login";
+    }
   };
-
   toggleMenuNav = () => {
     document.getElementById("menuNav").classList.toggle("menuNav");
+  };
+  logoutClick = async () => {
+    // 清除localStorage
+    localStorage.removeItem("userdata");
+    const userdata = localStorage.getItem("userdata");
+    console.log("現在的:", userdata);
+    try {
+      // 告訴後台使用者要登出
+      await axios.post("http://localhost:8000/logout");
+
+      //   window.location = '/logout'; // 看看登出要重新定向到哪個頁面
+    } catch (error) {
+      console.error("登出時出錯:", error);
+    }
+
+    document.getElementById("memberNav").classList.add("collapse");
+    this.setState({});
+    window.location = "/index";
+  };
+  loginCheck = () => {
+    const userData = JSON.parse(localStorage.getItem("userdata"));
+    if (userData) {
+      const userImg = userData.user_img ? userData.user_img : "LeDian.png";
+      return (
+        <h4
+          id="loginBtn"
+          className="my-auto btn headerText text-nowrap"
+          onClick={this.toggleMemberNav}
+        >
+          <img
+            id="memberHeadshot"
+            src={`/img/users/${userImg}`}
+            alt="memberHeadshot"
+            className="img-fluid my-auto mx-1 rounded-circle border"
+          ></img>
+          會員專區▼
+        </h4>
+      );
+    } else {
+      return (
+        <h4
+          id="loginBtn"
+          className="my-auto btn headerText align-self-center"
+          onClick={this.toggleMemberNav}
+        >
+          登入/註冊▼
+        </h4>
+      );
+    }
   };
 
   scrollToTop = () => {

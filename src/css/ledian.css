@@ -116,12 +116,9 @@
   cursor: pointer;
 }
 
-#memberNavImg {
-  position: absolute;
-  right: 0px;
-  width: 100%;
-  opacity: 0.2;
-  top: 50px;
+#memberHeadshot {
+  height: 50px;
+  width: 50px;
 }
 
 #bannerImg {
@@ -230,6 +227,10 @@
   }
   #rouletteArea {
     height: 380px;
+  }
+  #memberHeadshot {
+    height: 30px;
+    width: 30px;
   }
 }
 @media screen and (max-width: 768px) {
