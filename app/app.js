@@ -364,30 +364,3 @@ app.get("/dian/score_3.0", function (req, res) {
     }
   );
 });
-
-// test
-app.post("/linepay/test", (req, res) => {
-  conn.query("SELECT * FROM orders where order_id = 43", [], (err, row) => {
-    console.log(row);
-    let neworderData = {
-      amount: row[0].order_total,
-      currency: "TWD",
-      packages: [
-        {
-          amount: row[0].order_total,
-          products: [
-            {
-              name: "飲料",
-              quantity: 1,
-              price: row[0].order_total,
-            },
-          ],
-        },
-      ],
-    };
-
-    neworderData.orderId = parseInt(new Date().getTime() / 1000);
-
-    res.send(neworderData);
-  });
-});
