@@ -21,6 +21,7 @@ class le extends Component {
       data: [],
       filteredData: [],
       brand: [],
+      userImg: null,
     };
   }
 
@@ -34,8 +35,8 @@ class le extends Component {
         .then((response) => response.data),
     ])
       .then(([productsData, brandData]) => {
-        console.log("Fetched products data:", productsData);
-        console.log("Fetched brand data:", brandData);
+        // console.log("Fetched products data:", productsData);
+        // console.log("Fetched brand data:", brandData);
         this.setState({ data: productsData, brand: brandData }, () => {
           this.filterData();
         });
@@ -43,6 +44,22 @@ class le extends Component {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
+
+    const userData = JSON.parse(localStorage.getItem("userdata"));
+
+    if (userData) {
+      axios
+        .get(`http://localhost:8000/user/${userData.user_id}`)
+        .then((response) => {
+          const userImg = response.data.user_img
+            ? response.data.user_img
+            : "LeDian.png";
+          this.setState({ userImg, userData });
+        })
+        .catch((error) => {
+          console.error("Failed to fetch user data:", error);
+        });
+    }
   }
 
   handleFilterChange = (filter) => {
@@ -54,7 +71,7 @@ class le extends Component {
         },
       }),
       () => {
-        console.log("New Filters:", this.state.filters);
+        // console.log("New Filters:", this.state.filters);
         this.filterData();
       }
     );
@@ -62,8 +79,8 @@ class le extends Component {
 
   filterData() {
     const { data, filters } = this.state;
-    console.log("Filters:", filters);
-    console.log("Data:", data);
+    // console.log("Filters:", filters);
+    // console.log("Data:", data);
 
     const filterCondition = (item) => {
       return Object.keys(filters).every((filter) => {
@@ -81,10 +98,9 @@ class le extends Component {
       });
     };
 
-    // 使用 filterCondition 函數進行篩選
     const filteredData = data.filter(filterCondition);
 
-    console.log("Filtered Data:", filteredData);
+    // console.log("Filtered Data:", filteredData);
     this.setState({ filteredData });
 
     return filteredData;
@@ -131,7 +147,10 @@ class le extends Component {
                 alt="logo"
               ></img>
             </h4>
-            <h4 className="my-auto p-0 btn headerText menuBtn d-flex align-items-center justify-content-center">
+            <h4
+              className="my-auto p-0 btn headerText menuBtn d-flex align-items-center justify-content-center"
+              onClick={this.cartMenuClick}
+            >
               <HiOutlineShoppingBag className="fs-4" />
               購物車
             </h4>
@@ -165,7 +184,29 @@ class le extends Component {
           </div>
 
           <div className="d-flex me-2 align-items-center">
-            {this.loginCheck()}
+            {this.state.userData ? (
+              <h4
+                id="loginBtn"
+                className="my-auto btn headerText text-nowrap"
+                onClick={this.toggleMemberNav}
+              >
+                <img
+                  id="memberHeadshot"
+                  src={`/img/users/${this.state.userImg}`}
+                  alt="memberHeadshot"
+                  className="img-fluid my-auto mx-1 rounded-circle border"
+                />
+                會員專區▼
+              </h4>
+            ) : (
+              <h4
+                id="loginBtn"
+                className="my-auto btn headerText align-self-center"
+                onClick={this.toggleMemberNav}
+              >
+                登入/註冊
+              </h4>
+            )}
             <div id="memberNav" className="collapse">
               <div className="p-2">
                 <h4
@@ -191,7 +232,10 @@ class le extends Component {
           id="menuNav"
           className="menuNav d-flex flex-column align-items-center"
         >
-          <h4 className="menuText my-3 mainColor border-bottom border-secondary">
+          <h4
+            className="menuText my-3 mainColor border-bottom border-secondary"
+            onClick={this.cartMenuClick}
+          >
             <HiOutlineShoppingBag className="fs-4" />
             購物車
           </h4>
@@ -260,7 +304,6 @@ class le extends Component {
               ></img>
             </div>
           </div>
-          <h2 className="text-center mainColor m-2">附近店家</h2>
         </div>
 
         <main>
@@ -363,9 +406,9 @@ class le extends Component {
                 </div>
               </div>
               <div className="col-sm-7 col-md-8 col-lg-9 col-xxl-10 row choose_right mx-auto">
-                {shuffledData.map((item) => (
+                {shuffledData.map((item, i) => (
                   <div
-                    key={item.id}
+                    key={i}
                     className="col-lg-6 col-xxl-4 my-3"
                     onClick={() => {
                       window.location = `/branch/${item.brand_id}`;
@@ -379,7 +422,7 @@ class le extends Component {
                           className="card-img-top"
                           alt="..."
                         />{" "}
-                        {console.log(item)}
+                        {/* {console.log(item)} */}
                         {/* 動態設定 logo 路徑 */}
                         <img
                           src={`/img/logo/${item.brand_id}.png`}
@@ -480,8 +523,8 @@ class le extends Component {
           </div>
         </div>
 
-        <button className="top" onClick={this.scrollToTop}>
-          <FaArrowCircleUp />
+        <button className="topbtn" id="topbtn" onClick={this.scrollToTop}>
+          <FaArrowCircleUp className="text-white" />
         </button>
       </React.Fragment>
     );
@@ -512,15 +555,11 @@ class le extends Component {
     document.getElementById("menuNav").classList.toggle("menuNav");
   };
   logoutClick = async () => {
-    // 清除localStorage
     localStorage.removeItem("userdata");
     const userdata = localStorage.getItem("userdata");
     console.log("現在的:", userdata);
     try {
-      // 告訴後台使用者要登出
       await axios.post("http://localhost:8000/logout");
-
-      //   window.location = '/logout'; // 看看登出要重新定向到哪個頁面
     } catch (error) {
       console.error("登出時出錯:", error);
     }
@@ -529,42 +568,20 @@ class le extends Component {
     this.setState({});
     window.location = "/index";
   };
-  loginCheck = () => {
+  cartMenuClick = () => {
     const userData = JSON.parse(localStorage.getItem("userdata"));
     if (userData) {
-      const userImg = userData.user_img ? userData.user_img : "LeDian.png";
-      return (
-        <h4
-          id="loginBtn"
-          className="my-auto btn headerText text-nowrap"
-          onClick={this.toggleMemberNav}
-        >
-          <img
-            id="memberHeadshot"
-            src={`/img/users/${userImg}`}
-            alt="memberHeadshot"
-            className="img-fluid my-auto mx-1 rounded-circle border"
-          ></img>
-          會員專區▼
-        </h4>
-      );
+      const userId = userData.user_id;
+      window.location = `/cartlist/${userId}`;
     } else {
-      return (
-        <h4
-          id="loginBtn"
-          className="my-auto btn headerText align-self-center"
-          onClick={this.toggleMemberNav}
-        >
-          登入/註冊▼
-        </h4>
-      );
+      window.location = "/login";
     }
   };
 
   scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth", // 平滑滾動
+      behavior: "smooth",
     });
   };
 }

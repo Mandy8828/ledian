@@ -14,6 +14,7 @@ import {
   Autocomplete,
   DistanceMatrixService,
 } from "@react-google-maps/api";
+import { FaArrowCircleUp } from "react-icons/fa";
 
 <head>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxryD8kH56hfiJ0bJt6r_KQ6G4MEZY6dI&loading=async&libraries=places,drawing,geometry&callback=initMap&v=weekly"></script>
@@ -22,12 +23,27 @@ import {
 class index extends Component {
   state = {
     currentLocation: { lat: null, lng: null },
-    search: "搜尋店家",
     branchList: [{}],
     distances: {},
     brand: {},
+    userImg: null,
   };
-  async componentDidMount() {
+  componentDidMount() {
+    const userData = JSON.parse(localStorage.getItem("userdata"));
+
+    if (userData) {
+      Axios.get(`http://localhost:8000/user/${userData.user_id}`)
+        .then((response) => {
+          const userImg = response.data.user_img
+            ? response.data.user_img
+            : "LeDian.png";
+          this.setState({ userImg, userData });
+        })
+        .catch((error) => {
+          console.error("Failed to fetch user data:", error);
+        });
+    }
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         ({ coords: { latitude: lat, longitude: lng } }) => {
@@ -77,7 +93,7 @@ class index extends Component {
     const currentLng = this.state.currentLocation.lng;
     const branchPosition = this.state.branchPosition;
     if (currentLat !== null && currentLng !== null) {
-      const R = 6371; // 地球平均半径（km）
+      const R = 6371; // 地球平均半徑（km）
       const distances = {};
       branchPosition.forEach((branch) => {
         const { branchId, lat, lng } = branch;
@@ -90,7 +106,7 @@ class index extends Component {
             Math.sin(dLng / 2) *
             Math.sin(dLng / 2);
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        distances[branchId] = (R * c).toFixed(1); // 保留一位小数
+        distances[branchId] = (R * c).toFixed(1); // 保留一位小數
       });
       this.setState({ distances });
     }
@@ -129,9 +145,16 @@ class index extends Component {
                 window.location = "/index";
               }}
             >
-              <img id="logo" src="/img/index/LeDian_LOGO-05.png"></img>
+              <img
+                id="logo"
+                src="/img/index/LeDian_LOGO-05.png"
+                alt="logo"
+              ></img>
             </h4>
-            <h4 className="my-auto p-0 btn headerText menuBtn d-flex align-items-center justify-content-center">
+            <h4
+              className="my-auto p-0 btn headerText menuBtn d-flex align-items-center justify-content-center"
+              onClick={this.cartMenuClick}
+            >
               <HiOutlineShoppingBag className="fs-4" />
               購物車
             </h4>
@@ -164,30 +187,48 @@ class index extends Component {
             <p>．本集點活動以公告為準，如有更改，恕不另行通知。</p>
           </div>
 
-          <div className="d-flex me-2  align-items-center">
-            <h4
-              id="loginBtn"
-              className="my-auto btn headerText"
-              onClick={this.toggleMemberNav}
-            >
-              登入/註冊▼
-            </h4>
+          <div className="d-flex me-2 align-items-center">
+            {this.state.userData ? (
+              <h4
+                id="loginBtn"
+                className="my-auto btn headerText text-nowrap"
+                onClick={this.toggleMemberNav}
+              >
+                <img
+                  id="memberHeadshot"
+                  src={`/img/users/${this.state.userImg}`}
+                  alt="memberHeadshot"
+                  className="img-fluid my-auto mx-1 rounded-circle border"
+                />
+                會員專區▼
+              </h4>
+            ) : (
+              <h4
+                id="loginBtn"
+                className="my-auto btn headerText align-self-center"
+                onClick={this.toggleMemberNav}
+              >
+                登入/註冊
+              </h4>
+            )}
+
             <div id="memberNav" className="collapse">
-              <img
-                id="memberNavImg"
-                src={"/img/index/LeDian_LOGO-05.png"}
-                alt="logo"
-              ></img>
-              <div>
-                <h4 className="headerText text-center my-3">個人檔案</h4>
+              <div className="p-2">
+                <h4
+                  className="headerText text-center my-2"
+                  onClick={() => {
+                    window.location = "/profile";
+                  }}
+                >
+                  會員中心
+                </h4>
                 <hr />
-                <h4 className="headerText text-center my-3">帳號管理</h4>
-                <hr />
-                <h4 className="headerText text-center my-3">歷史訂單</h4>
-                <hr />
-                <h4 className="headerText text-center my-3">載具存取</h4>
-                <hr />
-                <h4 className="headerText text-center my-3">登出</h4>
+                <h4
+                  className="headerText text-center my-2"
+                  onClick={this.logoutClick}
+                >
+                  登出
+                </h4>
               </div>
             </div>
           </div>
@@ -196,7 +237,10 @@ class index extends Component {
           id="menuNav"
           className="menuNav d-flex flex-column align-items-center"
         >
-          <h4 className="menuText my-3 mainColor border-bottom border-secondary">
+          <h4
+            className="menuText my-3 mainColor border-bottom border-secondary"
+            onClick={this.cartMenuClick}
+          >
             <HiOutlineShoppingBag className="fs-4" />
             購物車
           </h4>
@@ -231,7 +275,7 @@ class index extends Component {
             <div
               className="navImg col-4 btn"
               onClick={() => {
-                console.log(this.state);
+                window.location = "/le";
               }}
             >
               <img
@@ -240,7 +284,12 @@ class index extends Component {
                 className="img-fluid"
               ></img>
             </div>
-            <div className="navImg col-4 btn">
+            <div
+              className="navImg col-4 btn"
+              onClick={() => {
+                window.location = "/dian";
+              }}
+            >
               <img
                 src={"/img/index/LeDian_BANNER-02.jpg"}
                 alt="navImg"
@@ -260,14 +309,6 @@ class index extends Component {
               ></img>
             </div>
           </div>
-          <input
-            type="text"
-            id="search"
-            name="search"
-            onChange={this.searchChange}
-            value={this.state.search}
-            className="form-control rounded-pill ps-4 bg-secondary-subtle"
-          ></input>
           <h2 className="text-center mainColor m-2">所有分店</h2>
         </div>
         <div className="container my-2">
@@ -303,8 +344,22 @@ class index extends Component {
                           <div
                             className="col-lg-6 col-xxl-4 my-3"
                             id={branch.branch_id}
+                            onClick={() => {
+                              const userData = JSON.parse(
+                                localStorage.getItem("userdata")
+                              );
+                              if (userData) {
+                                window.location = `/order/${branch.branch_id}`;
+                              } else {
+                                sessionStorage.setItem(
+                                  "redirect",
+                                  `/order/${branch.branch_id}`
+                                );
+                                window.location = "/login";
+                              }
+                            }}
                           >
-                            <div className="card">
+                            <div className="card branchCard">
                               <div className="image">
                                 <img
                                   src={`/img/mainproduct/${branch.brand_id}.png`}
@@ -415,14 +470,13 @@ class index extends Component {
             </div>
           </div>
         </div>
+
+        <button className="topbtn" id="topbtn" onClick={this.scrollToTop}>
+          <FaArrowCircleUp className="text-white" />
+        </button>
       </React.Fragment>
     );
   }
-  searchChange = (e) => {
-    var newState = { ...this.state };
-    newState.search = e.target.value;
-    this.setState(newState);
-  };
   pointinfoShow = (event) => {
     document.getElementById("pointinfo").style.top = event.clientY + 50 + "px";
     document.getElementById("pointinfo").style.left =
@@ -435,10 +489,51 @@ class index extends Component {
   };
 
   toggleMemberNav = () => {
-    document.getElementById("memberNav").classList.toggle("collapse");
+    const userdata = localStorage.getItem("userdata");
+    if (userdata) {
+      document.getElementById("memberNav").classList.toggle("collapse");
+    } else {
+      const path = this.props.location.pathname;
+      sessionStorage.setItem("redirect", path);
+      window.location = "/login";
+    }
   };
   toggleMenuNav = () => {
     document.getElementById("menuNav").classList.toggle("menuNav");
+  };
+  logoutClick = async () => {
+    // 清除localStorage
+    localStorage.removeItem("userdata");
+    const userdata = localStorage.getItem("userdata");
+    console.log("現在的:", userdata);
+    try {
+      // 告訴後台使用者要登出
+      await Axios.post("http://localhost:8000/logout");
+
+      //   window.location = '/logout'; // 看看登出要重新定向到哪個頁面
+    } catch (error) {
+      console.error("登出時出錯:", error);
+    }
+
+    document.getElementById("memberNav").classList.add("collapse");
+    this.setState({});
+    window.location = "/index";
+  };
+  cartMenuClick = () => {
+    const userData = JSON.parse(localStorage.getItem("userdata"));
+    if (userData) {
+      const userId = userData.user_id;
+      window.location = `/cartlist/${userId}`;
+    } else {
+      window.location = "/login";
+    }
+  };
+
+  scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 }
 
